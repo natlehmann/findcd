@@ -5,14 +5,14 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.springframework.test.jpa.AbstractJpaTests;
+import org.junit.Before;
 
-import ar.com.natlehmann.cdcatalogue.Configuration;
+import ar.com.natlehmann.cdcatalogue.BeanLocator;
 import ar.com.natlehmann.cdcatalogue.business.model.Category;
 import ar.com.natlehmann.cdcatalogue.business.model.Resource;
 import ar.com.natlehmann.cdcatalogue.business.model.Volume;
 
-public class DaoBaseTest extends AbstractJpaTests {
+public class DaoBaseTest {
 	
 	protected Category category;
 	protected Category otherCategory;
@@ -22,13 +22,32 @@ public class DaoBaseTest extends AbstractJpaTests {
 	protected Resource secondResource;
 	protected Resource otherResource;
 	
-	@Override
-	protected String[] getConfigLocations() {
-		return new String[] {"classpath:" + Configuration.APPLICATION_CONTEXT_PATH};
+	private CategoryDao categoryDao;
+	private ResourceDao resourceDao;
+	private VolumeDao volumeDao;
+	
+	public DaoBaseTest() {
+		
+		this.categoryDao = BeanLocator.instance().getCategoryDao();
+		this.resourceDao = BeanLocator.instance().getResourceDao();
+		this.volumeDao = BeanLocator.instance().getVolumeDao();
 	}
 	
-	@Override
-	protected void onSetUpInTransaction() throws Exception {
+	public ResourceDao getResourceDao() {
+		return resourceDao;
+	}
+	
+	public VolumeDao getVolumeDao() {
+		return volumeDao;
+	}
+	
+	public CategoryDao getCategoryDao() {
+		return categoryDao;
+	}	
+	
+	
+	@Before
+	public void onSetUpInTransaction() throws Exception {
 		
 		this.category = new Category(10,"CategoriaPrueba");
 		this.otherCategory = new Category(11,"OtraCategoriaPrueba");
