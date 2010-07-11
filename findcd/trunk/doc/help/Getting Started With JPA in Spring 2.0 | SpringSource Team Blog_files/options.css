@@ -1,0 +1,129 @@
+body
+{
+font-family: Arial, Sans-serif;
+}
+
+#page, #footer, #pagenav, #header
+{
+width: 85%;
+}
+
+
+#wrapper
+{
+background: white url(skin/green/column.gif) repeat-y 20px 0px;
+}
+
+.linkbarbottom
+{
+background-image: url(skin/green/column-diff.gif);
+background-repeat: repeat-y;
+background-position: 20px 0px;
+height: 1.1em;
+padding-bottom: 4px;
+}
+
+#footer
+{
+background: transparent url(skin/green/column.gif) repeat-y 20px 0px;
+}
+
+#content .item
+{
+padding-left: 3em;
+}
+
+#footer p { padding-left: 60px; }
+
+
+
+h2.narrowcorner
+{
+background-image: url(skin/green/header-top-corner.gif);
+background-repeat: no-repeat;
+background-position: top left;
+}
+
+#rightbar #wp-calendar caption, #rightbar h2
+{
+background-image: url(skin/green/right-top-corner.gif);
+background-repeat: no-repeat;
+background-position: top left;
+}
+
+#rightbar ul li
+{
+background-image: url(skin/green/right-bottom-corner.gif);
+background-repeat: no-repeat;
+background-position: bottom left;
+}
+
+
+#leftbar #wp-calendar caption, #leftbar h2
+{
+background-image: url(skin/green/left-top-corner.gif);
+background-repeat: no-repeat;
+background-position: top right;
+}
+
+#leftbar ul li
+{
+background-image: url(skin/green/left-bottom-corner.gif);
+background-repeat: no-repeat;
+background-position: bottom right;
+}
+
+#rightbar ul li ul li, #leftbar ul li ul li { background-image: none; }
+
+
+
+#inner { padding-left: 20px; }
+
+#main
+{
+float: left;
+width: 79%;
+}
+
+#rightbar
+{
+width: 19%;
+float: right;
+}
+
+
+
+
+#header
+{
+height: 100px;
+margin: 0 auto;
+border: none;
+}
+
+#headerimg_left
+{
+height: 89px;
+width: 194px;
+background: transparent url(logo/SpringSource_logo.png) no-repeat left bottom;
+float: left;
+border: none;
+}
+
+
+#headerimg_right
+{
+height: 100px;
+width: 290px;
+background: transparent url(logo/teamBlog.png) no-repeat left bottom;
+float: right;
+border: none;
+}
+
+body
+{
+background: transparent url(background/grassThin.jpg) repeat-x left top;
+background-attachment: fixed;
+}
+
+

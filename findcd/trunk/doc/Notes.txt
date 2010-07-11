@@ -1,0 +1,9 @@
+Todas las dependencias (a excepción de javassist-3-1.jar) se obtuvieron de la distribución 2.0-m5 de
+spring-framework completo con dependencias (spring-framework-2.0-m5-with-dependencies.zip).
+
+El archivo persistence_1_0.xsd tuvo que ser incluido a nivel de root en el classpath, porque en caso contrario
+se producía el siguiente error:
+
+Caused by: java.io.FileNotFoundException: class path resource [persistence_1_0.xsd] cannot be resolved to URL because it does not exist
+
+Esto probablemente se deba a un bug de la versión de hibernate utilizada.

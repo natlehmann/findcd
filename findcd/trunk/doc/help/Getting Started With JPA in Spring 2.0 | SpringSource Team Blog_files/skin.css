@@ -1,0 +1,242 @@
+/*
+ * Name: Green
+ * Version: 2.0
+ * Author: John Godley
+ */
+
+body { background-color: #eeeef5 }
+
+#page, #header, #pagenav
+{
+border-left: 1px solid #728c16;
+border-right: 1px solid #728c16;
+}
+
+#page
+{
+border-bottom: 1px solid #728c16;
+}
+
+.widecontent h2
+{
+border-bottom: 1px solid #728c16;
+}
+
+.widecontent h3 a
+{
+color: #728c16;
+}
+
+.nobar
+{
+background: transparent url(archive.png) no-repeat bottom left !important;
+}
+
+h2.narrowcorner
+{
+background-color: #c3deb4;
+}
+
+h2.narrowheading
+{
+background-color: #728c16;
+color: #ffffff;
+}
+
+#inset
+{
+color: #728c16;
+}
+
+#inset h2
+{
+color: #395827;
+}
+
+a.author
+{
+color: #395827 !important;
+}
+
+.widecontent a, #inset a
+{
+color: #39828d;
+}
+
+.widecontent a:hover, #inset a:hover
+{
+color: #ff5c00;
+}
+
+#content h2 a
+{
+color: #395827 !important;
+}
+
+.postmetadata a
+{
+color: #39828d !important;
+}
+
+.postmetadata a:hover { color :#ff5c00 !important }
+
+.postmetadata
+{
+color: #39828d;
+}
+
+div.hr
+{
+color: #728c16;
+background-color: #728c16;
+}
+
+#headerimg a
+{
+color: #39828d;
+}
+
+#pagenav
+{
+border-top: 1px solid #728c16;
+border-bottom: 1px solid #6ba549;
+background: #6ba549 url(grey-grad.gif) repeat-x top left;
+}
+
+.linkbar
+{
+background-color: #728c16;
+}
+
+.linkbar ul li a:hover, .linkbar .active
+{
+background-color: #395827;
+}
+
+ol.commentlist li
+{
+border-bottom: 1px solid #728c16;
+}
+
+
+.commentlist p a
+{
+color: #39828d;
+}
+
+.commentlist a:hover
+{
+color: #ff5c00;
+}
+
+.post a
+{
+color: #728c16;
+}
+
+.post a:hover
+{
+color: #ff5c00 !important
+}
+
+h2 a
+{
+color: #395827 !important;
+}
+
+h2 a:hover { color: #ff5c00 !important }
+
+.sidebar
+{
+color: #395827;
+}
+
+.sidebar a:hover
+{
+color: #ff5c00;
+}
+
+.sidebar ul li
+{
+/* CHANGED: BEN HALE */
+background-color: #d4e493;
+}
+
+.sidebar h2
+{
+/* CHANGED: BEN HALE */
+color: #ffffff;
+background-color: #728c16;
+}
+
+.sidebar a, #searchform, #searchsubmit, #s
+{
+color: #395827;
+text-decoration: none;
+}
+
+#wp-calendar
+{
+/* CHANGED: BEN HALE */
+background-color: #d4e493;
+}
+
+#wp-calendar caption a, #wp-calendar caption a:hover
+{
+color: #6B903C;
+}
+
+#wp-calendar th
+{
+background-color: #95a959;
+}
+
+#wp-calendar a
+{
+border: 1px solid #728c16;
+background-color: #95a959;
+color: #385827;
+}
+
+#wp-calendar a:hover
+{
+border: 1px solid #728c16;
+background-color: #6B903C;
+color: #ffffff;
+}
+
+#wp-calendar caption
+{
+/* CHANGED: BEN HALE */
+color: #ffffff;
+background-color: #728c16;
+}
+
+a.java
+{
+color: #ff5c00;
+}
+
+.gravatar
+{
+border: 1px solid #c3deb4;
+}
+
+img.author
+{
+border: 1px solid #ff5c00;
+}
+
+
+.commentmetadata, .commentmetadata a
+{
+color: #39828d;
+}
+
+.commentlist h4, .commentlist h4 a
+{
+color: #6B903C;
+}
+
+
+

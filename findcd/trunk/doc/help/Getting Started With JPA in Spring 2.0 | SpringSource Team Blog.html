@@ -1,0 +1,2043 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head profile="http://gmpg.org/xfn/11">
+
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Getting Started With JPA in Spring 2.0 | SpringSource Team Blog</title>
+<!--	<meta name="generator" content="WordPress 2.7.1" />  leave this for stats -->
+	
+	<link rel="stylesheet" href="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/style.css" type="text/css" media="all">
+	<link rel="stylesheet" href="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/skin.css" type="text/css" media="all">
+	<link rel="stylesheet" href="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/options.css" type="text/css" media="all">
+	
+	  <link rel="stylesheet" href="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/print.css" type="text/css" media="print">
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://blog.springsource.com/feed/">
+	<link rel="alternate" type="text/xml" title="RSS .92" href="http://blog.springsource.com/feed/rss/">
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://blog.springsource.com/feed/atom/">
+	<link rel="pingback" href="http://blog.springsource.com/xmlrpc.php">
+	<link rel="icon" href="http://blog.springsource.com/2006/05/30/getting-started-with-jpa-in-spring-20/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="http://blog.springsource.com/2006/05/30/getting-started-with-jpa-in-spring-20/favicon.ico" type="image/x-icon">
+			<link rel="archives" title="August 2009" href="http://blog.springsource.com/2009/08/">
+	<link rel="archives" title="July 2009" href="http://blog.springsource.com/2009/07/">
+	<link rel="archives" title="June 2009" href="http://blog.springsource.com/2009/06/">
+	<link rel="archives" title="May 2009" href="http://blog.springsource.com/2009/05/">
+	<link rel="archives" title="April 2009" href="http://blog.springsource.com/2009/04/">
+	<link rel="archives" title="March 2009" href="http://blog.springsource.com/2009/03/">
+	<link rel="archives" title="February 2009" href="http://blog.springsource.com/2009/02/">
+	<link rel="archives" title="January 2009" href="http://blog.springsource.com/2009/01/">
+	<link rel="archives" title="December 2008" href="http://blog.springsource.com/2008/12/">
+	<link rel="archives" title="November 2008" href="http://blog.springsource.com/2008/11/">
+	<link rel="archives" title="October 2008" href="http://blog.springsource.com/2008/10/">
+	<link rel="archives" title="September 2008" href="http://blog.springsource.com/2008/09/">
+	<link rel="archives" title="August 2008" href="http://blog.springsource.com/2008/08/">
+	<link rel="archives" title="July 2008" href="http://blog.springsource.com/2008/07/">
+	<link rel="archives" title="June 2008" href="http://blog.springsource.com/2008/06/">
+	<link rel="archives" title="May 2008" href="http://blog.springsource.com/2008/05/">
+	<link rel="archives" title="April 2008" href="http://blog.springsource.com/2008/04/">
+	<link rel="archives" title="March 2008" href="http://blog.springsource.com/2008/03/">
+	<link rel="archives" title="February 2008" href="http://blog.springsource.com/2008/02/">
+	<link rel="archives" title="January 2008" href="http://blog.springsource.com/2008/01/">
+	<link rel="archives" title="December 2007" href="http://blog.springsource.com/2007/12/">
+	<link rel="archives" title="November 2007" href="http://blog.springsource.com/2007/11/">
+	<link rel="archives" title="October 2007" href="http://blog.springsource.com/2007/10/">
+	<link rel="archives" title="September 2007" href="http://blog.springsource.com/2007/09/">
+	<link rel="archives" title="August 2007" href="http://blog.springsource.com/2007/08/">
+	<link rel="archives" title="July 2007" href="http://blog.springsource.com/2007/07/">
+	<link rel="archives" title="June 2007" href="http://blog.springsource.com/2007/06/">
+	<link rel="archives" title="May 2007" href="http://blog.springsource.com/2007/05/">
+	<link rel="archives" title="April 2007" href="http://blog.springsource.com/2007/04/">
+	<link rel="archives" title="March 2007" href="http://blog.springsource.com/2007/03/">
+	<link rel="archives" title="February 2007" href="http://blog.springsource.com/2007/02/">
+	<link rel="archives" title="January 2007" href="http://blog.springsource.com/2007/01/">
+	<link rel="archives" title="December 2006" href="http://blog.springsource.com/2006/12/">
+	<link rel="archives" title="November 2006" href="http://blog.springsource.com/2006/11/">
+	<link rel="archives" title="October 2006" href="http://blog.springsource.com/2006/10/">
+	<link rel="archives" title="September 2006" href="http://blog.springsource.com/2006/09/">
+	<link rel="archives" title="August 2006" href="http://blog.springsource.com/2006/08/">
+	<link rel="archives" title="July 2006" href="http://blog.springsource.com/2006/07/">
+	<link rel="archives" title="May 2006" href="http://blog.springsource.com/2006/05/">
+	<link rel="archives" title="April 2006" href="http://blog.springsource.com/2006/04/">
+	<link rel="archives" title="March 2006" href="http://blog.springsource.com/2006/03/">
+	<link rel="archives" title="February 2006" href="http://blog.springsource.com/2006/02/">
+	<link rel="archives" title="August 2004" href="http://blog.springsource.com/2004/08/">
+	  <script src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/pingpop.js" type="text/javascript">
+  </script>
+        <script type="text/javascript" src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/prototype.html"></script>
+        <script type="text/javascript" src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/effects.php"></script>
+        <script type="text/javascript" src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/ajax_comments.js"></script>
+  	<link rel="stylesheet" href="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/codesnippet.css" type="text/css">
+<style type="text/css">
+.codesnip-container  {border:1px solid #ccc; background:#eee; padding: 5px;margin:10px;}
+</style>
+<link rel="stylesheet" href="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/shCore.css" type="text/css" media="all">
+<link rel="stylesheet" href="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/shThemeDefault.css" type="text/css" media="all">
+<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://blog.springsource.com/xmlrpc.php?rsd">
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://blog.springsource.com/wp-includes/wlwmanifest.xml"> 
+<meta name="generator" content="WordPress 2.7.1">
+
+
+<!-- all in one seo pack 1.5.1 [279,358] -->
+<meta name="description" content="The motivation behind this blog entry is to provide a simple step-by-step guide for getting started with JPA in a standalone environment with the Spring">
+<link rel="canonical" href="http://blog.springsource.com/2006/05/30/getting-started-with-jpa-in-spring-20/">
+<!-- /all in one seo pack -->
+<!-- Begin Google Analytics code -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/ga.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-2728886-3");
+pageTracker._setDomainName("none");
+pageTracker._setAllowLinker(true);
+pageTracker._trackPageview();
+</script>
+
+<!-- End Google Analytics code --><link rel="stylesheet" href="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/sociable.css" type="text/css" media="screen" charset="utf-8"></head><body>
+<div id="header">
+  <a href="http://www.springsource.com/" onclick="javascript:urchinTracker('/outbound/www.springsource.com');"><div id="headerimg_left"></div></a><a href="http://blog.springsource.com/"><div id="headerimg_right"></div></a>
+</div>
+
+
+
+
+<div id="page">
+<div class="linkbar"></div>
+
+<div id="lead" class="widecontent fullcontent">
+	<div class="post" id="post-32">
+	<h2><a href="http://blog.springsource.com/2006/05/30/getting-started-with-jpa-in-spring-20/" rel="bookmark" title="Permanent Link">Getting Started With JPA in Spring 2.0</a></h2>
+			<p class="postmetadata"><small>
+			Posted on May 30th, 2006 by <a href="http://blog.springsource.com/author/markf/" title="Posts by Mark Fisher">Mark Fisher</a> in <a href="http://blog.springsource.com/category/20/" title="View all posts in 2.0" rel="category tag">2.0</a>,  <a href="http://blog.springsource.com/category/data-access/" title="View all posts in Data Access" rel="category tag">Data Access</a>,  <a href="http://blog.springsource.com/category/spring/" title="View all posts in Spring" rel="category tag">Spring</a>.</small></p>
+
+	<div class="entrytext">
+		<!--CHANGED: BEN HALE --><a href="http://blog.springsource.com/author/markf/" title="Posts by Mark Fisher"><img src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/markf.jpg" alt="Mark Fisher" title="Mark Fisher" class="author_image"></a><p>The motivation behind this blog entry is to provide a simple step-by-step guide for getting started with JPA in a <i>standalone</i> environment with the Spring Framework. While the JPA specification originated as the persistence mechanism <i>for EJB 3.0</i>,
+it was fortunately recognized that any such mechanism should in fact be
+able to persist simple POJOs. Therefore, with a handful of JARs in your
+classpath and a few Spring-configured beans, you can begin
+experimenting with JPA code within your favorite IDE. I will be using
+Glassfish JPA - which is the reference implementation and is based upon
+Oracle’s TopLink ORM framework.</p>
+<h2>Initial Setup</h2>
+<p>Ensure that you are using Java 5 (a prerequisite for JPA as well as EJB 3.0).</p>
+<p>Download the glassfish JPA jar from: <a href="https://glassfish.dev.java.net/downloads/persistence/JavaPersistence.html">https://glassfish.dev.java.net/downloads/persistence/JavaPersistence.html</a><br>
+(NOTE: I used the “V2_build_02″ jar, but any later version should also work.)</p>
+<p>To unbundle the jar from the “installer�? jar, run:<br>
+<tt>java -jar glassfish-persistence-installer-v2-b02.jar</tt><br>
+(this is required for acceptance of the license agreement)</p>
+<p>Add the <tt>toplink-essentials.jar</tt> to your classpath</p>
+<p>Add the JAR containing your database driver (I am using hsqldb.jar
+version 1.8.0.1 in the example, but only minor changes are necessary to
+adapt for another database).</p>
+<p>Add the following Spring JARs using the 2.0 M5 versions (available here: <a href="http://sourceforge.net/project/showfiles.php?group_id=73357" onclick="javascript:urchinTracker('/outbound/sourceforge.net');">http://sourceforge.net/project/showfiles.php?group_id=73357</a>).</p>
+<ul>
+<li>spring.jar
+</li><li>spring-jpa.jar
+</li><li>spring-mock.jar
+</li></ul>
+<p>Finally, add these jars to your classpath as well:</p>
+<ul>
+<li>commons-logging.jar
+</li><li>log4j.jar
+</li><li>junit.jar
+</li></ul>
+<h2>Code - Domain Model</h2>
+<p>This example will be based on a purposefully simple domain model of
+just 3 classes. Notice the use of annotations. With JPA, one may choose
+to use either annotations or an XML file to specify the
+object-relational mapping metadata - or even a combination of both
+approaches. Here, I have chosen to use solely annotations - for which
+brief descriptions will be provided immediately following the domain
+model code listings.</p>
+<p>First, the <tt>Restaurant</tt> class:</p>
+<div class="codesnip-container">
+<div class="codesnip">package blog.<span class="me1">jpa</span>.<span class="me1">domain</span>;
+<p><span class="co2">import java.util.Set;</span><br>
+<span class="co2">import javax.persistence.CascadeType;</span><br>
+<span class="co2">import javax.persistence.Entity;</span><br>
+<span class="co2">import javax.persistence.GeneratedValue;</span><br>
+<span class="co2">import javax.persistence.GenerationType;</span><br>
+<span class="co2">import javax.persistence.Id;</span><br>
+<span class="co2">import javax.persistence.JoinColumn;</span><br>
+<span class="co2">import javax.persistence.JoinTable;</span><br>
+<span class="co2">import javax.persistence.ManyToMany;</span><br>
+<span class="co2">import javax.persistence.OneToOne;</span></p>
+<p>@<a href="http://www.google.com/search?q=allinurl%3AEntity+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">Entity</span></a><br>
+<span class="kw2">public</span> <span class="kw2">class</span> Restaurant <span class="br0">{</span></p>
+<p>&nbsp; @Id<br>
+&nbsp; @GeneratedValue<span class="br0">(</span>strategy = GenerationType.<span class="me1">AUTO</span><span class="br0">)</span><br>
+&nbsp; <span class="kw2">private</span> <span class="kw4">long</span> id;</p>
+<p>&nbsp; <span class="kw2">private</span> <a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> name;</p>
+<p>&nbsp; @OneToOne<span class="br0">(</span>cascade = CascadeType.<span class="me1">ALL</span><span class="br0">)</span><br>
+&nbsp; <span class="kw2">private</span> Address address;</p>
+<p>&nbsp; @ManyToMany<br>
+&nbsp; @JoinTable<span class="br0">(</span>inverseJoinColumns = @JoinColumn<span class="br0">(</span>name = <span class="st0">"ENTREE_ID"</span><span class="br0">)</span><span class="br0">)</span><br>
+&nbsp; <span class="kw2">private</span> Set&lt;Entree&gt; entrees;</p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">long</span> getId<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">return</span> id;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> setId<span class="br0">(</span><span class="kw4">long</span> id<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">this</span>.<span class="me1">id</span> = id;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> getName<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">return</span> name;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> setName<span class="br0">(</span><a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> name<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">this</span>.<span class="me1">name</span> = name;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> Address getAddress<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">return</span> address;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> setAddress<span class="br0">(</span>Address address<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">this</span>.<span class="me1">address</span> = address;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> Set&lt;Entree&gt; getEntrees<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">return</span> entrees;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> setEntrees<span class="br0">(</span>Set&lt;Entree&gt; entrees<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">this</span>.<span class="me1">entrees</span> = entrees;<br>
+&nbsp; <span class="br0">}</span></p>
+<p><span class="br0">}</span></p></div>
+</div>
+<p>Second, the <tt>Address</tt> class:</p>
+<div class="codesnip-container">
+<div class="codesnip">package blog.<span class="me1">jpa</span>.<span class="me1">domain</span>;
+<p><span class="co2">import javax.persistence.Column;</span><br>
+<span class="co2">import javax.persistence.Entity;</span><br>
+<span class="co2">import javax.persistence.GeneratedValue;</span><br>
+<span class="co2">import javax.persistence.GenerationType;</span><br>
+<span class="co2">import javax.persistence.Id;</span></p>
+<p>@<a href="http://www.google.com/search?q=allinurl%3AEntity+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">Entity</span></a><br>
+<span class="kw2">public</span> <span class="kw2">class</span> Address <span class="br0">{</span></p>
+<p>&nbsp; @Id<br>
+&nbsp; @GeneratedValue<span class="br0">(</span>strategy = GenerationType.<span class="me1">AUTO</span><span class="br0">)</span><br>
+&nbsp; <span class="kw2">private</span> <span class="kw4">long</span> id;</p>
+<p>&nbsp; @Column<span class="br0">(</span>name = <span class="st0">"STREET_NUMBER"</span><span class="br0">)</span><br>
+&nbsp; <span class="kw2">private</span> <span class="kw4">int</span> streetNumber;</p>
+<p>&nbsp; @Column<span class="br0">(</span>name = <span class="st0">"STREET_NAME"</span><span class="br0">)</span><br>
+&nbsp; <span class="kw2">private</span> <a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> streetName;</p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">long</span> getId<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">return</span> id;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> setId<span class="br0">(</span><span class="kw4">long</span> id<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">this</span>.<span class="me1">id</span> = id;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">int</span> getStreetNumber<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">return</span> streetNumber;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> setStreetNumber<span class="br0">(</span><span class="kw4">int</span> streetNumber<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">this</span>.<span class="me1">streetNumber</span> = streetNumber;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> getStreetName<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">return</span> streetName;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> setStreetName<span class="br0">(</span><a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> streetName<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">this</span>.<span class="me1">streetName</span> = streetName;<br>
+&nbsp; <span class="br0">}</span></p>
+<p><span class="br0">}</span></p></div>
+</div>
+<p>Third, the <tt>Entree</tt> class:</p>
+<div class="codesnip-container">
+<div class="codesnip">package blog.<span class="me1">jpa</span>.<span class="me1">domain</span>;
+<p><span class="co2">import javax.persistence.Entity;</span><br>
+<span class="co2">import javax.persistence.GeneratedValue;</span><br>
+<span class="co2">import javax.persistence.GenerationType;</span><br>
+<span class="co2">import javax.persistence.Id;</span></p>
+<p>@<a href="http://www.google.com/search?q=allinurl%3AEntity+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">Entity</span></a><br>
+<span class="kw2">public</span> <span class="kw2">class</span> Entree <span class="br0">{</span></p>
+<p>&nbsp; @Id<br>
+&nbsp; @GeneratedValue<span class="br0">(</span>strategy = GenerationType.<span class="me1">AUTO</span><span class="br0">)</span><br>
+&nbsp; <span class="kw2">private</span> <span class="kw4">long</span> id;</p>
+<p>&nbsp; <span class="kw2">private</span> <a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> name;</p>
+<p>&nbsp; <span class="kw2">private</span> <span class="kw4">boolean</span> vegetarian;</p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">long</span> getId<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">return</span> id;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> setId<span class="br0">(</span><span class="kw4">long</span> id<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">this</span>.<span class="me1">id</span> = id;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> getName<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">return</span> name;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> setName<span class="br0">(</span><a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> name<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">this</span>.<span class="me1">name</span> = name;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">boolean</span> isVegetarian<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">return</span> vegetarian;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> setVegetarian<span class="br0">(</span><span class="kw4">boolean</span> vegetarian<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">this</span>.<span class="me1">vegetarian</span> = vegetarian;<br>
+&nbsp; <span class="br0">}</span></p>
+<p><span class="br0">}</span></p></div>
+</div>
+<p>As you can see, not every persistent field has been annotated. JPA
+uses defaults (such as using a column name that matches the property
+name exactly) so that in many cases you do not need to specify the
+metadata explicitly. However, you may still choose to do so in order to
+provide more thoroughly self-documenting code. Notice that in the <tt>Entree</tt> class I am not using annotations for the String property “name�? or the boolean property “vegetarian�?. However, in the <tt>Address</tt>
+class, I am using the annotations, because I want to have a non-default
+name for the columns in the database (for example, I have chosen
+“STREET_NAME�? whereas the default would have been “STREETNAME�?).</p>
+<p>Of course, one of the most important features of any ORM mechanism
+is the way in which one specifies the mapping from relationships
+between Objects to their database counterparts. In the <tt>Restaurant</tt> class, there is a <tt>@OneToOne</tt> annotation to describe the relationship to an <tt>Address</tt> and a <tt>@ManyToMany</tt> annotation to describe the relationship with members of the <tt>Entree</tt> class. Since instances of these other classes are also being managed by the <tt>EntityManager</tt>, it is possible to specify “cascade�? rules. For example, when a <tt>Restaurant</tt> is deleted, the associated <tt>Address</tt> will also be deleted. In a moment, you will see a testcase for this scenario.</p>
+<p>Finally, take a look at the @Id annotations and the specified
+“strategy�? for the ID’s @GeneratedValue. This metadata is used for
+describing the <i>primary key</i> generation strategy which in turn controls the identity within the database.</p>
+<p>To learn much more about these and additional JPA annotations, check out the JPA specification - which is actually a subset of <a href="http://www.jcp.org/en/jsr/detail?id=220" onclick="javascript:urchinTracker('/outbound/www.jcp.org');">JSR-220</a>.</p>
+<h2>Code - Data Access Layer</h2>
+<p>For accessing instances of the domain model, it is best to create a
+generic interface that hides all details about the underlying
+persistence mechanism. That way, if switching later to something other
+than JPA, there will be no impact on the architecture. This also makes
+it easier to test the service layer, since it enables the creation of
+stub implementations of this data access interface - or even dynamic
+mock implementations.</p>
+<p>Here is the interface. Notice that there are no dependencies on any
+JPA or Spring classes. In fact, the only dependencies here that are not
+core Java classes are the classes of my domain model (in this simple
+case, there is only one - <tt>Restaurant</tt>):</p>
+<div class="codesnip-container">
+<div class="codesnip">package blog.<span class="me1">jpa</span>.<span class="me1">dao</span>;
+<p><span class="co2">import java.util.List;</span><br>
+<span class="co2">import blog.jpa.domain.Restaurant;</span></p>
+<p><span class="kw2">public</span> <span class="kw2">interface</span> RestaurantDao <span class="br0">{</span></p>
+<p>&nbsp; <span class="kw2">public</span> Restaurant findById<span class="br0">(</span><span class="kw4">long</span> id<span class="br0">)</span>;</p>
+<p>&nbsp; <span class="kw2">public</span> List&lt;Restaurant&gt; findByName<span class="br0">(</span><a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> name<span class="br0">)</span>;</p>
+<p>&nbsp; <span class="kw2">public</span> List&lt;Restaurant&gt; findByStreetName<span class="br0">(</span><a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> streetName<span class="br0">)</span>;</p>
+<p>&nbsp; <span class="kw2">public</span> List&lt;Restaurant&gt; findByEntreeNameLike<span class="br0">(</span><a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> entreeName<span class="br0">)</span>;</p>
+<p>&nbsp; <span class="kw2">public</span> List&lt;Restaurant&gt; findRestaurantsWithVegetarianEntrees<span class="br0">(</span><span class="br0">)</span>;</p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> save<span class="br0">(</span>Restaurant restaurant<span class="br0">)</span>;</p>
+<p>&nbsp; <span class="kw2">public</span> Restaurant update<span class="br0">(</span>Restaurant restaurant<span class="br0">)</span>;</p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> delete<span class="br0">(</span>Restaurant restaurant<span class="br0">)</span>;</p>
+<p><span class="br0">}</span></p></div>
+</div>
+<p>For the implementation of this interface, I am going to extend Spring’s <tt>JpaDaoSupport</tt> class. This provides a convenience method for retrieving the <tt>JpaTemplate</tt>. If you have used Spring with JDBC or other ORM technologies, then you will probably be quite familiar with this approach.</p>
+<p>It should be noted that use of the <tt>JpaDaoSupport</tt> is optional. It is possible to construct a <tt>JpaTemplate</tt> directly by simply providing the <tt>EntityManagerFactory</tt> to its constructor. In fact, the <tt>JpaTemplate</tt>
+itself is optional. If you do not wish to have the automatic
+translation of JPA exceptions into Spring’s runtime exception
+hierarchy, then you can avoid <tt>JpaTemplate</tt> altogether. In that case, you may still be interested in Spring’s <tt>EntityManagerFactoryUtils</tt> class which provides a convenient static method for obtaining the shared (and thus transactional) <tt>EntityManager</tt>.</p>
+<p>Here is the implementation:</p>
+<div class="codesnip-container">
+<div class="codesnip">package blog.<span class="me1">jpa</span>.<span class="me1">dao</span>;
+<p><span class="co2">import java.util.List;</span><br>
+<span class="co2">import org.springframework.orm.jpa.support.JpaDaoSupport;</span><br>
+<span class="co2">import blog.jpa.domain.Restaurant;</span></p>
+<p><span class="kw2">public</span> <span class="kw2">class</span> JpaRestaurantDao <span class="kw2">extends</span> JpaDaoSupport <span class="kw2">implements</span> RestaurantDao <span class="br0">{</span></p>
+<p>&nbsp; <span class="kw2">public</span> Restaurant findById<span class="br0">(</span><span class="kw4">long</span> id<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">return</span> getJpaTemplate<span class="br0">(</span><span class="br0">)</span>.<span class="me1">find</span><span class="br0">(</span>Restaurant.<span class="kw2">class</span>, id<span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> List&lt;Restaurant&gt; findByName<span class="br0">(</span><a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> name<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">return</span> getJpaTemplate<span class="br0">(</span><span class="br0">)</span>.<span class="me1">find</span><span class="br0">(</span><span class="st0">"select r from Restaurant r where r.name = ?1"</span>, name<span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> List&lt;Restaurant&gt; findByStreetName<span class="br0">(</span><a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> streetName<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">return</span> getJpaTemplate<span class="br0">(</span><span class="br0">)</span>.<span class="me1">find</span><span class="br0">(</span><span class="st0">"select r from Restaurant r where r.address.streetName = ?1"</span>, streetName<span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> List&lt;Restaurant&gt; findByEntreeNameLike<span class="br0">(</span><a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> entreeName<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">return</span> getJpaTemplate<span class="br0">(</span><span class="br0">)</span>.<span class="me1">find</span><span class="br0">(</span><span class="st0">"select r from Restaurant r where r.entrees.name like ?1"</span>, entreeName<span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> List&lt;Restaurant&gt; findRestaurantsWithVegetarianEntrees<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">return</span> getJpaTemplate<span class="br0">(</span><span class="br0">)</span>.<span class="me1">find</span><span class="br0">(</span><span class="st0">"select r from Restaurant r where r.entrees.vegetarian = 'true'"</span><span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> save<span class="br0">(</span>Restaurant restaurant<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; getJpaTemplate<span class="br0">(</span><span class="br0">)</span>.<span class="me1">persist</span><span class="br0">(</span>restaurant<span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> Restaurant update<span class="br0">(</span>Restaurant restaurant<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">return</span> getJpaTemplate<span class="br0">(</span><span class="br0">)</span>.<span class="me1">merge</span><span class="br0">(</span>restaurant<span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> delete<span class="br0">(</span>Restaurant restaurant<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; getJpaTemplate<span class="br0">(</span><span class="br0">)</span>.<span class="me1">remove</span><span class="br0">(</span>restaurant<span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p><span class="br0">}</span></p></div>
+</div>
+<h2>The Service Layer</h2>
+<p>As the purpose here is to focus on a JPA implementation for the
+data-access layer, the service layer is omitted. Obviously, in a
+realistic scenario, the service layer would play a critical role in the
+system architecture. It would be the point where transactions are
+demarcated - and typically, they would be demarcated declaratively in
+the Spring configuration. In the next step, when you have a look at the
+configuration, you will notice that I have provided a
+“transactionManager�? bean. It is used by the base test class to
+automatically wrap each test method in a transaction, and it is the
+same “transactionManager�? that would wrap service layer methods with
+transactions. The main point to take away is that there is NO
+transaction-related code in the data-access tier. Using the Spring <tt>JpaTemplate</tt> ensures that the same <tt>EntityManager</tt>
+is shared across all DAOs. Therefore transaction propagation occurs
+automatically - as dictated by the service layer. In other words, it
+will actually behave exactly the same as other persistence mechanisms
+configured within the Spring framework. There is nothing JPA-specific -
+hence the rationale for leaving it out of this entry which is focused
+on JPA.</p>
+<h2>Configuration</h2>
+<p>Since I opted for the annotation-based mappings, you have actually
+already seen most of the JPA-specific configuration when the domain
+classes were presented. As mentioned above, it also would have been
+possible to configure those mappings via XML (in an ‘orm.xml’ file).
+The only other required configuration is in ‘META-INF/persistence.xml’.
+In this case, that is very simple since the database-related properties
+will be available to the <tt>EntityManagerFactory</tt> via a
+dependency-injected “dataSource�? provided in the Spring configuration
+(due up next). The only other information in this ‘persistence.xml’ is
+whether to use local or global (JTA) transactions. Here are the
+contents of the ‘persistence.xml’ file:</p>
+<div class="codesnip-container">
+<div class="codesnip"><span class="sc3"><span class="re1">&lt;persistence</span> <span class="re0">xmlns</span>=<span class="st0">"http://java.sun.com/xml/ns/persistence"</span> <span class="re0">version</span>=<span class="st0">"1.0"</span><span class="re2">&gt;</span></span>
+<p>&nbsp; <span class="sc3"><span class="re1">&lt;persistence</span>-unit <span class="re0">name</span>=<span class="st0">"SpringJpaGettingStarted"</span> <span class="re0">transaction-type</span>=<span class="st0">"RESOURCE_LOCAL"</span><span class="re2">/&gt;</span></span></p>
+<p><span class="sc3"><span class="re1">&lt;/persistence<span class="re2">&gt;</span></span></span></p></div>
+</div>
+<p>There are only 4 beans in the Spring configuration (well ok, a
+couple of inner-beans too). First, there is the “restaurantDao�? (I
+purposefully left “jpa�? out of the bean name since any service layer
+beans depending on the DAO should only be concerned with the generic
+interface). The only required property for the JPA implementation of
+this DAO is the “entityManagerFactory�? which it uses to create the <tt>JpaTemplate</tt>.
+The “entityManagerFactory�? depends on the “dataSource�?, and there is
+nothing JPA-specific about that. In this configuration, you will see a <tt>DriverManagerDataSource</tt>, but in production code, this would be replaced by a connection pool - and typically one obtained via a <tt>JndiObjectFactoryBean</tt> (or Spring 2.0’s new convenience <jndi:lookup>
+tag). The final bean is the “transactionManager�? that is required by
+the test class. This is the same “transactionManager�? that would be
+used for transactions demarcated in the service-layer. The
+implementation class is Spring’s <tt>JpaTransactionManager</tt>. To
+anyone familiar with configuring Spring for JDBC, Hibernate, JDO,
+TopLink, or iBATIS, most of these beans will look very familiar. The
+only exception is the <tt>EntityManagerFactory</tt>. I will discuss it briefly, but first have a look at the complete ‘applicationContext.xml’ file:</jndi:lookup></p>
+<div class="codesnip-container">
+<div class="codesnip"><span class="sc3"><span class="re1">&lt;</span>?xml <span class="re0">version</span>=<span class="st0">"1.0"</span> <span class="re0">encoding</span>=<span class="st0">"UTF-8"</span>?<span class="re2">&gt;</span></span><br>
+<span class="sc3"><span class="re1">&lt;beans</span> <span class="re0">xmlns</span>=<span class="st0">"http://www.springframework.org/schema/beans"</span><br>
+&nbsp; xmlns:<span class="re0">xsi</span>=<span class="st0">"http://www.w3.org/2001/XMLSchema-instance"</span><br>
+&nbsp; xsi:<span class="re0">schemaLocation</span>=<span class="st0">"http://www.springframework.org/schema/beans<br>
+&nbsp; &nbsp; http://www.springframework.org/schema/beans/spring-beans.xsd"</span><span class="re2">&gt;</span></span>
+<p>&nbsp; <span class="sc3"><span class="re1">&lt;bean</span> <span class="re0">id</span>=<span class="st0">"restaurantDao"</span> <span class="re0">class</span>=<span class="st0">"blog.jpa.dao.JpaRestaurantDao"</span><span class="re2">&gt;</span></span><br>
+&nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;property</span> <span class="re0">name</span>=<span class="st0">"entityManagerFactory"</span> <span class="re0">ref</span>=<span class="st0">"entityManagerFactory"</span><span class="re2">/&gt;</span></span><br>
+&nbsp; <span class="sc3"><span class="re1">&lt;/bean<span class="re2">&gt;</span></span></span></p>
+<p>&nbsp; <span class="sc3"><span class="re1">&lt;bean</span> <span class="re0">id</span>=<span class="st0">"entityManagerFactory"</span> <span class="re0">class</span>=<span class="st0">"org.springframework.orm.jpa.ContainerEntityManagerFactoryBean"</span><span class="re2">&gt;</span></span><br>
+&nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;property</span> <span class="re0">name</span>=<span class="st0">"dataSource"</span> <span class="re0">ref</span>=<span class="st0">"dataSource"</span><span class="re2">/&gt;</span></span><br>
+&nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;property</span> <span class="re0">name</span>=<span class="st0">"jpaVendorAdapter"</span><span class="re2">&gt;</span></span><br>
+&nbsp; &nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;bean</span> <span class="re0">class</span>=<span class="st0">"org.springframework.orm.jpa.vendor.TopLinkJpaVendorAdapter"</span><span class="re2">&gt;</span></span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;property</span> <span class="re0">name</span>=<span class="st0">"showSql"</span> <span class="re0">value</span>=<span class="st0">"true"</span><span class="re2">/&gt;</span></span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;property</span> <span class="re0">name</span>=<span class="st0">"generateDdl"</span> <span class="re0">value</span>=<span class="st0">"true"</span><span class="re2">/&gt;</span></span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;property</span> <span class="re0">name</span>=<span class="st0">"databasePlatform"</span> <span class="re0">value</span>=<span class="st0">"oracle.toplink.essentials.platform.database.HSQLPlatform"</span><span class="re2">/&gt;</span></span><br>
+&nbsp; &nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;/bean<span class="re2">&gt;</span></span></span><br>
+&nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;/property<span class="re2">&gt;</span></span></span><br>
+&nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;property</span> <span class="re0">name</span>=<span class="st0">"loadTimeWeaver"</span><span class="re2">&gt;</span></span><br>
+&nbsp; &nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;bean</span> <span class="re0">class</span>=<span class="st0">"org.springframework.instrument.classloading.SimpleLoadTimeWeaver"</span><span class="re2">/&gt;</span></span><br>
+&nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;/property<span class="re2">&gt;</span></span></span><br>
+&nbsp; <span class="sc3"><span class="re1">&lt;/bean<span class="re2">&gt;</span></span></span></p>
+<p>&nbsp; <span class="sc3"><span class="re1">&lt;bean</span> <span class="re0">id</span>=<span class="st0">"dataSource"</span> <span class="re0">class</span>=<span class="st0">"org.springframework.jdbc.datasource.DriverManagerDataSource"</span><span class="re2">&gt;</span></span><br>
+&nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;property</span> <span class="re0">name</span>=<span class="st0">"driverClassName"</span> <span class="re0">value</span>=<span class="st0">"org.hsqldb.jdbcDriver"</span><span class="re2">/&gt;</span></span><br>
+&nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;property</span> <span class="re0">name</span>=<span class="st0">"url"</span> <span class="re0">value</span>=<span class="st0">"jdbc:hsqldb:hsql://localhost/"</span><span class="re2">/&gt;</span></span><br>
+&nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;property</span> <span class="re0">name</span>=<span class="st0">"username"</span> <span class="re0">value</span>=<span class="st0">"sa"</span><span class="re2">/&gt;</span></span><br>
+&nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;property</span> <span class="re0">name</span>=<span class="st0">"password"</span> <span class="re0">value</span>=<span class="st0">""</span><span class="re2">/&gt;</span></span><br>
+&nbsp; <span class="sc3"><span class="re1">&lt;/bean<span class="re2">&gt;</span></span></span></p>
+<p>&nbsp; <span class="sc3"><span class="re1">&lt;bean</span> <span class="re0">id</span>=<span class="st0">"transactionManager"</span> <span class="re0">class</span>=<span class="st0">"org.springframework.orm.jpa.JpaTransactionManager"</span><span class="re2">&gt;</span></span><br>
+&nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;property</span> <span class="re0">name</span>=<span class="st0">"entityManagerFactory"</span> <span class="re0">ref</span>=<span class="st0">"entityManagerFactory"</span><span class="re2">/&gt;</span></span><br>
+&nbsp; &nbsp; <span class="sc3"><span class="re1">&lt;property</span> <span class="re0">name</span>=<span class="st0">"dataSource"</span> <span class="re0">ref</span>=<span class="st0">"dataSource"</span><span class="re2">/&gt;</span></span><br>
+&nbsp; <span class="sc3"><span class="re1">&lt;/bean<span class="re2">&gt;</span></span></span></p>
+<p><span class="sc3"><span class="re1">&lt;/beans<span class="re2">&gt;</span></span></span></p></div>
+</div>
+<p>First you see that the “entityManagerFactory�? needs to be aware of
+a “dataSource�?. Next there is the “jpaVendorAdapter�? as there are a
+variety of JPA implementations. In this case, I’ve configured the <tt>TopLinkJpaVendorAdapter</tt>
+as an inner bean, and it has a few properties of its own. There is a
+boolean property to specify whether SQL should be shown and another
+boolean property for the generation of DDL. Both of these have been set
+to “true�? and thus the database schema will be automatically generated
+each time the tests are executed. This is rather convenient in the
+early development phase as it provides immediate feedback for
+experimentations in the mappings, column names, etc. The
+“databasePlatformClass�? provides the necessary information of what
+particular database is being used. Finally, the “entityManagerFactory�?
+has a property for a “loadTimeWeaver�? that plays a role in the
+transformation of class files by JPA persistence providers in order to
+accomodate certain features such as lazy-loading.</p>
+<h2>Integration Testing</h2>
+<p>Perhaps the best way to learn a new API is to write a bunch of testcases. The <tt>JpaRestaurantDaoTests</tt>
+class provides some basic tests. In order to learn more about JPA,
+modify the code and/or configuration and observe the impact on these
+tests. For example, try modifying the <i>cascade</i> settings - or the cardinality of the associations. Notice that <tt>JpaRestaurantDaoTests</tt> extends Spring’s <tt>AbstractJpaTests</tt>. You may already be familiar with Spring’s <tt>AbstractTransactionalDataSourceSpringContextTests</tt>. This class will behave the same way in that any database changes caused by the test methods will rollback by default. <tt>AbstractJpaTests</tt>
+actually does much more than that, but it is beyond the scope of this
+entry to go into those details. If interested, have a look at the
+source code for <tt>AbstractJpaTests</tt>.</p>
+<p>Here is the <tt>JpaRestaurantDaoTests</tt> code:</p>
+<div class="codesnip-container">
+<div class="codesnip">package blog.<span class="me1">jpa</span>.<span class="me1">dao</span>;
+<p><span class="co2">import java.util.List;</span><br>
+<span class="co2">import org.springframework.test.jpa.AbstractJpaTests;</span><br>
+<span class="co2">import blog.jpa.dao.RestaurantDao;</span><br>
+<span class="co2">import blog.jpa.domain.Restaurant;</span></p>
+<p><span class="kw2">public</span> <span class="kw2">class</span> JpaRestaurantDaoTests <span class="kw2">extends</span> AbstractJpaTests <span class="br0">{</span></p>
+<p>&nbsp; <span class="kw2">private</span> RestaurantDao restaurantDao;</p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> setRestaurantDao<span class="br0">(</span>RestaurantDao restaurantDao<span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">this</span>.<span class="me1">restaurantDao</span> = restaurantDao;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">protected</span> <a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a><span class="br0">[</span><span class="br0">]</span> getConfigLocations<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <span class="kw2">return</span> <span class="kw2">new</span> <a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a><span class="br0">[</span><span class="br0">]</span> <span class="br0">{</span><span class="st0">"classpath:/blog/jpa/dao/applicationContext.xml"</span><span class="br0">}</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">protected</span> <span class="kw4">void</span> onSetUpInTransaction<span class="br0">(</span><span class="br0">)</span> <span class="kw2">throws</span> <a href="http://www.google.com/search?q=allinurl%3AException+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">Exception</span></a> <span class="br0">{</span><br>
+&nbsp; &nbsp; jdbcTemplate.<span class="me1">execute</span><span class="br0">(</span><span class="st0">"insert into address (id, street_number, street_name) values (1, 10, 'Main Street')"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; jdbcTemplate.<span class="me1">execute</span><span class="br0">(</span><span class="st0">"insert into address (id, street_number, street_name) values (2, 20, 'Main Street')"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; jdbcTemplate.<span class="me1">execute</span><span class="br0">(</span><span class="st0">"insert into address (id, street_number, street_name) values (3, 123, 'Dover Street')"</span><span class="br0">)</span>;</p>
+<p>&nbsp; &nbsp; jdbcTemplate.<span class="me1">execute</span><span class="br0">(</span><span class="st0">"insert into restaurant (id, name, address_id) values (1, 'Burger Barn', 1)"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; jdbcTemplate.<span class="me1">execute</span><span class="br0">(</span><span class="st0">"insert into restaurant (id, name, address_id) values (2, 'Veggie Village', 2)"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; jdbcTemplate.<span class="me1">execute</span><span class="br0">(</span><span class="st0">"insert into restaurant (id, name, address_id) values (3, 'Dover Diner', 3)"</span><span class="br0">)</span>;</p>
+<p>&nbsp; &nbsp; jdbcTemplate.<span class="me1">execute</span><span class="br0">(</span><span class="st0">"insert into entree (id, name, vegetarian) values (1, 'Hamburger', 0)"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; jdbcTemplate.<span class="me1">execute</span><span class="br0">(</span><span class="st0">"insert into entree (id, name, vegetarian) values (2, 'Cheeseburger', 0)"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; jdbcTemplate.<span class="me1">execute</span><span class="br0">(</span><span class="st0">"insert into entree (id, name, vegetarian) values (3, 'Tofu Stir Fry', 1)"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; jdbcTemplate.<span class="me1">execute</span><span class="br0">(</span><span class="st0">"insert into entree (id, name, vegetarian) values (4, 'Vegetable Soup', 1)"</span><span class="br0">)</span>;</p>
+<p>&nbsp; &nbsp; jdbcTemplate.<span class="me1">execute</span><span class="br0">(</span><span class="st0">"insert into restaurant_entree (restaurant_id, entree_id) values (1, 1)"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; jdbcTemplate.<span class="me1">execute</span><span class="br0">(</span><span class="st0">"insert into restaurant_entree (restaurant_id, entree_id) values (1, 2)"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; jdbcTemplate.<span class="me1">execute</span><span class="br0">(</span><span class="st0">"insert into restaurant_entree (restaurant_id, entree_id) values (2, 3)"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; jdbcTemplate.<span class="me1">execute</span><span class="br0">(</span><span class="st0">"insert into restaurant_entree (restaurant_id, entree_id) values (2, 4)"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; jdbcTemplate.<span class="me1">execute</span><span class="br0">(</span><span class="st0">"insert into restaurant_entree (restaurant_id, entree_id) values (3, 1)"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; jdbcTemplate.<span class="me1">execute</span><span class="br0">(</span><span class="st0">"insert into restaurant_entree (restaurant_id, entree_id) values (3, 2)"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; jdbcTemplate.<span class="me1">execute</span><span class="br0">(</span><span class="st0">"insert into restaurant_entree (restaurant_id, entree_id) values (3, 4)"</span><span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> testFindByIdWhereRestaurantExists<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; Restaurant restaurant = restaurantDao.<span class="me1">findById</span><span class="br0">(</span><span class="nu0">1</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertNotNull<span class="br0">(</span>restaurant<span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertEquals<span class="br0">(</span><span class="st0">"Burger Barn"</span>, restaurant.<span class="me1">getName</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> testFindByIdWhereRestaurantDoesNotExist<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; Restaurant restaurant = restaurantDao.<span class="me1">findById</span><span class="br0">(</span><span class="nu0">99</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertNull<span class="br0">(</span>restaurant<span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> testFindByNameWhereRestaurantExists<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; List&lt;Restaurant&gt; restaurants = restaurantDao.<span class="me1">findByName</span><span class="br0">(</span><span class="st0">"Veggie Village"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertEquals<span class="br0">(</span><span class="nu0">1</span>, restaurants.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; Restaurant restaurant = restaurants.<span class="me1">get</span><span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertEquals<span class="br0">(</span><span class="st0">"Veggie Village"</span>, restaurant.<span class="me1">getName</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertEquals<span class="br0">(</span><span class="st0">"Main Street"</span>, restaurant.<span class="me1">getAddress</span><span class="br0">(</span><span class="br0">)</span>.<span class="me1">getStreetName</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertEquals<span class="br0">(</span><span class="nu0">2</span>, restaurant.<span class="me1">getEntrees</span><span class="br0">(</span><span class="br0">)</span>.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> testFindByNameWhereRestaurantDoesNotExist<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; List&lt;Restaurant&gt; restaurants = restaurantDao.<span class="me1">findByName</span><span class="br0">(</span><span class="st0">"No Such Restaurant"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertEquals<span class="br0">(</span><span class="nu0">0</span>, restaurants.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> testFindByStreetName<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; List&lt;Restaurant&gt; restaurants = restaurantDao.<span class="me1">findByStreetName</span><span class="br0">(</span><span class="st0">"Main Street"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertEquals<span class="br0">(</span><span class="nu0">2</span>, restaurants.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; Restaurant r1 = restaurantDao.<span class="me1">findByName</span><span class="br0">(</span><span class="st0">"Burger Barn"</span><span class="br0">)</span>.<span class="me1">get</span><span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; Restaurant r2 = restaurantDao.<span class="me1">findByName</span><span class="br0">(</span><span class="st0">"Veggie Village"</span><span class="br0">)</span>.<span class="me1">get</span><span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertTrue<span class="br0">(</span>restaurants.<span class="me1">contains</span><span class="br0">(</span>r1<span class="br0">)</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertTrue<span class="br0">(</span>restaurants.<span class="me1">contains</span><span class="br0">(</span>r2<span class="br0">)</span><span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> testFindByEntreeNameLike<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; List&lt;Restaurant&gt; restaurants = restaurantDao.<span class="me1">findByEntreeNameLike</span><span class="br0">(</span><span class="st0">"%burger"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertEquals<span class="br0">(</span><span class="nu0">2</span>, restaurants.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> testFindRestaurantsWithVegetarianOptions<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; List&lt;Restaurant&gt; restaurants = restaurantDao.<span class="me1">findRestaurantsWithVegetarianEntrees</span><span class="br0">(</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertEquals<span class="br0">(</span><span class="nu0">2</span>, restaurants.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> testModifyRestaurant<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> oldName = <span class="st0">"Burger Barn"</span>;<br>
+&nbsp; &nbsp; <a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> newName = <span class="st0">"Hamburger Hut"</span>;<br>
+&nbsp; &nbsp; Restaurant restaurant = restaurantDao.<span class="me1">findByName</span><span class="br0">(</span>oldName<span class="br0">)</span>.<span class="me1">get</span><span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; restaurant.<span class="me1">setName</span><span class="br0">(</span>newName<span class="br0">)</span>;<br>
+&nbsp; &nbsp; restaurantDao.<span class="me1">update</span><span class="br0">(</span>restaurant<span class="br0">)</span>;<br>
+&nbsp; &nbsp; List&lt;Restaurant&gt; results = restaurantDao.<span class="me1">findByName</span><span class="br0">(</span>oldName<span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertEquals<span class="br0">(</span><span class="nu0">0</span>, results.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; results = restaurantDao.<span class="me1">findByName</span><span class="br0">(</span>newName<span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertEquals<span class="br0">(</span><span class="nu0">1</span>, results.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> testDeleteRestaurantAlsoDeletesAddress<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> restaurantName = <span class="st0">"Dover Diner"</span>;<br>
+&nbsp; &nbsp; <span class="kw4">int</span> preRestaurantCount = jdbcTemplate.<span class="me1">queryForInt</span><span class="br0">(</span><span class="st0">"select count(*) from restaurant"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; <span class="kw4">int</span> preAddressCount = jdbcTemplate.<span class="me1">queryForInt</span><span class="br0">(</span><span class="st0">"select count(*) from address where street_name = 'Dover Street'"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; Restaurant restaurant = restaurantDao.<span class="me1">findByName</span><span class="br0">(</span>restaurantName<span class="br0">)</span>.<span class="me1">get</span><span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; restaurantDao.<span class="me1">delete</span><span class="br0">(</span>restaurant<span class="br0">)</span>;<br>
+&nbsp; &nbsp; List&lt;Restaurant&gt; results = restaurantDao.<span class="me1">findByName</span><span class="br0">(</span>restaurantName<span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertEquals<span class="br0">(</span><span class="nu0">0</span>, results.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; <span class="kw4">int</span> postRestaurantCount = jdbcTemplate.<span class="me1">queryForInt</span><span class="br0">(</span><span class="st0">"select count(*) from restaurant"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertEquals<span class="br0">(</span>preRestaurantCount - <span class="nu0">1</span>, postRestaurantCount<span class="br0">)</span>;<br>
+&nbsp; &nbsp; <span class="kw4">int</span> postAddressCount = jdbcTemplate.<span class="me1">queryForInt</span><span class="br0">(</span><span class="st0">"select count(*) from address where street_name = 'Dover Street'"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertEquals<span class="br0">(</span>preAddressCount - <span class="nu0">1</span>, postAddressCount<span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span></p>
+<p>&nbsp; <span class="kw2">public</span> <span class="kw4">void</span> testDeleteRestaurantDoesNotDeleteEntrees<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; <a href="http://www.google.com/search?q=allinurl%3AString+java.sun.com&amp;bntl=1" onclick="javascript:urchinTracker('/outbound/www.google.com');"><span class="kw3">String</span></a> restaurantName = <span class="st0">"Dover Diner"</span>;<br>
+&nbsp; &nbsp; <span class="kw4">int</span> preRestaurantCount = jdbcTemplate.<span class="me1">queryForInt</span><span class="br0">(</span><span class="st0">"select count(*) from restaurant"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; <span class="kw4">int</span> preEntreeCount = jdbcTemplate.<span class="me1">queryForInt</span><span class="br0">(</span><span class="st0">"select count(*) from entree"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; Restaurant restaurant = restaurantDao.<span class="me1">findByName</span><span class="br0">(</span>restaurantName<span class="br0">)</span>.<span class="me1">get</span><span class="br0">(</span><span class="nu0">0</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; restaurantDao.<span class="me1">delete</span><span class="br0">(</span>restaurant<span class="br0">)</span>;<br>
+&nbsp; &nbsp; List&lt;Restaurant&gt; results = restaurantDao.<span class="me1">findByName</span><span class="br0">(</span>restaurantName<span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertEquals<span class="br0">(</span><span class="nu0">0</span>, results.<span class="me1">size</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; <span class="kw4">int</span> postRestaurantCount = jdbcTemplate.<span class="me1">queryForInt</span><span class="br0">(</span><span class="st0">"select count(*) from restaurant"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertEquals<span class="br0">(</span>preRestaurantCount - <span class="nu0">1</span>, postRestaurantCount<span class="br0">)</span>;<br>
+&nbsp; &nbsp; <span class="kw4">int</span> postEntreeCount = jdbcTemplate.<span class="me1">queryForInt</span><span class="br0">(</span><span class="st0">"select count(*) from entree"</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; assertEquals<span class="br0">(</span>preEntreeCount, postEntreeCount<span class="br0">)</span>;<br>
+&nbsp; <span class="br0">}</span><br>
+<span class="br0">}</span></p></div>
+</div>
+<h2>Further Reading</h2>
+<p>JPA is a vast topic, and this blog has only scratched the surface -
+the main objective being to demonstrate the basic configuration of a
+JPA-based persistence implementation with Spring. Obviously this domain
+model is trivial in terms of Object-Relational mapping. However, once
+you have this working configuration, you will be able to extend the
+example here while exploring the ORM capabilities offered by JPA. I
+would highly encourage a closer look at the Spring JPA support via the
+JavaDoc and the Spring reference documentation. The 2.0 RC1 release
+contains an added sub-section on JPA within the ORM section of the
+reference document.</p>
+<p>Here are a few helpful links:</p>
+<p><a href="http://www.jcp.org/en/jsr/detail?id=220" onclick="javascript:urchinTracker('/outbound/www.jcp.org');">JSR-220</a> (contains the JPA specification)<br>
+<a href="https://glassfish.dev.java.net/javaee5/persistence/">Glassfish JPA</a> (the reference implementation)<br>
+<a href="http://commerce.bea.com/showproduct.jsp?family=KODO&amp;major=4.0&amp;minor=0" onclick="javascript:urchinTracker('/outbound/commerce.bea.com');">Kodo 4.0</a> (BEA’s JPA implementation based on Kodo)<br>
+<a href="http://www.hibernate.org/371.html" onclick="javascript:urchinTracker('/outbound/www.hibernate.org');">Hibernate JPA Migration Guide</a><br>
+</p><h2>Similar Posts</h2>
+<ul class="similar-posts">
+<li><a href="http://blog.springsource.com/2006/04/09/spring-20s-jms-improvements/" rel="bookmark" title="April 9, 2006">Spring 2.0's JMS Improvements</a></li>
+<li><a href="http://blog.springsource.com/2007/01/23/dynamic-datasource-routing/" rel="bookmark" title="January 23, 2007">Dynamic DataSource Routing</a></li>
+<li><a href="http://blog.springsource.com/2007/05/14/annotation-driven-dependency-injection-in-spring-21/" rel="bookmark" title="May 14, 2007">Annotation-Driven Dependency Injection in Spring 2.1</a></li>
+<li><a href="http://blog.springsource.com/2006/03/22/pojo-aspects-in-spring-20-a-simple-example/" rel="bookmark" title="March 22, 2006">POJO Aspects in Spring 2.0: A Simple Example</a></li>
+<li><a href="http://blog.springsource.com/2007/05/29/customizing-annotation-configuration-and-component-detection-in-spring-21/" rel="bookmark" title="May 29, 2007">Customizing Annotation Configuration and Component Detection in Spring 2.1</a></li>
+</ul>
+<p><!-- Similar Posts took 13.465 ms --></p>
+
+<div class="sociable">
+<div class="sociable_tagline">
+<strong>Share this Post</strong>
+</div>
+<ul>
+	<li class="sociablefirst"><a rel="nofollow" target="_blank" href="http://digg.com/submit?phase=2&amp;url=http%3A%2F%2Fblog.springsource.com%2F2006%2F05%2F30%2Fgetting-started-with-jpa-in-spring-20%2F&amp;title=Getting%20Started%20With%20JPA%20in%20Spring%202.0&amp;bodytext=The%20motivation%20behind%20this%20blog%20entry%20is%20to%20provide%20a%20simple%20step-by-step%20guide%20for%20getting%20started%20with%20JPA%20in%20a%20standalone%20environment%20with%20the%20Spring%20Framework.%20While%20the%20JPA%20specification%20originated%20as%20the%20persistence%20mechanism%20for%20EJB%203.0%2C%20it%20wa" title="Digg"><img src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/digg.png" title="Digg" alt="Digg" class="sociable-hovers"></a></li>
+	<li><a rel="nofollow" target="_blank" href="http://sphinn.com/submit.php?url=http%3A%2F%2Fblog.springsource.com%2F2006%2F05%2F30%2Fgetting-started-with-jpa-in-spring-20%2F&amp;title=Getting%20Started%20With%20JPA%20in%20Spring%202.0" title="Sphinn"><img src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/sphinn.png" title="Sphinn" alt="Sphinn" class="sociable-hovers"></a></li>
+	<li><a rel="nofollow" target="_blank" href="http://delicious.com/post?url=http%3A%2F%2Fblog.springsource.com%2F2006%2F05%2F30%2Fgetting-started-with-jpa-in-spring-20%2F&amp;title=Getting%20Started%20With%20JPA%20in%20Spring%202.0&amp;notes=The%20motivation%20behind%20this%20blog%20entry%20is%20to%20provide%20a%20simple%20step-by-step%20guide%20for%20getting%20started%20with%20JPA%20in%20a%20standalone%20environment%20with%20the%20Spring%20Framework.%20While%20the%20JPA%20specification%20originated%20as%20the%20persistence%20mechanism%20for%20EJB%203.0%2C%20it%20wa" title="del.icio.us"><img src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/delicious.png" title="del.icio.us" alt="del.icio.us" class="sociable-hovers"></a></li>
+	<li><a rel="nofollow" target="_blank" href="http://www.facebook.com/share.php?u=http%3A%2F%2Fblog.springsource.com%2F2006%2F05%2F30%2Fgetting-started-with-jpa-in-spring-20%2F&amp;t=Getting%20Started%20With%20JPA%20in%20Spring%202.0" title="Facebook"><img src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/facebook.png" title="Facebook" alt="Facebook" class="sociable-hovers"></a></li>
+	<li><a rel="nofollow" target="_blank" href="http://www.mixx.com/submit?page_url=http%3A%2F%2Fblog.springsource.com%2F2006%2F05%2F30%2Fgetting-started-with-jpa-in-spring-20%2F&amp;title=Getting%20Started%20With%20JPA%20in%20Spring%202.0" title="Mixx"><img src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/mixx.png" title="Mixx" alt="Mixx" class="sociable-hovers"></a></li>
+	<li><a rel="nofollow" target="_blank" href="http://www.google.com/bookmarks/mark?op=edit&amp;bkmk=http%3A%2F%2Fblog.springsource.com%2F2006%2F05%2F30%2Fgetting-started-with-jpa-in-spring-20%2F&amp;title=Getting%20Started%20With%20JPA%20in%20Spring%202.0&amp;annotation=The%20motivation%20behind%20this%20blog%20entry%20is%20to%20provide%20a%20simple%20step-by-step%20guide%20for%20getting%20started%20with%20JPA%20in%20a%20standalone%20environment%20with%20the%20Spring%20Framework.%20While%20the%20JPA%20specification%20originated%20as%20the%20persistence%20mechanism%20for%20EJB%203.0%2C%20it%20wa" title="Google Bookmarks"><img src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/googlebookmark.png" title="Google Bookmarks" alt="Google Bookmarks" class="sociable-hovers"></a></li>
+	<li><a rel="nofollow" target="_blank" href="http://www.dzone.com/links/add.html?url=http%3A%2F%2Fblog.springsource.com%2F2006%2F05%2F30%2Fgetting-started-with-jpa-in-spring-20%2F&amp;title=Getting%20Started%20With%20JPA%20in%20Spring%202.0" title="DZone"><img src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/dzone.png" title="DZone" alt="DZone" class="sociable-hovers"></a></li>
+	<li><a rel="nofollow" target="_blank" href="http://www.linkedin.com/shareArticle?mini=true&amp;url=http%3A%2F%2Fblog.springsource.com%2F2006%2F05%2F30%2Fgetting-started-with-jpa-in-spring-20%2F&amp;title=Getting%20Started%20With%20JPA%20in%20Spring%202.0&amp;source=SpringSource+Team+Blog+The+voice+of+SpringSource&amp;summary=The%20motivation%20behind%20this%20blog%20entry%20is%20to%20provide%20a%20simple%20step-by-step%20guide%20for%20getting%20started%20with%20JPA%20in%20a%20standalone%20environment%20with%20the%20Spring%20Framework.%20While%20the%20JPA%20specification%20originated%20as%20the%20persistence%20mechanism%20for%20EJB%203.0%2C%20it%20wa" title="LinkedIn"><img src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/linkedin.png" title="LinkedIn" alt="LinkedIn" class="sociable-hovers"></a></li>
+	<li><a rel="nofollow" target="_blank" href="http://slashdot.org/bookmark.pl?title=Getting%20Started%20With%20JPA%20in%20Spring%202.0&amp;url=http%3A%2F%2Fblog.springsource.com%2F2006%2F05%2F30%2Fgetting-started-with-jpa-in-spring-20%2F" title="Slashdot"><img src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/slashdot.png" title="Slashdot" alt="Slashdot" class="sociable-hovers"></a></li>
+	<li><a rel="nofollow" target="_blank" href="http://technorati.com/faves?add=http%3A%2F%2Fblog.springsource.com%2F2006%2F05%2F30%2Fgetting-started-with-jpa-in-spring-20%2F" title="Technorati"><img src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/technorati.png" title="Technorati" alt="Technorati" class="sociable-hovers"></a></li>
+	<li class="sociablelast"><a rel="nofollow" target="_blank" href="http://twitter.com/home?status=http%3A%2F%2Fblog.springsource.com%2F2006%2F05%2F30%2Fgetting-started-with-jpa-in-spring-20%2F" title="TwitThis"><img src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/twitter.png" title="TwitThis" alt="TwitThis" class="sociable-hovers"></a></li>
+</ul>
+</div>
+		<div style="clear: both;">&nbsp;</div>
+			</div>
+	</div>
+</div>
+
+<div id="wrapper">
+  <!--
+<div id="leftbar" class="sidebar">
+	<ul>
+    <li>You will need to enter your own items here, or enable the Widget</li>
+  </ul>
+</div>
+-->
+
+	
+  <div id="inner">
+	<div id="main" class="noprint submain">
+	
+			
+	      <div id="inset" class="submain">
+      <h2>Other posts</h2>
+      <ul><li>11/08/2006: <a href="http://blog.springsource.com/2006/08/11/message-driven-pojos/">Message Driven POJOs!</a></li><li>12/03/2007: <a href="http://blog.springsource.com/2007/03/12/carplant-not-accepting-null-carmodels/">CarPlant not accepting null CarModels</a></li><li>01/05/2007: <a href="http://blog.springsource.com/2007/05/01/power-combination-sca-osgi-and-spring/">Power Combination:  SCA, OSGi, and Spring</a></li><li>26/06/2007: <a href="http://blog.springsource.com/2007/06/26/springone-2007-code-samples/">SpringOne 2007 Code Samples</a></li><li>05/06/2007: <a href="http://blog.springsource.com/2007/06/05/more-on-java-configuration/">More on Java Configuration </a></li></ul>
+    </div>
+      
+
+   	
+<div id="content" class="narrowcontents">
+<h2 class="narrowheading narrowcorner">41 responses</h2>  <div class="item" id="commentslist">
+  	<ol class="commentlist" id="commentlist">
+  	        		<li class="alt notlast" id="comment-25">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>ehsavoie</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-25">August 3rd, 2006 at 7:46 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Hi,<br>
+The example is working fine <img src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/icon_smile.gif" alt=":)" class="wp-smiley"> in RC2 with a slight correction<br>
+ should be<br>
+ .</p>
+<p>I'm trying to add transaction annotation to your DAO. When I add :</p>
+<p>All goes wrong :((( </p>
+<p>Error creating bean with name 'restaurantDao' defined in class path
+resource [blog/jpa/dao/applicationContext.xml]: Cannot resolve
+reference to bean 'entityManagerFactory' while setting bean property
+'entityManagerFactory'; nested exception is
+org.springframework.beans.factory.BeanCreationException: Error creating
+bean with name 'entityManagerFactory' defined in class path resource
+[blog/jpa/dao/applicationContext.xml]: Cannot resolve reference to bean
+'dataSource' while setting bean property 'dataSource'; nested exception
+is org.springframework.beans.factory.BeanCreationException: Error
+creating bean with name
+'org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor':
+Cannot create inner bean '(inner bean)' while setting bean property
+'transactionInterceptor'; nested exception is
+org.springframework.beans.factory.BeanCreationException: Error creating
+bean with name '(inner bean)': Cannot resolve reference to bean
+'transactionManager' while setting bean property 'transactionManager';
+nested exception is
+org.springframework.beans.factory.BeanCreationException: Error creating
+bean with name 'transactionManager' defined in class path resource
+[blog/jpa/dao/applicationContext.xml]: Initialization of bean failed;
+nested exception is java.lang.NullPointerException<br>
+org.springframework.beans.factory.BeanCreationException: Error creating
+bean with name 'restaurantDao' defined in class path resource
+[blog/jpa/dao/applicationContext.xml]: Cannot resolve reference to bean
+'entityManagerFactory' while setting bean property
+'entityManagerFactory'; nested exception is
+org.springframework.beans.factory.BeanCreationException: Error creating
+bean with name 'entityManagerFactory' defined in class path resource
+[blog/jpa/dao/applicationContext.xml]: Cannot resolve reference to bean
+'dataSource' while setting bean property 'dataSource'; nested exception
+is org.springframework.beans.factory.BeanCreationException: Error
+creating bean with name
+'org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor':
+Cannot create inner bean '(inner bean)' while setting bean property
+'transactionInterceptor'; nested exception is
+org.springframework.beans.factory.BeanCreationException: Error creating
+bean with name '(inner bean)': Cannot resolve reference to bean
+'transactionManager' while setting bean property 'transactionManager';
+nested exception is
+org.springframework.beans.factory.BeanCreationException: Error creating
+bean with name 'transactionManager' defined in class path resource
+[blog/jpa/dao/applicationContext.xml]: Initialization of bean failed;
+nested exception is java.lang.NullPointerException<br>
+Caused by: org.springframework.beans.factory.BeanCreationException:
+Error creating bean with name 'entityManagerFactory' defined in class
+path resource [blog/jpa/dao/applicationContext.xml]: Cannot resolve
+reference to bean 'dataSource' while setting bean property
+'dataSource'; nested exception is
+org.springframework.beans.factory.BeanCreationException: Error creating
+bean with name
+'org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor':
+Cannot create inner bean '(inner bean)' while setting bean property
+'transactionInterceptor'; nested exception is
+org.springframework.beans.factory.BeanCreationException: Error creating
+bean with name '(inner bean)': Cannot resolve reference to bean
+'transactionManager' while setting bean property 'transactionManager';
+nested exception is
+org.springframework.beans.factory.BeanCreationException: Error creating
+bean with name 'transactionManager' defined in class path resource
+[blog/jpa/dao/applicationContext.xml]: Initialization of bean failed;
+nested exception is java.lang.NullPointerException<br>
+Caused by: org.springframework.beans.factory.BeanCreationException:
+Error creating bean with name
+'org.springframework.transaction.interceptor.TransactionAttributeSourceAdvisor':
+Cannot create inner bean '(inner bean)' while setting bean property
+'transactionInterceptor'; nested exception is
+org.springframework.beans.factory.BeanCreationException: Error creating
+bean with name '(inner bean)': Cannot resolve reference to bean
+'transactionManager' while setting bean property 'transactionManager';
+nested exception is
+org.springframework.beans.factory.BeanCreationException: Error creating
+bean with name 'transactionManager' defined in class path resource
+[blog/jpa/dao/applicationContext.xml]: Initialization of bean failed;
+nested exception is java.lang.NullPointerException<br>
+Caused by: org.springframework.beans.factory.BeanCreationException:
+Error creating bean with name '(inner bean)': Cannot resolve reference
+to bean 'transactionManager' while setting bean property
+'transactionManager'; nested exception is
+org.springframework.beans.factory.BeanCreationException: Error creating
+bean with name 'transactionManager' defined in class path resource
+[blog/jpa/dao/applicationContext.xml]: Initialization of bean failed;
+nested exception is java.lang.NullPointerException<br>
+Caused by: org.springframework.beans.factory.BeanCreationException:
+Error creating bean with name 'transactionManager' defined in class
+path resource [blog/jpa/dao/applicationContext.xml]: Initialization of
+bean failed; nested exception is java.lang.NullPointerException<br>
+Caused by: java.lang.NullPointerException<br>
+at
+org.springframework.aop.framework.autoproxy.AbstractAutoProxyCreator.postProcessAfterInitialization(AbstractAutoProxyCreator.java:239)</p>
+<p>What am I missing ??<br>
+Thanks<br>
+Emmanuel</p>
+      		</li>
+      	              		<li class="notlast" id="comment-26">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>ehsavoie</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-26">August 3rd, 2006 at 7:49 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Sorry the XML was removed :((</p>
+<p>&lt;bean id="entityManagerFactory" class="org.springframework.orm.jpa.ContainerEntityManagerFactoryBean"&gt;<br>
+&lt;bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"&gt;</p>
+<p>&lt;tx:annotation-driven transaction-manager="transactionManager"/&gt;</p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-27">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>ehsavoie</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-27">August 3rd, 2006 at 8:13 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>This seems to be a bug with RC2 (http://forum.springframework.org/showthread.php?t=26771&amp;highlight=tx:annotation-driven).</p>
+      		</li>
+      	              		<li class="notlast" id="comment-48">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Ali</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-48">August 11th, 2006 at 11:50 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Hi,<br>
+Thx for your Tutorial but unfortunately doesn’t work!<br>
+can you please getting your example working<br>
+and this ContainerEntityManagerFactoryBean does'nt exit so i replace it with LocalContainerEntityManagerFactoryBean<br>
+I've got the Same Problem<br>
+Thx<br>
+Best Regards<br>
+Ali<br>
+org.springframework.beans.factory.BeanCreationException: Error creating
+bean with name 'restaurantDao' defined in class path resource
+[blog/jpa/dao/applicationContext.xml]: Cannot resolve reference to bean
+'entityManagerFactory' while setting bean property
+'entityManagerFactory'; nested exception is
+org.springframework.beans.factory.BeanCreationException: Error creating
+bean with name 'entityManagerFactory' defined in class path resource
+[blog/jpa/dao/applicationContext.xml]: Cannot resolve reference to bean
+'dataSource' while setting bean property 'dataSource'; nested exception
+is org.springframework.beans.factory.BeanCreationException: Error
+creating bean with name 'dataSource' defined in class path resource
+[blog/jpa/dao/applicationContext.xml]: Error setting property values;
+nested exception is PropertyAccessExceptionsException (1 errors)<br>
+Caused by: org.springframework.beans.factory.BeanCreationException:
+Error creating bean with name 'entityManagerFactory' defined in class
+path resource [blog/jpa/dao/applicationContext.xml]: Cannot resolve
+reference to bean 'dataSource' while setting bean property
+'dataSource'; nested exception is
+org.springframework.beans.factory.BeanCreationException: Error creating
+bean with name 'dataSource' defined in class path resource
+[blog/jpa/dao/applicationContext.xml]: Error setting property values;
+nested exception is PropertyAccessExceptionsException (1 errors)<br>
+Caused by: org.springframework.beans.factory.BeanCreationException:
+Error creating bean with name 'dataSource' defined in class path
+resource [blog/jpa/dao/applicationContext.xml]: Error setting property
+values; nested exception is PropertyAccessExceptionsException (1 errors)<br>
+Caused by: PropertyAccessExceptionsException (1 errors)<br>
+org.springframework.beans.MethodInvocationException: Property
+'driverClassName' threw exception; nested exception is
+org.springframework.jdbc.CannotGetJdbcConnectionException: Could not
+load JDBC driver class [org.hsqldb.jdbcDriver]; nested exception is
+java.lang.ClassNotFoundException: org.hsqldb.jdbcDriver<br>
+Caused by: org.springframework.jdbc.CannotGetJdbcConnectionException:
+Could not load JDBC driver class [org.hsqldb.jdbcDriver]; nested
+exception is java.lang.ClassNotFoundException: org.hsqldb.jdbcDriver<br>
+Caused by: java.lang.ClassNotFoundException: org.hsqldb.jdbcDriver<br>
+	at org.springframework.instrument.classloading.ShadowingClassLoader.doLoadClass(ShadowingClassLoader.java:97)<br>
+	at org.springframework.instrument.classloading.ShadowingClassLoader.loadClass(ShadowingClassLoader.java:58)<br>
+	at java.lang.ClassLoader.loadClassInternal(ClassLoader.java:319)<br>
+	at java.lang.Class.forName0(Native Method)<br>
+	at java.lang.Class.forName(Class.java:242)<br>
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:160)<br>
+	at org.springframework.util.ClassUtils.forName(ClassUtils.java:138)<br>
+	at org.springframework.jdbc.datasource.DriverManagerDataSource.setDriverClassName(DriverManagerDataSource.java:148)<br>
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)<br>
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)<br>
+	at java.lang.reflect.Method.invoke(Method.java:585)<br>
+	at org.springframework.beans.BeanWrapperImpl.setPropertyValue(BeanWrapperImpl.java:737)<br>
+	at org.springframework.beans.BeanWrapperImpl.setPropertyValue(BeanWrapperImpl.java:575)<br>
+	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValue(AbstractPropertyAccessor.java:49)<br>
+	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:68)<br>
+	at org.springframework.beans.AbstractPropertyAccessor.setPropertyValues(AbstractPropertyAccessor.java:57)<br>
+at
+org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:816)<br>
+at
+org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:592)<br>
+at
+org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:392)<br>
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:240)<br>
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:132)<br>
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:237)<br>
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:153)<br>
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:225)<br>
+at
+org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:114)<br>
+at
+org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:801)<br>
+at
+org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:592)<br>
+at
+org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:392)<br>
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:240)<br>
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:132)<br>
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:237)<br>
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:153)<br>
+	at org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveReference(BeanDefinitionValueResolver.java:225)<br>
+at
+org.springframework.beans.factory.support.BeanDefinitionValueResolver.resolveValueIfNecessary(BeanDefinitionValueResolver.java:114)<br>
+at
+org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.applyPropertyValues(AbstractAutowireCapableBeanFactory.java:801)<br>
+at
+org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:592)<br>
+at
+org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:392)<br>
+	at org.springframework.beans.factory.support.AbstractBeanFactory$1.getObject(AbstractBeanFactory.java:240)<br>
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:132)<br>
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:237)<br>
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:153)<br>
+at
+org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:254)<br>
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:337)<br>
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)<br>
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)<br>
+	at java.lang.reflect.Method.invoke(Method.java:585)<br>
+	at org.springframework.test.jpa.AbstractJpaTests.runBare(AbstractJpaTests.java:212)<br>
+	at junit.framework.TestResult$1.protect(TestResult.java:106)<br>
+	at junit.framework.TestResult.runProtected(TestResult.java:124)<br>
+	at junit.framework.TestResult.run(TestResult.java:109)<br>
+	at junit.framework.TestCase.run(TestCase.java:118)<br>
+	at org.eclipse.jdt.internal.junit.runner.junit3.JUnit3TestReference.run(JUnit3TestReference.java:128)<br>
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)<br>
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:460)<br>
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:673)<br>
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:386)<br>
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:196)</p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-56">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Ali</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-56">August 14th, 2006 at 6:13 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>The Example works Fun after some correction!<br>
+Thx<br>
+Ali</p>
+      		</li>
+      	              		<li class="notlast" id="comment-67">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Andre</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-67">August 22nd, 2006 at 6:47 pm</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Hi,</p>
+<p>I am running into this problem :</p>
+<p>Exception Description: A problem was encountered resolving the class name - The descriptor for [Restaurant] was not found.</p>
+<p>You guys that got this example goign which mods did you have to do ?</p>
+<p>regards,</p>
+<p>Andre</p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-68">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Andre</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-68">August 22nd, 2006 at 6:58 pm</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Ok!!</p>
+<p>Got it working know from in Eclipse.</p>
+<p>This worked for me :</p>
+<p>I added an instance of
+org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean for
+my entityManagerFactory. The important thing was to set the
+persistenceXmlLocation property. This refers to ones persistnce.xml
+file which should in the classpath.</p>
+<p>My Config :</p>
+<p>			persistence.xml</p>
+      		</li>
+      	              		<li class="notlast" id="comment-546">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Andrew S</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-546">October 12th, 2006 at 2:29 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Hi , i looking for example how run spring 2.0 with toplink jpa on j2se application. Can anybody help ??</p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-590">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Paul Smith</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-590">October 16th, 2006 at 2:09 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Great blog. The example worked perfectly for me.</p>
+<p>However, it would be great if you could follow up with the details
+on how to run the same example using a Java SE main() method (instead
+of the test program, where the test extends AbstractJpaTests). I have
+tried to make it work, but unfortunately, I end up with the following
+error:</p>
+<p>Object  is not a known entity type.</p>
+<p>Here is my main() (same as your example, but with my own data):</p>
+<p>	public static void main(String[] args) {<br>
+		ApplicationContext appCtxt = new ClassPathXmlApplicationContext("conf/spring.xml");<br>
+		meetService = (MeetDao)appCtxt.getBean("meetDao");<br>
+		Meet meet = new Meet();<br>
+		MeetTest.setWithTestValues(meet, "test1");<br>
+		meetService.save(meet);<br>
+	}</p>
+<p>	at oracle.toplink.essentials.internal.sessions.UnitOfWorkImpl.registerNewObjectForPersist(UnitOfWorkImpl.java:3178)<br>
+	at oracle.toplink.essentials.internal.ejb.cmp3.base.EntityManagerImpl.persist(EntityManagerImpl.java:170)<br>
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>
+	at sun.reflect.NativeMethodAccessorImpl.invoke(Unknown Source)<br>
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(Unknown Source)<br>
+	at java.lang.reflect.Method.invoke(Unknown Source)<br>
+at
+org.springframework.orm.jpa.ExtendedEntityManagerCreator$ExtendedEntityManagerInvocationHandler.invoke(ExtendedEntityManagerCreator.java:237)<br>
+	at $Proxy11.persist(Unknown Source)<br>
+	at org.springframework.orm.jpa.JpaTemplate$5.doInJpa(JpaTemplate.java:255)<br>
+	at org.springframework.orm.jpa.JpaTemplate.execute(JpaTemplate.java:183)<br>
+	at org.springframework.orm.jpa.JpaTemplate.persist(JpaTemplate.java:253)<br>
+	at dao.MeetDaoJpa.save(MeetDaoJpa.java:31)<br>
+	at dao.MeetDaoTest3.main(MeetDaoTest3.java:20)</p>
+<p>I'm a spring novice, so I'm probably forgetting something obvious.<br>
+Any insight into this would be *greatly* appreciated.</p>
+<p>Thanks,</p>
+<p>Paul</p>
+      		</li>
+      	              		<li class="notlast" id="comment-638">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>sateesh</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-638">October 18th, 2006 at 12:00 pm</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Hi,</p>
+<p>  Has any one tried running this sample in NetBeans??</p>
+<p>  Do i need to have AspectJ Module installed inorder to run this one !!</p>
+<p>Thanks<br>
+Sateesh</p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-639">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>sateesh</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-639">October 18th, 2006 at 2:35 pm</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>[quote comment="638"]Hi,</p>
+<p>Has any one tried running this sample in NetBeans??<br>
+Do i need to have AspectJ Module installed inorder to run this one !!</p>
+<p>I tried running this Example in NetBeans and getting a ClassNotFoundException .Here is the complete stack trace..</p>
+<p>log4j:WARN No appenders could be found for logger (org.springframework.core.CollectionFactory).<br>
+log4j:WARN Please initialize the log4j system properly.<br>
+Exception in thread "main"
+org.springframework.beans.factory.CannotLoadBeanClassException: Cannot
+find class
+[org.springframework.orm.jpa.ContainerEntityManagerFactoryBean] for
+bean with name 'entityManagerFactory' defined in class path resource
+[META-INF/applicationContext.xml]; nested exception is
+java.lang.ClassNotFoundException:
+org.springframework.orm.jpa.ContainerEntityManagerFactoryBean<br>
+Caused by: java.lang.ClassNotFoundException: org.springframework.orm.jpa.ContainerEntityManagerFactoryBean<br>
+        at java.net.URLClassLoader$1.run(URLClassLoader.java:200)<br>
+        at java.security.AccessController.doPrivileged(Native Method)<br>
+        at java.net.URLClassLoader.findClass(URLClassLoader.java:188)<br>
+        at java.lang.ClassLoader.loadClass(ClassLoader.java:306)<br>
+        at sun.misc.Launcher$AppClassLoader.loadClass(Launcher.java:276)<br>
+        at java.lang.ClassLoader.loadClass(ClassLoader.java:251)<br>
+        at org.springframework.util.ClassUtils.forName(ClassUtils.java:177)<br>
+        at org.springframework.beans.factory.support.AbstractBeanDefinition.resolveBeanClass(AbstractBeanDefinition.java:313)<br>
+        at org.springframework.beans.factory.support.AbstractBeanFactory.resolveBeanClass(AbstractBeanFactory.java:912)<br>
+at
+org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanNamesForType(DefaultListableBeanFactory.java:165)<br>
+at
+org.springframework.context.support.AbstractApplicationContext.getBeanNamesForType(AbstractApplicationContext.java:687)<br>
+at
+org.springframework.context.support.AbstractApplicationContext.invokeBeanFactoryPostProcessors(AbstractApplicationContext.java:397)<br>
+        at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:330)<br>
+        at org.springframework.context.support.ClassPathXmlApplicationContext.(ClassPathXmlApplicationContext.java:92)<br>
+        at org.springframework.context.support.ClassPathXmlApplicationContext.(ClassPathXmlApplicationContext.java:77)<br>
+        at org.springframework.context.support.ClassPathXmlApplicationContext.(ClassPathXmlApplicationContext.java:68)<br>
+        at blog.jpa.dao.TestDao.main(TestDao.java:26)<br>
+Java Result: 1<br>
+BUILD SUCCESSFUL (total time: 0 seconds)</p>
+<p>I have included all the required jar Files in the classpath and i am using Spring 2.0 version..</p>
+<p>Thanks<br>
+Sateesh[/quote]</p>
+      		</li>
+      	              		<li class="notlast" id="comment-640">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>sateesh</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-640">October 18th, 2006 at 3:04 pm</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Hi All,</p>
+<p>  I added the following Bean to the applicationContext.xml</p>
+<p>  and i have another Class with main() whose code is listed below..</p>
+<p> public static void main(String[] args) {<br>
+        ApplicationContext appCtxt = new ClassPathXmlApplicationContext("META-INF/applicationContext.xml");<br>
+        JpaRestaurantDaoTests testsDao = (JpaRestaurantDaoTests)appCtxt.getBean("testsDao");<br>
+        try{<br>
+            testsDao.onSetUpInTransaction();<br>
+            testsDao.testDeleteRestaurantAlsoDeletesAddress();<br>
+            testsDao.testDeleteRestaurantDoesNotDeleteEntrees();<br>
+            testsDao.testFindByEntreeNameLike();<br>
+            testsDao.testFindByIdWhereRestaurantDoesNotExist();<br>
+            testsDao.testFindByIdWhereRestaurantExists();<br>
+            testsDao.testFindByNameWhereRestaurantDoesNotExist();<br>
+            testsDao.testFindByNameWhereRestaurantExists();<br>
+            testsDao.testFindByStreetName();<br>
+            testsDao.testFindRestaurantsWithVegetarianOptions();<br>
+            testsDao.testModifyRestaurant();</p>
+<p>        }<br>
+        catch(Exception e){<br>
+            System.out.println(e);<br>
+            e.printStackTrace();<br>
+        }<br>
+    }</p>
+<p>  It looks like i need to create the tables before running this as i am getting the below Excep..</p>
+<p>[TopLink Config]: 2006.10.18
+03:56:46.938–ServerSession(19533676)–Thread(Thread[main,5,main])–The
+source foreign key column name for the many to many mapping [private
+java.util.Set blog.jpa.domain.Restaurant.entrees] is being defaulted
+to: Restaurant_ID.<br>
+[TopLink Config]: 2006.10.18
+03:56:46.938–ServerSession(19533676)–Thread(Thread[main,5,main])–The
+target primary key column name for the many to many mapping [private
+java.util.Set blog.jpa.domain.Restaurant.entrees] is being defaulted
+to: ID.<br>
+org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad
+SQL grammar [insert into address (id, street_number, street_name)
+values (1, 10, 'Main Street')]; nested exception is
+java.sql.SQLException: ORA-00942: table or view does not exist<br>
+org.springframework.jdbc.BadSqlGrammarException: StatementCallback; bad
+SQL grammar [insert into address (id, street_number, street_name)
+values (1, 10, 'Main Street')]; nested exception is
+java.sql.SQLException: ORA-00942: table or view does not exist</p>
+<p>Caused by: java.sql.SQLException: ORA-00942: table or view does not exist</p>
+<p>        at oracle.jdbc.driver.DatabaseError.throwSqlException(DatabaseError.java:111)<br>
+        at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:330)<br>
+        at oracle.jdbc.driver.T4CTTIoer.processError(T4CTTIoer.java:287)<br>
+        at oracle.jdbc.driver.T4C8Oall.receive(T4C8Oall.java:742)<br>
+        at oracle.jdbc.driver.T4CStatement.doOall8(T4CStatement.java:206)<br>
+        at oracle.jdbc.driver.T4CStatement.executeForRows(T4CStatement.java:945)<br>
+        at oracle.jdbc.driver.OracleStatement.doExecuteWithTimeout(OracleStatement.java:1159)<br>
+        at oracle.jdbc.driver.OracleStatement.executeInternal(OracleStatement.java:1678)<br>
+        at oracle.jdbc.driver.OracleStatement.execute(OracleStatement.java:1644)<br>
+        at org.springframework.jdbc.core.JdbcTemplate$1ExecuteStatementCallback.doInStatement(JdbcTemplate.java:336)<br>
+        at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:310)<br>
+        at org.springframework.jdbc.core.JdbcTemplate.execute(JdbcTemplate.java:343)<br>
+        at blog.jpa.dao.JpaRestaurantDaoTests.onSetUpInTransaction(JpaRestaurantDaoTests.java:40)<br>
+        at blog.jpa.dao.TestDao.main(TestDao.java:29)<br>
+BUILD SUCCESSFUL (total time: 2 seconds)</p>
+<p>Sateesh</p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-822">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Jim Shingler</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-822">October 24th, 2006 at 10:00 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Mark, This blog was VERY helpful. </p>
+<p>I would like to set this up with Hibernate instead of Toplink. This
+has been a challenge. It is a lot easier to do with Toplink than
+Hibernate. Could you do a follow-up that shows how to do the same thing
+with Hibernate. </p>
+<p>Thanks</p>
+<p>Jim</p>
+      		</li>
+      	              		<li class="notlast" id="comment-7834">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>lou</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-7834">January 10th, 2007 at 12:02 pm</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>thanks for the samples … </p>
+<p>im running into two more or less big problems which one of you guys might have already served.<br>
+Im trying to setup my application using the underlying hibernate o/m. </p>
+<p>Adding the ContainerEntityManagerFactoryBean results directly in a:</p>
+<p>Error creating bean with name 'entityManagerFactory' defined in
+class path resource [jpa-datasource.xml]: Invocation of init method
+failed; nested exception is java.lang.LinkageError: Class
+org/xml/sax/Parser violates loader constraints<br>
+Caused by: java.lang.LinkageError: Class org/xml/sax/Parser violates loader constraints</p>
+<p>which im not yet able to solve. </p>
+<p>Using the LocalEntityManagerFactoryBean requires a complete hibernate configuration in the persistence.xml :</p>
+<p>Although this configuration works, (hibernates connects properly )
+my Entities ( created them the way it was described here –&gt;
+annotations )<br>
+do not get mapped to the db.</p>
+<p>im using maven 2, spring 2.0.1 and hibernate 3.2.1.ga … </p>
+<p>any help is appreciated …</p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-10123">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Nikolay</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-10123">February 1st, 2007 at 6:01 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Hello. Can you please consult me where I can download interface21 jar? My email is <a href="mailto:nikolay.forums@gmail.com">nikolay.forums@gmail.com</a>.<br>
+Thank you in advance!</p>
+      		</li>
+      	              		<li class="notlast" id="comment-11836">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Michiel</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-11836">February 14th, 2007 at 5:16 pm</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Hi,</p>
+<p>Nice example to get me started. Thanks.</p>
+<p>I managed to get it working with Hibernate, although not all JUnit
+test passed out of the box. First of all there is a problem with using
+'true' in HQL queries, it results in a SMALLINT/CHAR conflict on my
+Derby database. After removing the quotes, the problem is over
+(switching back to Toplink still works as well). The second problem was
+that the tests for findByEntreeNameLike() and findByEntreeNameLike()
+returned too many rows, 4 instead of 2. This was fixed by using "select
+distinct". </p>
+<p>Hmm… so much for JPA provider independence.</p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-12812">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>thomas</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-12812">February 21st, 2007 at 1:21 pm</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>[quote post="32"]Great blog. The example worked perfectly for me.</p>
+<p>However, it would be great if you could follow up with the details
+on how to run the same example using a Java SE main() method (instead
+of the test program, where the test extends AbstractJpaTests). [/quote]</p>
+<p>Unfortunately i stepped in the same issue. I got it not work as a
+standalone Java SE application. I implemented the main-method like usal.</p>
+<p>Is there anybody outthere whos achieved to get it work out from main() (still in spring)?</p>
+<p>Or, what i have to take care about?</p>
+<p>thomas</p>
+      		</li>
+      	              		<li class="notlast" id="comment-12820">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>thomas</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-12820">February 21st, 2007 at 2:41 pm</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>now, i found a solution:</p>
+<p><a href="http://forum.springframework.org/showthread.php?t=30193#2" rel="nofollow" onclick="javascript:urchinTracker('/outbound/forum.springframework.org');">http://forum.springframework.org/showthread.php?t=30193#2</a></p>
+<p>you had to use the org … classloading.InstrumentationLoadTimeWeaver
+instead of the SimpleLoadTimeWeaver in combination with the VM
+argument: -javaagent:/spring-agent.jar</p>
+<p>but i dont know why i had to do this …</p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-14616">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>jb</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-14616">March 6th, 2007 at 6:02 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>I
+have problem to test de App. When I ran these tests I says: No
+persistence units parsed from {classpath*:META-INF/persistence.xml}.
+When I put a persistence.xml in my META-INF it says:</p>
+<p>Error creating bean with name 'usuarioDao' defined in file
+[C:\Documents and
+Settings\Administrador\workspace2\Padron\build\classes\com\telvent\padron\domain\dao\test\test-applicationContext.xml]:
+Cannot resolve reference to bean 'entityManagerFactory' while setting
+bean property 'entityManagerFactory'; nested exception is
+org.springframework.beans.factory.BeanCreationException: Error creating
+bean with name 'entityManagerFactory' defined in file [C:\Documents and
+Settings\Administrador\workspace2\Padron\build\classes\com\telvent\padron\domain\dao\test\test-applicationContext.xml]:
+Invocation of init method failed; nested exception is
+java.lang.RuntimeException: error trying to scan : file:/C:/Documents
+and Settings/Administrador/workspace2/Padron/build/classes/</p>
+<p>And I've never put a  in my persistence.xml</p>
+<p>regards, josé</p>
+      		</li>
+      	              		<li class="notlast" id="comment-14690">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite><a href="http://arsenalist.com/tag/tech" rel="external nofollow" class="url" onclick="javascript:urchinTracker('/outbound/arsenalist.com');">arsenalist</a></cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-14690">March 6th, 2007 at 3:10 pm</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>I have it working fine but with a different configuration:</p>
+<p>and that's it.  mydb is defined in the persistence.xml file:</p>
+<p>        oracle.toplink.essentials.ejb.cmp3.EntityManagerFactoryProvider<br>
+        com.arsenalist.User</p>
+<p>This is working fine for me.  Any shortcomings of this method?</p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-16918">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite><a href="http://samuel.lb.free.fr/sam/" rel="external nofollow" class="url" onclick="javascript:urchinTracker('/outbound/samuel.lb.free.fr');">Samuel Le Berrigaud</a></cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-16918">March 28th, 2007 at 6:14 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Hi,</p>
+<p>I started to look at JPA and thought I would start with this
+tutorial. I am not using the Glassfish implementation though and opted
+for OpenJPA.</p>
+<p>I am having trouble with the load time weaver it seems. When trying
+to persist an object the framework cannot cast it to
+'PersistenceCapable'. </p>
+<p>I tried different configuration:</p>
+<p>- using the SimpleLoadTimeWeaver without the spring agent,<br>
+- using the InstrumentationLoadTimeWeaver with the spring agent,</p>
+<p>with Spring 2.0.3 and openjpa 0.9.6 as well as 0.9.7-SNAPSHOT… This is all done outside in unit tests (outside any container).</p>
+<p>When using the OpenJPA PCEnhancer after the compilation phase (and before running the tests) it does work!</p>
+<p>I am lost, any idea?</p>
+<p>Thanks.</p>
+      		</li>
+      	              		<li class="notlast" id="comment-27361">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite><a href="http://www.nrc.ca/" rel="external nofollow" class="url" onclick="javascript:urchinTracker('/outbound/www.nrc.ca');">Rene Richard</a></cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-27361">June 15th, 2007 at 12:23 pm</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Here's a good example which talks about spring/jpa/hibernate</p>
+<p><a href="http://cwiki.apache.org/S2WIKI/struts-2-spring-2-jpa-ajax.html" rel="nofollow" onclick="javascript:urchinTracker('/outbound/cwiki.apache.org');">http://cwiki.apache.org/S2WIKI/struts-2-spring-2-jpa-ajax.html</a></p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-27362">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite><a href="http://www.nrc.ca/" rel="external nofollow" class="url" onclick="javascript:urchinTracker('/outbound/www.nrc.ca');">Rene Richard</a></cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-27362">June 15th, 2007 at 12:24 pm</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>re example … also  need hibernate-commons-annotations.jar also in the classpath</p>
+      		</li>
+      	              		<li class="notlast" id="comment-36272">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Roman Sykora</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-36272">July 26th, 2007 at 7:10 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Hi,
+first I'd like to say that I really liked your article. It helped me a
+lot to set things up quickly and get a running example.</p>
+<p>Doing the tests I had problems with:</p>
+<p>   blog.jpa.dao.JpaRestaurantDao#findByStreetName(String streetName)<br>
+   blog.jpa.dao.JpaRestaurantDao#findByEntryNameLike(String entreeName)</p>
+<p>I used Glassfish persistence (toplink-essentials v2-b50g) which seemed the latest milestone release as to date.</p>
+<p>I'll not post the full stacktrace since it's a little bit messy and hard to read. The important line is:<br>
+Exception Description: Error compiling the query [select r from
+Restaurant r where r.entrees.name like ?1], line 1, column 36: invalid
+navigation expression [r.entrees.name], cannot navigate collection
+valued association field [entrees].</p>
+<p>changing the related queries fixed that problem for me.</p>
+<p>   "select distinct r from Restaurant r join r.entrees e where e.name like ?1"<br>
+   "select distinct r from Restaurant r join r.entrees e where e.vegetarian = 'true'"</p>
+<p>regards<br>
+Roman Sykora</p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-63713">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>vamsee lakamsani</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-63713">November 12th, 2007 at 3:06 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Hi,
+Thanks for the sample. I got it it work after reading the blog as well
+as some user comments. I tried changing it a bit so I can add/persist
+new restaurants using the JpaTemplate. The original sample seems to be
+using direct jdbc to create stuff in onSetUpInTransaction. Not sure
+why. why not use JpaTemplate to create everything? I ran into a problem
+when I tried creating a restaurant. I described the details by replying
+to another user in the spring forum who was seeing a similar problem in
+his app. I saw the problem in my app too but decided to reproduce it in
+this sample. </p>
+<p><a href="http://forum.springframework.org/showthread.php?p=150400#post150400" rel="nofollow" onclick="javascript:urchinTracker('/outbound/forum.springframework.org');">http://forum.springframework.org/showthread.php?p=150400#post150400</a></p>
+<p>TIA for any suggestions.</p>
+      		</li>
+      	              		<li class="notlast" id="comment-64300">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>vamsee lakamsani</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-64300">November 13th, 2007 at 2:41 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Problem looks like load time weaver related. The entity not found error went away when I switched to this load time weaver.<br>
+<a href="http://static.springframework.org/spring/docs/2.0.x/reference/orm.html#orm-jpa-loadtimeweaver" rel="nofollow" onclick="javascript:urchinTracker('/outbound/static.springframework.org');">http://static.springframework.org/spring/docs/2.0.x/reference/orm.html#orm-jpa-loadtimeweaver</a></p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-85659">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>carol mcdonald</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-85659">January 7th, 2008 at 10:47 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Have you tried JPA and Spring 2.x on Glassfish V2 ?<br>
+I get the following error:</p>
+<p>javax.el.ELException:
+org.springframework.transaction.CannotCreateTransactionException: Could
+not open JPA EntityManager for transaction; nested exception is
+java.lang.IllegalStateException: Exception Description: Cannot use an
+EntityTransaction while using JTA.</p>
+<p>With Glassfish V1, I could use Spring 2.0  &amp; JPA with a container managed entity manager :</p>
+<p>@PersistenceContext(unitName = "PetCatalogPu")<br>
+private EntityManager em;</p>
+<p>To do this, I had to configure The Entity Manager factory and the transactionManager in the spring applicationContext.xml :</p>
+<p>..</p>
+<p>…<br>
+this no longer works in Glassfish v2 , apparently because the Spring JpaTransactionManager does not use JTA .<br>
+I noticed that spring provides a JTA manager for Weblogic and Websphere:</p>
+      		</li>
+      	              		<li class="notlast" id="comment-96125">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Khosro</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-96125">February 2nd, 2008 at 11:26 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>hello Mark and hello to all,<br>
+I have  serious problems,i googling but could not found </p>
+<p>anything useful.<br>
+I divide my errors in two parts.<br>
+errors that i got with Hibernate and errors that i got with<br>
+TopLink.</p>
+<p>1.In Hibernate<br>
+ 1.1.In hibernate if i set the "transaction-type" in </p>
+<p>persistence.xml to JTA i got the following error:</p>
+<p>""org.springframework.beans.factory.BeanCreationException: </p>
+<p>Error creating bean with name 'entityManagerFactory' defined </p>
+<p>in ServletContext resource [/WEB-INF/applicationContext.xml]: </p>
+<p>Invocation of init method failed; nested exception is </p>
+<p>javax.persistence.PersistenceException: </p>
+<p>org.hibernate.HibernateException: The chosen transaction </p>
+<p>strategy requires access to the JTA TransactionManager""</p>
+<p>When i change the  "transaction-type" to RESOURCE_LOCAL it </p>
+<p>works,and when i click bottun to add to DB the page refresh </p>
+<p>but the intance does not add to DB.WHY?(I do not get any </p>
+<p>error).</p>
+<p>1.2.My entity class is Article.when i run my project in </p>
+<p>hibernate with transaction-type="RESOURCE_LOCAL",the page </p>
+<p>display but when i click to add the Article instance to DB i </p>
+<p>got the following error:</p>
+<p>""""com.sun.rave.web.ui.appbase.ApplicationException: #</p>
+<p>{insert.add_action}: </p>
+<p>org.springframework.dao.InvalidDataAccessApiUsageException: </p>
+<p>Unknown entity: iranjava.model.Article; nested exception is </p>
+<p>java.lang.IllegalArgumentException: Unknown entity: </p>
+<p>iranjava.model.Article""""</p>
+<p>I found i must explicitly add Article entity to </p>
+<p>persistence.xml.</p>
+<p>i mean, i must:</p>
+<p>iranjava<br>
+    false</p>
+<p>Conclusion in Hibernate:</p>
+<p>So far i set the transaction-type="RESOURCE_LOCAL" and </p>
+<p>explicitly add the Article instance to DB the project run,but </p>
+<p>when i click button to add to DB it does not added to </p>
+<p>DB,meanwhile i do not get any error.</p>
+<p>2.In TopLink:</p>
+<p>  2.1.with transaction-type="JTA" ,the project run but when i </p>
+<p>want to  add instance to DB i got the following error:</p>
+<p>""java.lang.IllegalArgumentException: Object: </p>
+<p>iranjava.model.Article[id=6] is not a known entity type.""<br>
+and i must declare :<br>
+iranjava<br>
+if i do not,i got error.</p>
+<p>I beg you help me?</p>
+<p>Thank.<br>
+Khosro.</p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-100662">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>MG</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-100662">March 14th, 2008 at 4:08 pm</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>I am getting a similar error with QuerySyntaxException, entity is not mapped. My entityManager looks like:</p>
+<p>			classpath:/META-INF/persistence.xml</p>
+<p>I haven't been able to find a definitive answer for why the test
+won't run. The application runs fine. Some signs point to
+persistence.xml, but if I delete the file and try to re-run the test I
+get a configuration error because of the missing persistence unit. Any
+help/comments would be appreciated.</p>
+      		</li>
+      	              		<li class="notlast" id="comment-101523">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Erhan Elgün</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-101523">March 26th, 2008 at 10:14 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>thanks for the nice article. After reading your blog article, many thing is clear in my mind about spring   jpa configuration.  </p>
+<p>But i wonder how a "delete from …." or "insert into " statement can be executed with "getJpaTemplate(). …" ??</p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-103251">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>alessandro</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-103251">April 15th, 2008 at 4:52 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Your guide is interesting.<br>
+I like especially the Integration Testing part.</p>
+<p>Bye.</p>
+<p>Note:<br>
+I would like to point out that the link<br>
+Hibernate JPA Migration Guide<br>
+is not working and that the new address is as follows:<br>
+Java Persistence Migration Guide<br>
+<a href="http://www.hibernate.org/398.html" rel="nofollow" onclick="javascript:urchinTracker('/outbound/www.hibernate.org');">http://www.hibernate.org/398.html</a></p>
+      		</li>
+      	              		<li class="notlast" id="comment-113132">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Dinesh</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-113132">July 15th, 2008 at 6:41 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Hi,</p>
+<p>I followed your code and implemented as a sample where Employee is
+an object in place of Restuarant. Everything is working fine except the
+delete. I am getting the following exception in delete operation.
+Please help me how to resolve this issue.</p>
+<p>Thanks &amp; Regards,<br>
+Dinesh<br>
+org.springframework.dao.InvalidDataAccessApiUsageException: Entity must be managed to call remove: p<br>
+oc.employee.domain.Employee@e376b4, try merging the detached and try the remove again.; nested excep<br>
+tion is java.lang.IllegalArgumentException: Entity must be managed to call remove: poc.employee.doma<br>
+in.Employee@e376b4, try merging the detached and try the remove again.<br>
+        at org.springframework.orm.jpa.EntityManagerFactoryUtils.convertJpaAccessExceptionIfPossible<br>
+(EntityManagerFactoryUtils.java:229)<br>
+        at org.springframework.orm.jpa.DefaultJpaDialect.translateExceptionIfPossible(DefaultJpaDial<br>
+ect.java:113)<br>
+        at org.springframework.dao.support.DataAccessUtils.translateIfNecessary(DataAccessUtils.java<br>
+:212)<br>
+        at org.springframework.orm.jpa.JpaAccessor.translateIfNecessary(JpaAccessor.java:152)<br>
+        at org.springframework.orm.jpa.JpaTemplate.execute(JpaTemplate.java:196)<br>
+        at org.springframework.orm.jpa.JpaTemplate.remove(JpaTemplate.java:278)<br>
+        at poc.employee.jpa.EmployeeDaoImpl.deleteEmployee(EmployeeDaoImpl.java:41)<br>
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>
+        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)<br>
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)<br>
+        at java.lang.reflect.Method.invoke(Method.java:585)<br>
+        at org.springframework.aop.support.AopUtils.invokeJoinpointUsingReflection(AopUtils.java:310<br>
+)<br>
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.invokeJoinpoint(ReflectiveMe<br>
+thodInvocation.java:182)<br>
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvo<br>
+cation.java:149)<br>
+        at org.springframework.transaction.interceptor.TransactionInterceptor.invoke(TransactionInte<br>
+rceptor.java:106)<br>
+        at org.springframework.aop.framework.ReflectiveMethodInvocation.proceed(ReflectiveMethodInvo<br>
+cation.java:171)<br>
+        at org.springframework.aop.framework.JdkDynamicAopProxy.invoke(JdkDynamicAopProxy.java:204)<br>
+        at $Proxy83.deleteEmployee(Unknown Source)<br>
+        at poc.employee.service.EmpDetailsManagerImpl.deleteEmployee(EmpDetailsManagerImpl.java:60)<br>
+        at poc.employee.controller.EmployeeController.deleteEmp(EmployeeController.java:93)<br>
+        at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)<br>
+        at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:39)<br>
+        at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:25)<br>
+        at java.lang.reflect.Method.invoke(Method.java:585)<br>
+        at org.springframework.web.servlet.mvc.multiaction.MultiActionController.invokeNamedMethod(M<br>
+ultiActionController.java:473)<br>
+        at org.springframework.web.servlet.mvc.multiaction.MultiActionController.handleRequestIntern<br>
+al(MultiActionController.java:410)<br>
+        at org.springframework.web.servlet.mvc.AbstractController.handleRequest(AbstractController.j<br>
+ava:153)<br>
+        at org.springframework.web.servlet.mvc.SimpleControllerHandlerAdapter.handle(SimpleControlle<br>
+rHandlerAdapter.java:48)<br>
+        at org.springframework.web.servlet.DispatcherServlet.doDispatch(DispatcherServlet.java:874)<br>
+        at org.springframework.web.servlet.DispatcherServlet.doService(DispatcherServlet.java:808)<br>
+        at org.springframework.web.servlet.FrameworkServlet.processRequest(FrameworkServlet.java:523<br>
+)<br>
+        at org.springframework.web.servlet.FrameworkServlet.doPost(FrameworkServlet.java:463)<br>
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:727)<br>
+        at javax.servlet.http.HttpServlet.service(HttpServlet.java:820)<br>
+        at weblogic.servlet.internal.StubSecurityHelper$ServletServiceAction.run(StubSecurityHelper.<br>
+java:226)<br>
+        at weblogic.servlet.internal.StubSecurityHelper.invokeServlet(StubSecurityHelper.java:124)<br>
+        at weblogic.servlet.internal.ServletStubImpl.execute(ServletStubImpl.java:283)<br>
+        at weblogic.servlet.internal.ServletStubImpl.execute(ServletStubImpl.java:175)<br>
+        at weblogic.servlet.internal.WebAppServletContext$ServletInvocationAction.run(WebAppServletC<br>
+ontext.java:3395)<br>
+        at weblogic.security.acl.internal.AuthenticatedSubject.doAs(AuthenticatedSubject.java:321)<br>
+        at weblogic.security.service.SecurityManager.runAs(Unknown Source)<br>
+        at weblogic.servlet.internal.WebAppServletContext.securedExecute(WebAppServletContext.java:2<br>
+140)<br>
+        at weblogic.servlet.internal.WebAppServletContext.execute(WebAppServletContext.java:2046)<br>
+        at weblogic.servlet.internal.ServletRequestImpl.run(ServletRequestImpl.java:1366)<br>
+        at weblogic.work.ExecuteThread.execute(ExecuteThread.java:200)<br>
+        at weblogic.work.ExecuteThread.run(ExecuteThread.java:172)<br>
+Caused by: java.lang.IllegalArgumentException: Entity must be managed to call remove: poc.employee.d<br>
+omain.Employee@e376b4, try merging the detached and try the remove again.<br>
+        at oracle.toplink.essentials.internal.sessions.UnitOfWorkImpl.performRemove(UnitOfWorkImpl.j<br>
+ava:2767)<br>
+        at oracle.toplink.essentials.internal.ejb.cmp3.base.EntityManagerImpl.remove(EntityManagerIm<br>
+pl.java:238)<br>
+        at org.springframework.orm.jpa.JpaTemplate$7.doInJpa(JpaTemplate.java:280)<br>
+        at org.springframework.orm.jpa.JpaTemplate.execute(JpaTemplate.java:191)<br>
+        … 41 more<br>
+Result while deleting Emp Details::failed</p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-113174">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Seth Geoghegan</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-113174">July 15th, 2008 at 3:24 pm</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>[quote comment="7834"]thanks for the samples …</p>
+<p>Error creating bean with name 'entityManagerFactory' defined in
+class path resource [jpa-datasource.xml]: Invocation of init method
+failed; nested exception is java.lang.LinkageError: Class
+org/xml/sax/Parser violates loader constraints<br>
+Caused by: java.lang.LinkageError: Class org/xml/sax/Parser violates loader constraints</p>
+<p>which im not yet able to solve.</p>
+<p>[/quote]</p>
+<p>I too suffered for days with this problem.  The solution that worked for me was to remove </p>
+<p>from the configuration.</p>
+<p>Good luck!</p>
+      		</li>
+      	              		<li class="notlast" id="comment-121755">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Maciek</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-121755">September 18th, 2008 at 4:13 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Hello,</p>
+<p>nice article. I've been wondering if you could help me with the
+following problem. Suppose I want to delete an Entree, which is still
+referenced by a Restaurant. How do I formulate the JPQL query that
+would remove a given Entree from all 'entrees' sets of the Restaurant
+entree? Queries like "DELETE FROM Restaurant.entrees e WHERE e =
+:entree" don't work.</p>
+<p>Thanks in advance, Maciek</p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-121756">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Maciek</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-121756">September 18th, 2008 at 4:16 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>[quote
+comment="121755"]How do I formulate the JPQL query that would remove a
+given Entree from all 'entrees' sets of the Restaurant entree?[/quote]I
+ment Restaurant ENTITY, not entree, sorry!</p>
+      		</li>
+      	              		<li class="notlast" id="comment-127795">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>ideyatech</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-127795">November 5th, 2008 at 10:15 pm</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>i have an article regarding spring transactions on JPA<br>
+<a href="http://www.ideyatech.com/2008/09/troubleshooting-tips-spring-transactions-on-jpa/" rel="nofollow" onclick="javascript:urchinTracker('/outbound/www.ideyatech.com');">http://www.ideyatech.com/2008/09/troubleshooting-tips-spring-transactions-on-jpa/</a></p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-134586">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Ondra Žižka</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-134586">December 25th, 2008 at 8:14 pm</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Shouldn't there be "LocalContainerEntityManagerFactoryBean"?</p>
+      		</li>
+      	              		<li class="notlast" id="comment-167144">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Bruno</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-167144">May 28th, 2009 at 5:08 pm</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>Great article.  Even after all this time, it is the clearest JPA 'getting started' document out there.</p>
+<p>Unfortunately I am using Spring 2.5 and it looks like spring-jpa.jar
+and spring-mock.jar are no longer easy to find. Presumably they have
+been absorbed into spring.jar, and I see a bunch of *.orm.jpa.* classes
+there, but I get java.lang.ClassNotFoundException:
+org.springframework.orm.jpa.ContainerEntityManagerFactoryBean.</p>
+<p>Any idea about where I might find the missing JARs?  Or perhaps the Class has been replaced by something else?</p>
+<p>Or… is there a version of your article updated for Spring 2.5?</p>
+      		</li>
+      	              		<li class="alt notlast" id="comment-167148">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>Marten Deinum</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-167148">May 29th, 2009 at 1:50 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>@Bruno that is clarified in the release notes of 2.5<br>
+Spring-jpa.jar == spring-orm.jar<br>
+spring-mock.jar == spring-test.jar</p>
+      		</li>
+      	              		<li class="notlast" id="comment-167235">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>werwuifi</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-167235">June 8th, 2009 at 9:39 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>hey,</p>
+<p>great article, however im running into a NoSuchMethodError caused by
+org.slf4j.Logger.trace (in Hibernate
+ClassValidator.getDefaultResourceBundle()).<br>
+Anyone ever came across a similar problem?!?</p>
+<p>That's my testContext.xml:</p>
+<p>		testContext used from within unit tests</p>
+<p>	<!-- uses the persistence unit defined in the META-INF/persistence.xml JPA configuration file --></p>
+<p>&lt;!–		–&gt;<br>
+&lt;!–      		–&gt;<br>
+&lt;!–    	–&gt;</p>
+<p>	<!-- transaction manager for use with a single JPA EntityManagerFactory for transactional data access to a single datasource --></p>
+<p>		&lt;!– </p>
+<p>		 –&gt;</p>
+<p>&lt;!–	–&gt;</p>
+<p>&lt;!–		–&gt;</p>
+<p>Thx for any suppport!</p>
+<p>w</p>
+      		</li>
+      	              		<li class="alt" id="comment-167236">
+
+        		<div class="commentinfo">
+        		          		  <h4 class="authorlink"><cite>werwuifi</cite> says:</h4>
+        			<small class="commentmetadata">Added on <a href="#comment-167236">June 8th, 2009 at 9:41 am</a>  </small>
+      			</div>
+
+      			      			<br>
+            <div style="clear: left;"></div>
+      			<p>&lt;?xml version="1.0" encoding="UTF-8"?&gt;</p>
+<p>&lt;beans&gt;</p>
+<p>	&lt;description&gt;<br>
+		testContext used from within unit tests<br>
+	&lt;/description&gt;</p>
+<p>	&lt;bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer"&gt;<br>
+ 		&lt;property name="location" value="classpath:META-INF/spring.properties.test"/&gt;<br>
+ 	&lt;/bean&gt;</p>
+<p>	&lt;!– uses the persistence unit defined in the META-INF/persistence.xml JPA configuration file –&gt;<br>
+	&lt;bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"&gt;<br>
+		&lt;property name="persistenceXmlLocation" value="classpath:META-INF/persistence.xml" /&gt;<br>
+		&lt;property name="dataSource" ref="dataSource"/&gt;<br>
+		&lt;property name="jpaVendorAdapter"&gt;<br>
+			&lt;bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter"&gt;<br>
+				&lt;property name="showSql" value="true"/&gt;<br>
+				&lt;property name="generateDdl" value="true"/&gt;<br>
+				&lt;property name="databasePlatform" value="org.hibernate.dialect.OracleDialect"/&gt;<br>
+			&lt;/bean&gt;<br>
+		&lt;/property&gt;<br>
+&lt;!–		&lt;property name="loadTimeWeaver"&gt;–&gt;<br>
+&lt;!–      		&lt;bean class="org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver"/&gt;–&gt;<br>
+&lt;!–    	&lt;/property&gt;–&gt;<br>
+	&lt;/bean&gt;</p>
+<p> &lt;!– transaction manager for use with a single JPA
+EntityManagerFactory for transactional data access to a single
+datasource –&gt;<br>
+	&lt;bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager"&gt;<br>
+		&lt;property name="entityManagerFactory" ref="entityManagerFactory"/&gt;<br>
+		&lt;property name="dataSource" ref="dataSource" /&gt;<br>
+		&lt;!–<br>
+		&lt;property name="jpaDialect"&gt;<br>
+			&lt;bean class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" /&gt;<br>
+		&lt;/property&gt;<br>
+		 –&gt;<br>
+	&lt;/bean&gt;</p>
+<p>	&lt;!–<br>
+		- defines the dataSource as local test or development resource configured to properties from property placeholder<br>
+	–&gt;<br>
+	&lt;bean id="localDataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource" destroy-method="close"&gt;<br>
+&lt;!–	&lt;bean id="localDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close"&gt;–&gt;<br>
+		&lt;property name="driverClassName" value="${dataSource.driverClassName}" /&gt;<br>
+		&lt;property name="url" value="${dataSource.url}" /&gt;<br>
+		&lt;property name="username" value="${dataSource.username}" /&gt;<br>
+		&lt;property name="password" value="${dataSource.password}" /&gt;<br>
+&lt;!–		&lt;property name="accessToUnderlyingConnectionAllowed" value="true" /&gt;–&gt;<br>
+	&lt;/bean&gt;</p>
+<p>	&lt;alias name="localDataSource" alias="dataSource"&gt;&lt;/alias&gt;</p>
+<p>&lt;/beans&gt;</p>
+      		</li>
+      	        	</ol>
+	</div>
+
+  <h2 class="narrowheading">7 trackbacks</h2>
+  <div class="item" id="pingslist" style="display: none;">
+    <a class="java" href="javascript:pingsOff()">Hide pings &amp; trackbacks</a>
+  	<ol class="commentlist">
+  	        		<li class="" id="comment-37">
+      			<h4><cite><a href="http://blog.interface21.com/main/2006/08/07/using-jpa-in-spring-without-referencing-spring/" rel="external nofollow" class="url" onclick="javascript:urchinTracker('/outbound/blog.interface21.com');">Interface21 Team Blog » Using JPA in Spring without referencing Spring</a></cite>:</h4>
+      			<small class="commentmetadata">Added on <a href="#comment-37">August 7th, 2006 at 2:08 pm</a> </small>
+       		</li>
+      	                		<li class="alt" id="comment-43">
+      			<h4><cite><a href="http://vinny.wordpress.com/2006/08/08/links-for-2006-08-08/" rel="external nofollow" class="url" onclick="javascript:urchinTracker('/outbound/vinny.wordpress.com');">Vinny Carpenter’s Link blog » links for 2006-08-08</a></cite>:</h4>
+      			<small class="commentmetadata">Added on <a href="#comment-43">August 8th, 2006 at 6:21 pm</a> </small>
+       		</li>
+      	                		<li class="" id="comment-44">
+      			<h4><cite><a href="http://www.j2eegeek.com/blog/2006/08/08/daily-delicious-for-aug-08-2006/" rel="external nofollow" class="url" onclick="javascript:urchinTracker('/outbound/www.j2eegeek.com');">Vinny Carpenter’s blog · Daily del.icio.us for Aug 08, 2006</a></cite>:</h4>
+      			<small class="commentmetadata">Added on <a href="#comment-44">August 8th, 2006 at 7:47 pm</a> </small>
+       		</li>
+      	                		<li class="alt" id="comment-23994">
+      			<h4><cite><a href="http://www.notiz-blog.net/index.php?/archives/2-Spring,-JPA,-DAOs-und-JUnit.html" rel="external nofollow" class="url" onclick="javascript:urchinTracker('/outbound/www.notiz-blog.net');">Notiz-Blog.net</a></cite>:</h4>
+      			<small class="commentmetadata">Added on <a href="#comment-23994">May 21st, 2007 at 12:46 pm</a> </small>
+       		</li>
+      	                		<li class="" id="comment-25189">
+      			<h4><cite><a href="http://www.notiz-blog.net/index.php/2007/05/30/spring-jpa-daos-und-junit/" rel="external nofollow" class="url" onclick="javascript:urchinTracker('/outbound/www.notiz-blog.net');">Notiz-Blog.net » Blog Archive » Spring, JPA, DAOs und JUnit</a></cite>:</h4>
+      			<small class="commentmetadata">Added on <a href="#comment-25189">May 30th, 2007 at 12:39 pm</a> </small>
+       		</li>
+      	                		<li class="alt" id="comment-127007">
+      			<h4><cite><a href="http://209.20.88.229/%7Ejerry/wordpress/?p=5" rel="external nofollow" class="url" onclick="javascript:urchinTracker('/outbound/209.20.88.229');">Jerry Test blog » Blog Archive » Spring JPA and hibernate</a></cite>:</h4>
+      			<small class="commentmetadata">Added on <a href="#comment-127007">October 30th, 2008 at 10:59 am</a> </small>
+       		</li>
+      	                		<li class="" id="comment-127082">
+      			<h4><cite><a href="http://angelborroy.wordpress.com/2008/10/31/using-jpa-with-spring-20-or-the-java-agent-issue/" rel="external nofollow" class="url" onclick="javascript:urchinTracker('/outbound/angelborroy.wordpress.com');">Using JPA with Spring 2.0 or the Java Agent issue « Programming and So</a></cite>:</h4>
+      			<small class="commentmetadata">Added on <a href="#comment-127082">October 31st, 2008 at 3:48 am</a> </small>
+       		</li>
+      	          	</ol>
+	</div>
+	<div class="item" id="pinglistoff">
+	<a class="java" href="javascript:pingsOn()">View all pings &amp; trackbacks</a>
+	</div>
+
+
+<h2 class="narrowheading" id="respond">Leave a Reply</h2>
+<div class="item">
+
+<form id="commentform" action="http://blog.springsource.com/wp-comments-post.php" method="post" onsubmit="new Ajax.Updater({success: 'commentlist'}, 'http://blog.springsource.com/wp-content/themes/giraffe2/comments-ajax.php', {asynchronous: true, evalScripts: true, insertion: Insertion.Bottom, onComplete: function(request){complete(request)}, onFailure: function(request){failure(request)}, onLoading: function(request){loading()}, parameters: Form.serialize(this)}); return false;">
+
+<p><input name="author" id="author" value="" size="22" tabindex="1" type="text">
+<label for="author"><small>Name (required)</small></label></p>
+
+<p><input name="email" id="email" value="" size="22" tabindex="2" type="text">
+<label for="email"><small>Mail (will not be published) (required)</small></label></p>
+
+<p><input name="url" id="url" value="" size="22" tabindex="3" type="text">
+<label for="url"><small>Website</small></label></p>
+
+
+<p><textarea name="comment" id="comment" rows="10" tabindex="4" cols="11"></textarea></p>
+
+<p> <input name="submit" id="submit" tabindex="5" value="Submit Comment" type="submit">
+<input name="comment_post_ID" value="32" type="hidden">
+</p>
+<input id="sk2_my_js_check1" name="sk2_my_js_check1" value="q4t0p444ni" type="hidden">
+<input id="sk2_my_js_check2" name="sk2_my_js_check2" value="8b3c89dca58ebfd44165833d179305f3" type="hidden">
+<script type="text/javascript">
+<!--
+	document.write('<input type="hidden" id="sk2_my_js_payload" name="sk2_my_js_payload" value="');
+	document.write(Math.round ( Math.abs(Math.round ( Math.abs((((Math.round ( Math.abs(Math.round ( Math.abs(Math.round ( Math.abs(1 / 4)) % 4)) % 40)) + 9) - 6) + 5) % 3)))));
+	document.write('" />');
+-->
+</script><input id="sk2_my_js_payload" name="sk2_my_js_payload" value="2" type="hidden">
+<input id="sk2_time" name="sk2_time" value="1250817791" type="hidden"><input id="sk2_ip" name="sk2_ip" value="201.253.238.8" type="hidden"><input id="sk2_payload" name="sk2_payload" value="fecba1f78875bf8afb40fa805d6a72f3" type="hidden">
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	<input name="subscribe" id="subscribe" value="subscribe" style="width: auto;" type="checkbox">
+	<label for="subscribe">Notify me of follow-up comments via e-mail</label>
+	</p>
+
+
+
+<div id="loading" style="display: none;"><img src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/loading.gif" alt="loading" align="middle" height="32" width="32"> Posting your comment.</div>
+<div id="errors"></div>
+
+<input value="adca0e3f-26b7-72b0-b9f7-03ec92424a67" name="vid" type="hidden"></form>
+</div>
+
+</div>	</div>
+	</div>
+  
+<div class="sidebar" id="rightbar">
+	<ul>
+		<li id="search" class="widget widget_giraffe_search">		  <h2>Search</h2>
+			<form method="get" id="searchform" action="/index.php">
+<div><input alt="Search" value="" name="s" id="s" type="text">
+<input id="searchsubmit" value="Go" type="submit">
+</div>
+<input value="adca0e3f-26b7-72b0-b9f7-03ec92424a67" name="vid" type="hidden"></form>
+		</li>
+  <li id="list-authors" class="widget widget_list_authors">    	<h2 class="widgettitle">Authors</h2>
+      <ul>
+      <li><a href="http://blog.springsource.com/author/aclement/" title="Posts by aclement">Andy Clement</a> (1)</li><li><a href="http://blog.springsource.com/author/adrianc/" title="Posts by Adrian Colyer">Adrian Colyer</a> (13)</li><li>Adam FitzGerald</li><li><a href="http://blog.springsource.com/author/alefa/" title="Posts by Alef Arendsen">Alef Arendsen</a> (18)</li><li><a href="http://blog.springsource.com/author/awilkinson/" title="Posts by Andy Wilkinson">Andy Wilkinson</a> (6)</li><li>Adam Qualset</li><li><a href="http://blog.springsource.com/author/arjenp/" title="Posts by Arjen Poutsma">Arjen Poutsma</a> (4)</li><li><a href="http://blog.springsource.com/author/bena/" title="Posts by Ben Alex">Ben Alex</a> (10)</li><li><a href="http://blog.springsource.com/author/bcorrie/" title="Posts by Ben Corrie">Ben Corrie</a> (3)</li><li><a href="http://blog.springsource.com/author/benh/" title="Posts by Ben Hale">Ben Hale</a> (31)</li><li><a href="http://blog.springsource.com/author/cbeams/" title="Posts by Chris Beams">Chris Beams</a> (2)</li><li><a href="http://blog.springsource.com/author/cfrost/" title="Posts by Chris Frost">Chris Frost</a> (2)</li><li><a href="http://blog.springsource.com/author/cdupuis/" title="Posts by Christian Dupuis">Christian Dupuis</a> (7)</li><li>Charles Lee</li><li><a href="http://blog.springsource.com/author/colins/" title="Posts by Colin Sampaleanu">Colin Sampaleanu</a> (1)</li><li><a href="http://blog.springsource.com/author/coliny/" title="Posts by Colin Yates">Colin Yates</a> (1)</li><li>Contegix Support</li><li><a href="http://blog.springsource.com/author/costinl/" title="Posts by Costin Leau">Costin Leau</a> (6)</li><li>Chris Richardson</li><li><a href="http://blog.springsource.com/author/dheinz/" title="Posts by Daryl Heinz">Daryl Heinz</a> (1)</li><li><a href="http://blog.springsource.com/author/dsyer/" title="Posts by Dave Syer">Dave Syer</a> (9)</li><li>David Cowgill</li><li>Dan Harris</li><li><a href="http://blog.springsource.com/author/eberhardw/" title="Posts by Eberhard Wolff">Eberhard Wolff</a> (1)</li><li><a href="http://blog.springsource.com/author/gnormington/" title="Posts by Glyn Normington">Glyn Normington</a> (4)</li><li><a href="http://blog.springsource.com/author/grocher/" title="Posts by grocher">Graeme Rocher</a> (3)</li><li><a href="http://blog.springsource.com/author/glaforge/" title="Posts by Guillaume Laforge">Guillaume Laforge</a> (2)</li><li><a href="http://blog.springsource.com/author/ifuld/" title="Posts by Iwein Fuld">Iwein Fuld</a> (4)</li><li><a href="http://blog.springsource.com/author/jhickey/" title="Posts by Jennifer Hickey">Jennifer Hickey</a> (1)</li><li><a href="http://blog.springsource.com/author/jgrelle/" title="Posts by Jeremy Grelle">Jeremy Grelle</a> (2)</li><li><a href="http://blog.springsource.com/author/jjagielski/" title="Posts by Jim Jagielski">Jim Jagielski</a> (2)</li><li>Jim Moore</li><li><a href="http://blog.springsource.com/author/jkuipers/" title="Posts by Joris Kuipers">Joris Kuipers</a> (2)</li><li>Javier Soltero</li><li><a href="http://blog.springsource.com/author/juergenh/" title="Posts by Juergen Hoeller">Juergen Hoeller</a> (11)</li><li><a href="http://blog.springsource.com/author/keithd/" title="Posts by Keith Donald">Keith Donald</a> (10)</li><li><a href="http://blog.springsource.com/author/ltaylor/" title="Posts by Luke Taylor">Luke Taylor</a> (1)</li><li><a href="http://blog.springsource.com/author/mbrewer/" title="Posts by Mark Brewer">Mark Brewer</a> (1)</li><li><a href="http://blog.springsource.com/author/markf/" title="Posts by Mark Fisher">Mark Fisher</a> (14)</li><li><a href="http://blog.springsource.com/author/mpollack/" title="Posts by Mark Pollack">Mark Pollack</a> (2)</li><li><a href="http://blog.springsource.com/author/mthomas/" title="Posts by Mark Thomas">Mark Thomas</a> (2)</li><li>Matt Stodolnic</li><li><a href="http://blog.springsource.com/author/neelanc/" title="Posts by Neelan Choksi">Neelan Choksi</a> (3)</li><li><a href="http://blog.springsource.com/author/ozhurakousky/" title="Posts by Oleg Zhurakousky">Oleg Zhurakousky</a> (3)</li><li>Paul Chapman</li><li><a href="http://blog.springsource.com/author/pcooperellis/" title="Posts by Peter Cooper-Ellis">Peter Cooper-Ellis</a> (3)</li><li><a href="http://blog.springsource.com/author/ramnivasl/" title="Posts by Ramnivas Laddad">Ramnivas Laddad</a> (2)</li><li><a href="http://blog.springsource.com/author/robh/" title="Posts by Rob Harrop">Rob Harrop</a> (19)</li><li><a href="http://blog.springsource.com/author/rodj/" title="Posts by Rod Johnson">Rod Johnson</a> (47)</li><li><a href="http://blog.springsource.com/author/rstoyanchev/" title="Posts by Rossen Stoyanchev">Rossen Stoyanchev</a> (3)</li><li><a href="http://blog.springsource.com/author/rmiles/" title="Posts by Russ Miles">Russ Miles</a> (1)</li><li><a href="http://blog.springsource.com/author/sbrannen/" title="Posts by Sam Brannen">Sam Brannen</a> (1)</li><li><a href="http://blog.springsource.com/author/sconnolly/" title="Posts by Shaun Connolly">Shaun Connolly</a> (2)</li><li><a href="http://blog.springsource.com/author/stevens/" title="Posts by Steven Schuurman">Steven Schuurman</a> (3)</li><li>Steven Yates</li><li>Thomas Risberg</li><li>Trevor Marshall</li>      </ul>
+  </li>
+<li id="categories-227402801" class="widget widget_categories"><h2 class="widgettitle">Categories</h2>
+		<ul>
+			<li class="cat-item cat-item-8"><a href="http://blog.springsource.com/category/20/" title="View all posts filed under 2.0">2.0</a> (29)
+</li>
+	<li class="cat-item cat-item-22"><a href="http://blog.springsource.com/category/25-21/" title="View all posts filed under 2.5/2.1">2.5/2.1</a> (18)
+</li>
+	<li class="cat-item cat-item-35"><a href="http://blog.springsource.com/category/spring/30/" title="News and information about Spring 3.0">3.0</a> (11)
+</li>
+	<li class="cat-item cat-item-5"><a href="http://blog.springsource.com/category/aop/" title="View all posts filed under AOP">AOP</a> (15)
+</li>
+	<li class="cat-item cat-item-42"><a href="http://blog.springsource.com/category/apache-tomcat/" title="View all posts filed under Apache Tomcat">Apache Tomcat</a> (2)
+</li>
+	<li class="cat-item cat-item-11"><a href="http://blog.springsource.com/category/books/" title="View all posts filed under Books">Books</a> (2)
+</li>
+	<li class="cat-item cat-item-19"><a href="http://blog.springsource.com/category/builds/" title="View all posts filed under Builds">Builds</a> (12)
+</li>
+	<li class="cat-item cat-item-24"><a href="http://blog.springsource.com/category/business/" title="View all posts filed under Business">Business</a> (16)
+</li>
+	<li class="cat-item cat-item-48"><a href="http://blog.springsource.com/category/cloud-computing/" title="Cloud management, monitoring and development">Cloud Computing</a> (3)
+</li>
+	<li class="cat-item cat-item-13"><a href="http://blog.springsource.com/category/containers/" title="View all posts filed under Containers">Containers</a> (4)
+</li>
+	<li class="cat-item cat-item-9"><a href="http://blog.springsource.com/category/data-access/" title="View all posts filed under Data Access">Data Access</a> (10)
+</li>
+	<li class="cat-item cat-item-27"><a href="http://blog.springsource.com/category/application-platform/" title="View all posts filed under dm Server">dm Server</a> (48)
+</li>
+	<li class="cat-item cat-item-34"><a href="http://blog.springsource.com/category/groovy-grails/" title="View all posts filed under Groovy/Grails">Groovy/Grails</a> (9)
+</li>
+	<li class="cat-item cat-item-12"><a href="http://blog.springsource.com/category/ioc-container/" title="View all posts filed under IOC Container">IOC Container</a> (19)
+</li>
+	<li class="cat-item cat-item-15"><a href="http://blog.springsource.com/category/java/" title="View all posts filed under Java">Java</a> (27)
+</li>
+	<li class="cat-item cat-item-7"><a href="http://blog.springsource.com/category/jms/" title="View all posts filed under JMS">JMS</a> (3)
+</li>
+	<li class="cat-item cat-item-6"><a href="http://blog.springsource.com/category/jmx/" title="View all posts filed under JMX">JMX</a> (2)
+</li>
+	<li class="cat-item cat-item-21"><a href="http://blog.springsource.com/category/jsf/" title="View all posts filed under JSF">JSF</a> (1)
+</li>
+	<li class="cat-item cat-item-23"><a href="http://blog.springsource.com/category/open-source/" title="View all posts filed under Open Source">Open Source</a> (34)
+</li>
+	<li class="cat-item cat-item-17"><a href="http://blog.springsource.com/category/osgi/" title="OSGi related content">OSGi</a> (46)
+</li>
+	<li class="cat-item cat-item-14"><a href="http://blog.springsource.com/category/security/" title="View all posts filed under Security">Security</a> (8)
+</li>
+	<li class="cat-item cat-item-49"><a href="http://blog.springsource.com/category/slices/" title="View all posts filed under Slices">Slices</a> (1)
+</li>
+	<li class="cat-item cat-item-3"><a href="http://blog.springsource.com/category/spring/" title="View all posts filed under Spring">Spring</a> (210)
+</li>
+	<li class="cat-item cat-item-4"><a href="http://blog.springsource.com/category/spring-events/" title="View all posts filed under Spring Events">Spring Events</a> (21)
+</li>
+	<li class="cat-item cat-item-2"><a href="http://blog.springsource.com/category/springsource/" title="View all posts filed under SpringSource">SpringSource</a> (29)
+</li>
+	<li class="cat-item cat-item-46"><a href="http://blog.springsource.com/category/tc-server/" title="View all posts filed under tc Server">tc Server</a> (5)
+</li>
+	<li class="cat-item cat-item-16"><a href="http://blog.springsource.com/category/testing/" title="View all posts filed under Testing">Testing</a> (9)
+</li>
+	<li class="cat-item cat-item-41"><a href="http://blog.springsource.com/category/tools/" title="View all posts filed under Tools">Tools</a> (13)
+</li>
+	<li class="cat-item cat-item-26"><a href="http://blog.springsource.com/category/training-certification/" title="View all posts filed under Training/Certification">Training/Certification</a> (2)
+</li>
+	<li class="cat-item cat-item-25"><a href="http://blog.springsource.com/category/web/" title="View all posts filed under Web">Web</a> (17)
+</li>
+	<li class="cat-item cat-item-20"><a href="http://blog.springsource.com/category/web-flow/" title="View all posts filed under Web Flow">Web Flow</a> (7)
+</li>
+	<li class="cat-item cat-item-18"><a href="http://blog.springsource.com/category/web-services/" title="View all posts filed under Web Services">Web Services</a> (4)
+</li>
+		</ul>
+</li>
+<li id="linkcat-29" class="widget widget_links"><h2 class="widgettitle">Websites</h2>
+
+	<ul class="xoxo blogroll">
+<li><a href="http://www.springsource.com/" target="_blank">Enterprise Java</a></li>
+<li><a href="http://www.hyperic.com/" target="_blank">Open Source Monitoring</a></li>
+<li><a href="http://www.springframework.org/" onclick="javascript:urchinTracker('/outbound/www.springframework.org');">Spring Framework</a></li>
+<li><a href="http://www.springsource.com/products/tcserver" target="_blank">Tomcat Server</a></li>
+
+	</ul>
+</li>
+
+		<li id="meta" class="widget widget_meta">			<h2 class="widgettitle">Meta</h2>
+			<ul>
+						<li><a href="http://blog.springsource.com/wp-login.php">Log in</a></li>
+			<li><a href="http://blog.springsource.com/feed/" title="Syndicate this site using RSS 2.0">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://blog.springsource.com/comments/feed/" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform." onclick="javascript:urchinTracker('/outbound/wordpress.org');">WordPress.org</a></li>
+						</ul>
+		</li>
+	</ul>
+	<div class="clear"></div>
+</div>  <div class="clear"></div>
+</div>
+
+  <div class="linkbar linkbarbottom">
+    <ul><li class="left"><a href="http://blog.springsource.com/">Home</a></li><li class="right"><a href="#">Top</a></li>
+          </ul></div>
+</div>
+
+<div id="footer" class="noprint">
+<span id="giraffe">&nbsp;</span>
+<p>All content Copyright © 2000-2009 by <a href="http://www.springsource.com/" onclick="javascript:urchinTracker('/outbound/www.springsource.com');">SpringSource</a></p>
+
+<!-- Begin LoopFuse code --><script src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/listen.js" type="text/javascript"></script><script type="text/javascript">
+_lf_cid = "LF_48be82fa";
+_lf_remora();
+</script><!-- End LoopFuse code --><p>
+  <a href="http://blog.springsource.com/feed/">Entries <img src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/feed.png" alt="feed" height="16" width="16"></a> 
+  | <a href="http://blog.springsource.com/comments/feed/">Comments <img src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/feed.png" alt="feed" height="16" width="16"></a>
+  <!-- 136 queries. 1.266 seconds. -->
+</p>
+</div>
+
+<script src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/e-200934.js" type="text/javascript"></script>
+<script type="text/javascript">
+st_go({blog:'7836369',v:'ext',post:'32'});
+var load_cmc = function(){linktracker_init(7836369,32,2);};
+if ( typeof addLoadEvent != 'undefined' ) addLoadEvent(load_cmc);
+else load_cmc();
+</script><img id="wpstats" src="Getting%20Started%20With%20JPA%20in%20Spring%202.0%20%7C%20SpringSource%20Team%20Blog_files/g.gif" alt="">
+</body></html>

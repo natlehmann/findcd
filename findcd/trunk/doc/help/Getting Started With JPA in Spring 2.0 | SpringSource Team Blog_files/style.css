@@ -1,0 +1,825 @@
+/*
+Theme Name: Giraffe2
+Theme URI: http://www.urbangiraffe.com/themes/giraffe2
+Description: Fully localized and configurable fluid theme with 1 to 3 columns
+Version: wonky 3
+Author: John Godley
+Author URI: http://www.urbangiraffe.com/
+*/
+
+
+/*
+ * Basic styles
+ *
+ */
+
+*
+{
+margin: 0;
+padding: 0;
+}
+
+body
+{
+background: #eeeef5 url($scheme/pagebackground.png) repeat top left;
+font-size: 76%;
+min-width: 800px;
+max-width: 1400px;
+color: #333;
+}
+
+.clear
+{
+clear: both;
+height: 1px;
+padding: 0;
+margin: 0;
+overflow: hidden;
+}
+
+.widecontent, .fullcontent
+{
+padding: 20px 20px 2em 20px;
+text-align: justify;
+background-color: white;
+}
+
+.widecontent .post
+{
+font-size: 1.2em;
+}
+
+.widecontent p
+{
+padding: 2px 1em 0.5em 0px;
+}
+
+.narrowcontents
+{
+padding-bottom: 1.5em;
+overflow: hidden;
+}
+
+.narrowcontents .post
+{
+padding-top: 1em;
+padding-bottom: 0.5em;
+}
+
+.narrowcontents .post p
+{
+line-height: 1.6em;
+margin-bottom: 0.8em;
+}
+
+#inset em
+{
+margin-left: 0.5em;
+}
+
+#content .post
+{
+padding-right: 1em;
+font-size: 1em;
+}
+
+.post
+{
+margin-bottom: 0.5em;
+line-height: 1.5em;
+}
+
+.smallpost
+{
+padding-left: 1em;
+margin: 0 0 0.8em 0;
+}
+
+.smallpost h2
+{
+font-size: 1.2em;
+}
+
+.smallpost postmetadata
+{
+font-size: 0.7em;
+}
+
+.entry
+{
+text-align: justify;
+}
+
+.entrytext > p:first-child:first-letter,
+.entry > p:first-child:first-letter
+{
+font-size: 1.3em;
+}
+
+div.hr hr
+{
+display: none;
+}
+
+#pagenav ul
+{
+padding-top: 0.3em;
+}
+
+#pagenav li
+{
+display: inline;
+list-style-type: none;
+}
+
+#pagenav ul li a
+{
+color: white;
+text-align: center;
+font-size: 1em;
+padding-left: 0.4em;
+padding-right: 1em;
+text-decoration: none;
+}
+
+#pagenav ul li a:hover
+{
+text-decoration: underline;
+}
+
+.item h2 img
+{
+width: 1.1em;
+height: 1.1em;
+}
+
+.alignleft
+{
+float: left;
+text-align: left;
+}
+
+.alignright
+{
+float: right;
+text-align: right;
+}
+
+.aligncenter {
+	text-align: center;
+}
+
+
+img.centered
+{
+display: block;
+margin-left: auto;
+margin-right: auto;
+border: 1px solid #aaa;
+padding: 2px;
+}
+
+img.alignright
+{
+padding: 4px;
+margin: 4px 0 5px 7px;
+display: inline;
+border: 1px solid #ddd;
+}
+
+img.alignleft
+{
+padding: 4px;
+margin: 4px 7px 5px 0;
+display: inline;
+border: 1px solid #ddd;
+}
+
+img.border
+{
+border: 1px solid #aaa;
+padding: 2px;
+}
+
+acronym, abbr, span.caps
+{
+cursor: help;
+}
+
+acronym, abbr
+{
+border-bottom: 1px dashed #999;
+}
+
+blockquote cite
+{
+margin: 5px 0 0;
+display: block;
+}
+
+.center
+{
+text-align: center;
+}
+
+a img
+{
+border: none;
+}
+
+h2
+{
+font-size: 1.3em;
+letter-spacing: 0.1em;
+font-weight: normal;
+}
+
+ul
+{
+list-style-type: none;
+}
+
+ul li
+{
+margin-left: 20px;
+padding-left: 15px;
+background: transparent url(bullet.gif) no-repeat 0px 6px;
+}
+
+ol
+{
+margin: 0 0 0.5em 1em;
+}
+
+ol li
+{
+margin-left: 20px;
+}
+
+h3
+{
+margin-top: 0.5em;
+font-size: 1.4em;
+font-weight: normal;
+}
+
+h4
+{
+margin-top: 1.2em;
+font-size: 1.2em;
+}
+
+h5
+{
+margin-top: 1em;
+font-size: 1em;
+}
+
+
+.alignleft
+{
+float: left;
+text-align: left;
+}
+
+.alignright
+{
+float: right;
+text-align: right;
+}
+
+.inset
+{
+float: right;
+border: 1px dotted #999999;
+padding: 5px;
+margin-top: 5px;
+color: #ffffff;
+margin-left: 10px;
+}
+
+.inset ul
+{
+margin-top: 0 !important; padding-top: 0 !important;
+}
+
+.inset li
+{
+margin-left: 5px !important;
+}
+
+
+.sidebar
+{
+margin-bottom: 2em;
+overflow: hidden;
+}
+
+.sidebar ul
+{
+margin: 0; padding: 0;
+list-style-type: none;
+}
+
+.sidebar ul li
+{
+margin: 0; padding: 0;
+padding-bottom : 0.5em;
+margin-bottom: 1em;
+}
+
+.sidebar ul li ul li
+{
+padding-left: 15px;
+margin-left: 5px;
+background: transparent url(bullet.gif) no-repeat 0px 6px !important;
+}
+
+.sidebar ul ul
+{
+padding: 0.2em 1em 0 0.2em;
+line-height: 1.6em;
+}
+
+.sidebar h2
+{
+padding: 0.2em 1em 0.2em 0.8em;
+}
+
+.sidebar ul li ul li
+{
+background: none;
+margin-bottom: 0;
+padding-bottom: 0;
+}
+
+.sidebar dl
+{
+padding: 0.6em 1em 0.2em 1em;
+}
+
+.sidebar dl img
+{
+vertical-align: middle;
+padding-right: 0.5em;
+}
+
+.sidebar dt
+{
+font-weight: bold;
+}
+
+.sidebar dd
+{
+margin-left: 1.8em;
+margin-bottom: 0.3em;
+}
+
+.sidebar dt img
+{
+width: 1.3em;
+height: 1.3em;
+}
+
+.sidebar p, .textwidget
+{
+padding: 0.6em 1em 0.2em 1em;
+text-align: justify;
+}
+
+#wp-calendar td
+{
+padding: 2px 0;
+}
+
+#prev a, #next a, #next a:hover, #prev a:hover, #showit a, #showit a:hover
+{
+border: 0;
+text-decoration: underline;
+background-color: transparent;
+color: black;
+}
+
+#wp-calendar-split
+{
+border-top: 4px double #999;
+margin-top: 4px;
+}
+
+/*
+ * Comments
+ *
+ */
+
+#commentform
+{
+margin-top: 1em;
+}
+
+#commentform p
+{
+margin-bottom: 0.5em;
+}
+
+#commentform textarea
+{
+width: 95%;
+}
+
+#commentform a
+{
+color: #13076b;
+}
+
+#submit
+{
+border: 1px solid #999;
+}
+
+ol.commentlist
+{
+margin: 0; padding: 0;
+list-style-type: none;
+}
+
+.authorlink { display: inline; }
+.authorlink a
+{
+text-decoration: none;
+}
+
+.authorlink a:hover { color: #ff5c00; }
+ol.commentlist li
+{
+ margin: 0;
+padding: 0 10px;
+padding-top: 1.5em;
+}
+
+.commentlist cite
+{
+font-style: normal;
+}
+
+code
+{
+font-size: 1.2em;
+}
+
+.commentauthor
+{
+background-color: #eee;
+}
+
+.commentinfo h4
+{
+display: inline;
+}
+
+.commentlist p
+{
+line-height: 1.4em;
+margin-bottom: 1em;
+}
+
+#giraffe
+{
+float: right;
+color: #ffffff;
+}
+
+#giraffe a
+{
+color: #ffffff;
+}
+
+#page
+{
+margin: 0 auto;
+background-color: white;
+}
+
+#wrapper
+{
+margin: 0;
+}
+
+
+#main
+{
+margin: 0;
+overflow: hidden;
+margin-bottom: 10px;
+}
+
+.widecontent .post
+{
+padding: 0;
+margin-bottom: 0px;
+line-height: 1.6em;
+}
+
+.widecontent h2
+{
+font-size: 1.6em;
+height: auto;
+padding: 0.2em 1em 0.3em 0px;
+display: table;
+width: 90%;
+}
+
+.widecontent h3 a
+{
+text-decoration: none;
+}
+
+h2.narrowcorner
+{
+letter-spacing: 0.3em;
+margin-bottom: 0px !important;
+}
+
+h2.narrowheading
+{
+letter-spacing: 0.3em;
+padding: 0.2em 1em 0.2em 2.5em;
+margin-bottom: 1em;
+}
+
+#inset
+{
+padding-bottom: 2.5em;
+background-color: white;
+}
+
+#inset ul
+{
+line-height: 1.6em;
+}
+
+#inset h2
+{
+padding: 0.2em 1em 0.2em 0;
+}
+
+#footer
+{
+margin: 0 auto;
+clear: both;
+text-align: left;
+line-height: 1.5em;
+padding: 20px 0;
+color: #ffffff;
+}
+
+#footer img
+{
+vertical-align: middle;
+}
+
+#footer a
+{
+color: #ffffff;
+text-decoration: none;
+}
+
+#footer a:hover
+{
+color: #ff5c00;
+}
+
+div.hr
+{
+height: 1px;
+}
+
+#header a
+{
+text-decoration: none;
+font-size: 1.5em;
+}
+
+#pagenav
+{
+text-align: center;
+margin: 0 auto;
+height: 1.8em;
+white-space: nowrap;
+overflow: auto;
+}
+
+#pagenav ul li { background: none; padding: 0; margin: 0 }
+
+.linkbar
+{
+text-align: center;
+clear: both;
+margin: 0;
+padding: 3px 0;
+}
+
+.linkbar ul
+{
+text-align: center;
+}
+.linkbar ul li
+{
+display: inline;
+text-decoration: none;
+background: none;
+}
+
+.linkbar ul li a
+{
+color: white;
+text-decoration: none;
+padding: 3px 0.4em;
+}
+
+.linkbar ul li a:hover, .linkbar .active
+{
+color:#ff5c00;
+padding: 3px 0.4em;
+}
+
+.linkbar ul li p
+{
+color: #ffffff;
+display: inline;
+padding: 3px 0.4em;
+}
+
+.linkbar li.left
+{
+float: left;
+margin-left: 29px;
+width: 10em;
+text-align: left;
+}
+
+.linkbar li.right
+{
+text-align: right;
+float: right;
+width: 10em;
+margin-right: 24px;
+}
+
+.linkbar li.left a, .linkbar li.right a
+{
+border: 0;
+}
+
+blockquote
+{
+margin: 1em 1.5em;
+padding: 1em 1em;
+background: transparent url(quote.gif) no-repeat scroll top left;
+font-size: 0.9em;
+color: #333;
+font-style: oblique;
+}
+
+h2 a
+{
+text-decoration: none;
+}
+
+h2 a:hover { color: #ff5c00 }
+
+#searchform
+{
+padding: 1em 0;
+margin: 0 auto;
+text-align: center;
+width: 95%;
+}
+
+#searchsubmit
+{
+border: 1px solid #999;
+width: 20%;
+}
+
+#s
+{
+width: 60%;
+}
+
+#wp-calendar
+{
+text-align: center;
+width: 100%;
+border-collapse: collapse;
+padding: 0;
+margin: 0;
+font-size: 1em;
+}
+
+#wp-calendar caption a, #wp-calendar caption a:hover
+{
+background: transparent;
+}
+
+#wp-calendar th
+{
+padding: 2px 0;
+}
+
+#wp-calendar a
+{
+text-decoration: none;
+display: block;
+color: black;
+}
+
+#wp-calendar caption
+{
+letter-spacing: 0.1em;
+padding: 0.2em 1em 0.2em 0.8em;
+font-weight: normal;
+text-align: left;
+font-size: 1.2em;
+}
+
+a.java
+{
+padding: 1em 1em 1em 0px;
+margin-bottom: 1em;
+display: block;
+font-size: 1.2em;
+}
+
+.gravatar
+{
+width: 3.2em;
+height: 3.2em;
+margin-right: 1em;
+margin-bottom: 0.5em;
+padding: 3px;
+background-color: white;
+}
+
+ol.commentlist li
+{
+padding-bottom: 0.5em;
+}
+
+.commentlist h4 a
+{
+text-decoration: none;
+}
+
+.commentmetadata
+{
+display: block;
+padding-top: 0.5em;
+font-size: 0.9em;
+}
+
+.commentlist h4
+{
+padding-top: 0;
+margin-bottom: 0;
+padding-bottom: 0.1em;
+font-size: 1.2em;
+}
+
+.fullmain
+{
+padding-top: 20px;
+}
+
+#calendar .widgettitle
+{
+display: none;
+}
+
+.loading
+{
+margin: 0 auto;
+background-color: #ccc;
+padding: 10px;
+margin-top: 10px;
+}
+
+/*
+ * Custom styles
+ * CHANGED: BEN HALE
+ */
+img.author_image
+{
+	float: right;
+	padding-top: 7px;
+	padding-left: 10px;
+}
+
+/*
+ * Custom styles
+ * CHANGED: Trevor Marshall
+ */
+div.callbox{
+    background: #C3D2A5;
+    border: 1px dotted #ccc;
+    padding: 6px;}
+

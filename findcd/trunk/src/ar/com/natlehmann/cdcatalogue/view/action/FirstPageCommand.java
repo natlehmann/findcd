@@ -1,0 +1,20 @@
+package ar.com.natlehmann.cdcatalogue.view.action;
+
+import java.awt.event.ActionEvent;
+
+import ar.com.natlehmann.cdcatalogue.view.CdCatalogueViewFacade;
+
+public class FirstPageCommand extends CommandActionListener {
+
+	public FirstPageCommand(CdCatalogueViewFacade viewFacade) {
+		super(viewFacade);
+	}
+
+	@Override
+	public void execute(ActionEvent event) {
+		
+		getViewObserver().fireShowFirstPage();
+
+	}
+
+}
