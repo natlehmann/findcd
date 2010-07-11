@@ -1,5 +1,7 @@
 package ar.com.natlehmann.cdcatalogue.dao;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 
 
