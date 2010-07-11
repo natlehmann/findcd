@@ -1,16 +1,12 @@
 package ar.com.natlehmann.cdcatalogue.dao.jpa;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.orm.jpa.JpaCallback;
-import org.springframework.orm.jpa.support.JpaDaoSupport;
 
 import ar.com.natlehmann.cdcatalogue.business.model.Resource;
 import ar.com.natlehmann.cdcatalogue.dao.DaoException;
@@ -20,13 +16,10 @@ import ar.com.natlehmann.cdcatalogue.dao.Parameter;
 import ar.com.natlehmann.cdcatalogue.dao.QueryHelper;
 import ar.com.natlehmann.cdcatalogue.dao.ResourceDao;
 
-public class ResourceDaoJpaImpl extends JpaDaoSupport implements ResourceDao {
+public class ResourceDaoJpaImpl implements ResourceDao {
 	
 	private static Log log = LogFactory.getLog(ResourceDaoJpaImpl.class);
 	
-	private EntityManager em;
-	
-		
 	private static final String BASE_SELECT_QUERY_STRING = "SELECT " + QueryHelper.RESOURCE_PREFIX
 			+ " FROM Resource " + QueryHelper.RESOURCE_PREFIX 
 			+ " LEFT JOIN FETCH " + QueryHelper.RESOURCE_PREFIX + ".volume " 
@@ -40,28 +33,26 @@ public class ResourceDaoJpaImpl extends JpaDaoSupport implements ResourceDao {
 			+ QueryHelper.VOLUME_PREFIX
 			+ " JOIN " + QueryHelper.VOLUME_PREFIX + ".category " 
 			+ QueryHelper.CATEGORY_PREFIX + " ";
-
-
-	public EntityManager getEntityManager() {
-		if (em == null) {
-			log.info("Creating Entity Manager");
-			em = this.getJpaTemplate().getEntityManagerFactory().createEntityManager();
-		}
-		return em;
-	}
 	
 	
 	public void createResource(Resource resource) throws DaoException {
 		
+		EntityManager em = DaoResources.getInstance().getEntityManager();
+		
+		if (!em.getTransaction().isActive()) {
+			em.getTransaction().begin();
+		}
+		
 		try {
-			this.getJpaTemplate().execute(new CreateResourceCallback(resource));
+			em.persist(resource);
+			em.flush();
+			em.getTransaction().commit();
 			
 		} catch (Exception e) {
-			
-			log.error("Could not create resource " + resource);
+			log.error("Could not create Resource. " + e.getMessage());
+			em.getTransaction().rollback();
 			throw new DaoException(e);
 		}
-
 	}
 
 	@SuppressWarnings("unchecked")
@@ -69,8 +60,7 @@ public class ResourceDaoJpaImpl extends JpaDaoSupport implements ResourceDao {
 	public List<Resource> getResources(List<Parameter> parameters,
 			OrderBy orderField, Page page) throws DaoException {
 		
-
-		EntityManager em = getEntityManager();
+		EntityManager em = DaoResources.getInstance().getEntityManager();
 		
 		StringBuffer queryStr = new StringBuffer(BASE_SELECT_QUERY_STRING);
 		
@@ -115,24 +105,27 @@ public class ResourceDaoJpaImpl extends JpaDaoSupport implements ResourceDao {
 			query.append("ORDER BY ").append(orderBy.toString());
 		}
 		
-		
-		List<Object> values = new LinkedList<Object>();
+		EntityManager em = DaoResources.getInstance().getEntityManager();
+		Query queryObj = em.createQuery(query.toString());
 		
 		if (!parameters.isEmpty()) {
 			
+			int index = 1;
+			
 			for (Parameter parameter : parameters) {
-				values.add(parameter.getValue());
+				queryObj.setParameter(index, parameter.getValue());
+				index++;
 			}
 		}
 		
-		return this.getJpaTemplate().find(query.toString(), values.toArray());
+		return queryObj.getResultList();
 	}
 
 	@Override
 	public long getResourceCount(List<Parameter> searchParameters)
 			throws DaoException {
 		
-		EntityManager em = getEntityManager();
+		EntityManager em = DaoResources.getInstance().getEntityManager();
 		
 		StringBuffer queryStr = new StringBuffer(BASE_COUNT_QUERY_STRING);
 		
@@ -154,35 +147,4 @@ public class ResourceDaoJpaImpl extends JpaDaoSupport implements ResourceDao {
 		return result.longValue();
 	}
 	
-	
-	public class CreateResourceCallback implements JpaCallback {
-		
-		private Resource resource;		
-
-		public CreateResourceCallback(Resource resource) {
-			this.resource = resource;
-		}
-
-		@Override
-		public Object doInJpa(EntityManager em) throws PersistenceException {
-			
-			if (!em.getTransaction().isActive()) {
-				em.getTransaction().begin();
-			}
-			
-			try {
-				em.persist(resource);
-				em.flush();
-				em.getTransaction().commit();
-				
-			} catch (Exception e) {
-				log.error("Could not create Resource. " + e.getMessage());
-				em.getTransaction().rollback();
-				throw new PersistenceException(e);
-			}
-			
-			return resource;
-		}		
-	}
-
 }
