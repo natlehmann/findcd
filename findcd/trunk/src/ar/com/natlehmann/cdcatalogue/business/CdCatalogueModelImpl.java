@@ -23,6 +23,7 @@ import ar.com.natlehmann.cdcatalogue.dao.Page;
 import ar.com.natlehmann.cdcatalogue.dao.Parameter;
 import ar.com.natlehmann.cdcatalogue.dao.ResourceDao;
 import ar.com.natlehmann.cdcatalogue.dao.VolumeDao;
+import ar.com.natlehmann.cdcatalogue.dao.jpa.DaoResources;
 
 public class CdCatalogueModelImpl implements CdCatalogueBusinessModel {
 	
@@ -314,6 +315,11 @@ public class CdCatalogueModelImpl implements CdCatalogueBusinessModel {
 		} catch (DaoException e) {
 			throw new CdCatalogueException("Could not update volumes.", e);
 		}		
+	}
+
+	@Override
+	public void shutDownApp() {
+		DaoResources.getInstance().shutDown();		
 	}
 
 }
