@@ -1,5 +1,8 @@
 package ar.com.natlehmann.cdcatalogue.dao.jpa;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.LinkedList;
 import java.util.List;
 
@@ -9,11 +12,9 @@ import org.junit.Test;
 
 import ar.com.natlehmann.cdcatalogue.business.model.Category;
 import ar.com.natlehmann.cdcatalogue.business.model.Resource;
-import ar.com.natlehmann.cdcatalogue.dao.CategoryDao;
 import ar.com.natlehmann.cdcatalogue.dao.DaoBaseTest;
 import ar.com.natlehmann.cdcatalogue.dao.DaoException;
 import ar.com.natlehmann.cdcatalogue.dao.Parameter;
-import ar.com.natlehmann.cdcatalogue.dao.ResourceDao;
 import ar.com.natlehmann.cdcatalogue.dao.SearchField;
 
 /**
@@ -23,40 +24,30 @@ import ar.com.natlehmann.cdcatalogue.dao.SearchField;
  */
 public class ResourceCategoryDaoTest extends DaoBaseTest {
 	
-	private ResourceDao resourceDao;
-	private CategoryDao categoryDao;
-	
 	@SuppressWarnings("unused")
 	private static Log log = LogFactory.getLog(ResourceCategoryDaoTest.class);
 	
-	public void setResourceDao(ResourceDao resourceDao) {
-		this.resourceDao = resourceDao;
-	}
-	
-	public void setCategoryDao(CategoryDao categoryDao) {
-		this.categoryDao = categoryDao;
-	}
 
 	@Test
 	public void testUpdateCategoryNameInResources() throws DaoException {
 		
 		List<Parameter> parameters = new LinkedList<Parameter>();
 		parameters.add(new Parameter(SearchField.CATEGORY_NAME, this.category.getCategoryName()));
-		List<Resource> resources = resourceDao.getResources(parameters);
+		List<Resource> resources = this.getResourceDao().getResources(parameters);
 
 		checkIfPresent(resources);
 		
 		String oldCategoryName = this.category.getCategoryName();
 		
 		this.category.setCategoryName("nuevo nombre prueba");
-		categoryDao.updateCategory(category);
+		this.getCategoryDao().updateCategory(category);
 		
-		Category updatedCategory = categoryDao.getCategory(this.category.getCategoryId());
+		Category updatedCategory = this.getCategoryDao().getCategory(this.category.getCategoryId());
 		assertTrue(updatedCategory.getCategoryName().equals("nuevo nombre prueba"));
 		
 		parameters = new LinkedList<Parameter>();
 		parameters.add(new Parameter(SearchField.CATEGORY_NAME, "nuevo nombre prueba"));
-		resources = resourceDao.getResources(parameters);
+		resources = this.getResourceDao().getResources(parameters);
 		
 		checkIfPresent(resources);
 		
@@ -66,7 +57,7 @@ public class ResourceCategoryDaoTest extends DaoBaseTest {
 		
 		
 		this.category.setCategoryName(oldCategoryName);
-		categoryDao.updateCategory(category);
+		this.getCategoryDao().updateCategory(category);
 		
 	}
 
