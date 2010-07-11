@@ -20,6 +20,8 @@ public interface CdCatalogueBusinessModel extends CdCatalogueModelFacade {
 	void updateCategory(Category category) throws CdCatalogueException;
 	void updateVolume(Volume volume) throws CdCatalogueException;
 	void updateVolumes(List<Volume> volumes) throws CdCatalogueException;
+
+	void shutDownApp();
 	
 
 }
