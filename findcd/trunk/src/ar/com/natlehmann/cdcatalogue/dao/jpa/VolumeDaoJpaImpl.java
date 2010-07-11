@@ -1,17 +1,13 @@
 package ar.com.natlehmann.cdcatalogue.dao.jpa;
 
-import java.util.LinkedList;
 import java.util.List;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.orm.jpa.JpaCallback;
-import org.springframework.orm.jpa.support.JpaDaoSupport;
 
 import ar.com.natlehmann.cdcatalogue.business.exception.DuplicateNameException;
 import ar.com.natlehmann.cdcatalogue.business.model.Category;
@@ -24,11 +20,9 @@ import ar.com.natlehmann.cdcatalogue.dao.Parameter;
 import ar.com.natlehmann.cdcatalogue.dao.QueryHelper;
 import ar.com.natlehmann.cdcatalogue.dao.VolumeDao;
 
-public class VolumeDaoJpaImpl extends JpaDaoSupport implements VolumeDao {
+public class VolumeDaoJpaImpl implements VolumeDao {
 	
 	private static Log log = LogFactory.getLog(VolumeDaoJpaImpl.class);
-	
-	private EntityManager em;
 	
 	private static final String BASE_QUERY_STRING = "SELECT DISTINCT " + QueryHelper.VOLUME_PREFIX + 
 		" FROM Volume " + QueryHelper.VOLUME_PREFIX 
@@ -36,22 +30,28 @@ public class VolumeDaoJpaImpl extends JpaDaoSupport implements VolumeDao {
 		+ " LEFT JOIN FETCH " + QueryHelper.VOLUME_PREFIX + ".category " 
 		+ QueryHelper.CATEGORY_PREFIX + " ";
 	
-	public EntityManager getEntityManager() {
-		if (em == null) {
-			log.info("Creating Entity Manager");
-			em = this.getJpaTemplate().getEntityManagerFactory().createEntityManager();
-		}
-		return em;
-	}
 
 	public Volume createVolume(Volume volume) throws DaoException {
-
+		
+		EntityManager em = DaoResources.getInstance().getEntityManager();
+		
+		if (!em.getTransaction().isActive()) {
+			em.getTransaction().begin();
+		}
+		
 		try {
-			this.getJpaTemplate().execute(new CreateVolumeCallback(volume));
+			em.persist(volume);
+			em.flush();
+			em.getTransaction().commit();
+		
+		} catch (EntityExistsException e) {
+			log.error("Volume already exists. Could not create volume. " + e.getMessage());
+			em.getTransaction().rollback();
+			throw new DuplicateNameException("Volume already exists.", e);
 			
 		} catch (Exception e) {
-			
-			log.error("Could not create volume " + volume);
+			log.error("Could not create volume. " + e.getMessage());
+			em.getTransaction().rollback();
 			throw new DaoException(e);
 		}
 		
@@ -61,8 +61,12 @@ public class VolumeDaoJpaImpl extends JpaDaoSupport implements VolumeDao {
 	@SuppressWarnings("unchecked")
 	public Volume findVolume(String volumeName) throws DaoException {
 
-		List<Volume> results = this.getJpaTemplate().find(
-				"SELECT c FROM Volume c WHERE c.volumeName = ?1", volumeName);
+		EntityManager em = DaoResources.getInstance().getEntityManager();
+		
+		List<Volume> results = em.createQuery(
+				"SELECT c FROM Volume c WHERE c.volumeName = ?1")
+				.setParameter(1, volumeName)
+				.getResultList();
 		
 		if (!results.isEmpty()) {	
 			
@@ -80,14 +84,14 @@ public class VolumeDaoJpaImpl extends JpaDaoSupport implements VolumeDao {
 
 	public Volume getVolume(Integer volumeId) throws DaoException {
 
-		return this.getJpaTemplate().find(Volume.class, volumeId);
+		return DaoResources.getInstance().getEntityManager().find(
+				Volume.class, volumeId);
 	}
 	
 	
 	@SuppressWarnings("unchecked")
 	public List<Volume> getVolumes(List<Parameter> parameters, OrderBy orderField) 
-	throws DaoException {
-	
+	throws DaoException {	
 		
 		StringBuffer query = new StringBuffer(BASE_QUERY_STRING);
 		
@@ -97,17 +101,20 @@ public class VolumeDaoJpaImpl extends JpaDaoSupport implements VolumeDao {
 			query.append("ORDER BY ").append(orderField.toString());
 		}
 		
-		
-		List<Object> values = new LinkedList<Object>();
+		EntityManager em = DaoResources.getInstance().getEntityManager();
+		Query queryObj = em.createQuery(query.toString());
 		
 		if (!parameters.isEmpty()) {
 			
+			int index = 1;
+			
 			for (Parameter parameter : parameters) {
-				values.add(parameter.getValue());
+				queryObj.setParameter(index, parameter.getValue());
+				index++;
 			}
 		}
 		
-		return this.getJpaTemplate().find(query.toString(), values.toArray());
+		return queryObj.getResultList();
 		
 	}
 	
@@ -124,7 +131,7 @@ public class VolumeDaoJpaImpl extends JpaDaoSupport implements VolumeDao {
 	public List<Volume> getVolumes(List<Parameter> parameters, OrderBy orderField, Page page) 
 	throws DaoException {
 		
-		EntityManager em = getEntityManager();
+		EntityManager em = DaoResources.getInstance().getEntityManager();
 		
 		StringBuffer queryStr = new StringBuffer(BASE_QUERY_STRING);
 		
@@ -163,7 +170,7 @@ public class VolumeDaoJpaImpl extends JpaDaoSupport implements VolumeDao {
 	public List<Volume> getVolumes(OrderBy orderField, Page page) 
 	throws DaoException {
 		
-		EntityManager em = getEntityManager();
+		EntityManager em = DaoResources.getInstance().getEntityManager();
 		
 		StringBuffer queryStr = new StringBuffer(BASE_QUERY_STRING);
 		
@@ -179,8 +186,12 @@ public class VolumeDaoJpaImpl extends JpaDaoSupport implements VolumeDao {
 	@Override
 	public List<Volume> getVolumes(Category category) throws DaoException {
 		
-		List<Volume> results = this.getJpaTemplate().find(
-				"SELECT v FROM Volume v WHERE v.category = ?1 ORDER BY v.volumeName", category);
+		EntityManager em = DaoResources.getInstance().getEntityManager();
+		
+		List<Volume> results = em.createQuery(
+				"SELECT v FROM Volume v WHERE v.category = ?1 ORDER BY v.volumeName")
+				.setParameter(1, category)
+				.getResultList();
 		
 		return results;
 	}
@@ -188,12 +199,21 @@ public class VolumeDaoJpaImpl extends JpaDaoSupport implements VolumeDao {
 	@Override
 	public void deleteVolume(Volume volume) throws DaoException {
 		
+		EntityManager em = DaoResources.getInstance().getEntityManager();
+		
+		if (!em.getTransaction().isActive()) {
+			em.getTransaction().begin();
+		}
+		
 		try {
-			this.getJpaTemplate().execute(new DeleteVolumeCallback(volume));	
+			Volume deletedVol = em.find(Volume.class, volume.getVolumeId());
+			em.remove(deletedVol);
+			em.flush();
+			em.getTransaction().commit();
 			
 		} catch (Exception e) {
-			
-			log.error("Could not delete volume " + volume);
+			log.error("Could not delete Volume. " + e.getMessage());
+			em.getTransaction().rollback();
 			throw new DaoException(e);
 		}		
 	}
@@ -201,156 +221,45 @@ public class VolumeDaoJpaImpl extends JpaDaoSupport implements VolumeDao {
 	@Override
 	public void updateVolume(Volume volume) throws DaoException {
 		
-		try {
-			this.getJpaTemplate().execute(new UpdateVolumeCallback(volume));	
-			
-		} catch (Exception e) {
-			
-			log.error("Could not update volume " + volume);
-			throw new DaoException(e);
+		EntityManager em = DaoResources.getInstance().getEntityManager();
+		
+		if (!em.getTransaction().isActive()) {
+			em.getTransaction().begin();
 		}
 		
+		try {
+			volume = em.merge(volume);
+			em.flush();
+			em.getTransaction().commit();
+			
+		} catch (Exception e) {
+			log.error("Could not update Volume. " + e.getMessage());
+			em.getTransaction().rollback();
+			throw new DaoException(e);
+		}		
 	}
 
 	@Override
 	public void updateVolumes(List<Volume> volumes) throws DaoException {
 		
+		EntityManager em = DaoResources.getInstance().getEntityManager();
+		
+		if (!em.getTransaction().isActive()) {
+			em.getTransaction().begin();
+		}
+		
 		try {
-			this.getJpaTemplate().execute(new UpdateVolumesCallback(volumes));
+			
+			for (Volume volume : volumes) {
+				volume = em.merge(volume);
+				em.flush();
+			}				
+			em.getTransaction().commit();
 			
 		} catch (Exception e) {
-			
-			log.error("Could not update volumes " + volumes);
+			log.error("Could not update Volume. " + e.getMessage());
+			em.getTransaction().rollback();
 			throw new DaoException(e);
-		}
-		
-	}
-	
-	
-	public class DeleteVolumeCallback implements JpaCallback {
-		
-		private Volume volume;		
-
-		public DeleteVolumeCallback(Volume volume) {
-			this.volume = volume;
-		}
-
-		@Override
-		public Object doInJpa(EntityManager em) throws PersistenceException {
-			
-			if (!em.getTransaction().isActive()) {
-				em.getTransaction().begin();
-			}
-			
-			try {
-				this.volume = em.merge(volume);
-				em.remove(volume);
-				em.flush();
-				em.getTransaction().commit();
-				
-			} catch (Exception e) {
-				log.error("Could not delete Volume. " + e.getMessage());
-				em.getTransaction().rollback();
-				throw new PersistenceException(e);
-			}
-			return null;
-		}		
-	}
-	
-	public class UpdateVolumeCallback implements JpaCallback {
-		
-		private Volume volume;		
-
-		public UpdateVolumeCallback(Volume volume) {
-			this.volume = volume;
-		}
-
-		@Override
-		public Object doInJpa(EntityManager em) throws PersistenceException {
-			
-			if (!em.getTransaction().isActive()) {
-				em.getTransaction().begin();
-			}
-			
-			try {
-				this.volume = em.merge(volume);
-				em.flush();
-				em.getTransaction().commit();
-				
-			} catch (Exception e) {
-				log.error("Could not update Volume. " + e.getMessage());
-				em.getTransaction().rollback();
-				throw new PersistenceException(e);
-			}
-			return this.volume;
-		}		
-	}
-	
-	public class UpdateVolumesCallback implements JpaCallback {
-		
-		private List<Volume> volumes;		
-
-		public UpdateVolumesCallback(List<Volume> volumes) {
-			this.volumes = volumes;
-		}
-
-		@Override
-		public Object doInJpa(EntityManager em) throws PersistenceException {
-			
-			if (!em.getTransaction().isActive()) {
-				em.getTransaction().begin();
-			}
-			
-			try {
-				
-				for (Volume volume : this.volumes) {
-					volume = em.merge(volume);
-					em.flush();
-				}				
-				em.getTransaction().commit();
-				
-			} catch (Exception e) {
-				log.error("Could not update Volume. " + e.getMessage());
-				em.getTransaction().rollback();
-				throw new PersistenceException(e);
-			}
-			
-			return null;
-		}		
-	}
-	
-	public class CreateVolumeCallback implements JpaCallback {
-		
-		private Volume volume;		
-
-		public CreateVolumeCallback(Volume volume) {
-			this.volume = volume;
-		}
-
-		@Override
-		public Object doInJpa(EntityManager em) throws PersistenceException {
-			
-			if (!em.getTransaction().isActive()) {
-				em.getTransaction().begin();
-			}
-			
-			try {
-				em.persist(volume);
-				em.flush();
-				em.getTransaction().commit();
-			
-			} catch (EntityExistsException e) {
-				log.error("Volume already exists. Could not create volume. " + e.getMessage());
-				em.getTransaction().rollback();
-				throw new DuplicateNameException("Volume already exists.", e);
-				
-			} catch (Exception e) {
-				log.error("Could not create volume. " + e.getMessage());
-				em.getTransaction().rollback();
-				throw new PersistenceException(e);
-			}
-			
-			return volume;
 		}		
 	}
 
