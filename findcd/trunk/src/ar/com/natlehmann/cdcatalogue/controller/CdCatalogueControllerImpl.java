@@ -1,7 +1,6 @@
 package ar.com.natlehmann.cdcatalogue.controller;
 
 import java.io.File;
-import java.util.LinkedList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -11,11 +10,7 @@ import ar.com.natlehmann.cdcatalogue.business.CdCatalogueBusinessModel;
 import ar.com.natlehmann.cdcatalogue.business.exception.CdCatalogueException;
 import ar.com.natlehmann.cdcatalogue.business.exception.InvalidNameException;
 import ar.com.natlehmann.cdcatalogue.business.model.Category;
-import ar.com.natlehmann.cdcatalogue.business.model.Resource;
 import ar.com.natlehmann.cdcatalogue.business.model.Volume;
-import ar.com.natlehmann.cdcatalogue.dao.Page;
-import ar.com.natlehmann.cdcatalogue.dao.Parameter;
-import ar.com.natlehmann.cdcatalogue.dao.SearchField;
 import ar.com.natlehmann.cdcatalogue.util.Validator;
 import ar.com.natlehmann.cdcatalogue.view.CdCatalogueViewFacade;
 import ar.com.natlehmann.cdcatalogue.view.CdCatalogueViewObserver;
@@ -240,10 +235,7 @@ public class CdCatalogueControllerImpl implements CdCatalogueControllerFacade, C
 						
 						oldCategory.setCategoryName(categoryName);						
 						this.modelFacade.updateCategory(oldCategory);
-//System.out.println("ACA VA -------------------- ");
-//List<Parameter> par = new LinkedList<Parameter>();
-//par.add(new Parameter(SearchField.CATEGORY_NAME,categoryName));
-//for(Resource r : this.modelFacade.getResources(par, null, new Page(1))) System.out.println("categoria " + r.getVolume().getCategory());
+
 						this.viewFacade.closeDialogues();
 						this.viewFacade.refreshCategory(oldCategoryName, categoryName);
 						this.viewFacade.showSuccessMessage("The category was successfully updated.");
@@ -258,6 +250,11 @@ public class CdCatalogueControllerImpl implements CdCatalogueControllerFacade, C
 			}
 		}
 		
+	}
+
+	@Override
+	public void fireShutDownApp() {
+		this.modelFacade.shutDownApp();		
 	}
 
 }
