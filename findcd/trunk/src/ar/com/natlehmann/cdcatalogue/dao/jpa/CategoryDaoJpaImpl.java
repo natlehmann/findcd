@@ -4,12 +4,9 @@ import java.util.List;
 
 import javax.persistence.EntityExistsException;
 import javax.persistence.EntityManager;
-import javax.persistence.PersistenceException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.orm.jpa.JpaCallback;
-import org.springframework.orm.jpa.support.JpaDaoSupport;
 
 import ar.com.natlehmann.cdcatalogue.business.exception.DuplicateNameException;
 import ar.com.natlehmann.cdcatalogue.business.model.Category;
@@ -17,31 +14,33 @@ import ar.com.natlehmann.cdcatalogue.dao.CategoryDao;
 import ar.com.natlehmann.cdcatalogue.dao.DaoException;
 import ar.com.natlehmann.cdcatalogue.dao.NonUniqueResultExcetion;
 
-public class CategoryDaoJpaImpl extends JpaDaoSupport implements CategoryDao {
+public class CategoryDaoJpaImpl implements CategoryDao {
 	
 	private static Log log = LogFactory.getLog(CategoryDaoJpaImpl.class);
-	private EntityManager em;
-	
-	public EntityManager getEntityManager() {
-		if (em == null) {
-			log.info("Creating Entity Manager");
-			em = this.getJpaTemplate().getEntityManagerFactory().createEntityManager();
-		}
-		return em;
-	}
 	
 
 	public Category createCategory(Category category) throws DaoException {
 		
+		EntityManager em = DaoResources.getInstance().getEntityManager();
+		
 		try {
-			this.getJpaTemplate().execute(new CreateCategoryCallback(category));
 			
-		} catch (DuplicateNameException e) {
-			throw e;
+			if (!em.getTransaction().isActive()) {
+				em.getTransaction().begin();
+			}
+			
+			em.persist(category);
+			em.flush();
+			em.getTransaction().commit();
+				
+		} catch (EntityExistsException e) {
+			log.error("Category already exists. Could not create category. " + e.getMessage());
+			em.getTransaction().rollback();
+			throw new DuplicateNameException("Category already exists.", e);
 			
 		} catch (Exception e) {
-			
-			log.error("Could not create category " + category);
+			log.error("Could not create Category. " + e.getMessage());
+			em.getTransaction().rollback();
 			throw new DaoException(e);
 		}
 		
@@ -51,8 +50,12 @@ public class CategoryDaoJpaImpl extends JpaDaoSupport implements CategoryDao {
 	@SuppressWarnings("unchecked")
 	public Category findCategory(String categoryName) throws DaoException {
 
-		List<Category> results = this.getJpaTemplate().find(
-				"SELECT c FROM Category c WHERE c.categoryName = ?1", categoryName);
+		EntityManager em = DaoResources.getInstance().getEntityManager();
+		
+		List<Category> results = em.createQuery(
+				"SELECT c FROM Category c WHERE c.categoryName = :categoryName")
+				.setParameter("categoryName", categoryName)
+				.getResultList();
 		
 		if (!results.isEmpty()) {
 			
@@ -70,17 +73,20 @@ public class CategoryDaoJpaImpl extends JpaDaoSupport implements CategoryDao {
 	}
 
 	public Category getCategory(Integer categoryId) throws DaoException {
-
-		return this.getJpaTemplate().find(Category.class, categoryId);
+		
+		return DaoResources.getInstance().getEntityManager().find(
+				Category.class, categoryId);
 	}
 
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Category> getCategoryVolumes() throws DaoException {
 		
-		List<Category> results = this.getJpaTemplate().find(
+		EntityManager em = DaoResources.getInstance().getEntityManager();
+		
+		List<Category> results = em.createQuery(
 				"SELECT DISTINCT c FROM Category c LEFT JOIN FETCH c.volumes v " +
-				"ORDER BY v.volumeName");
+				"ORDER BY v.volumeName").getResultList();
 		
 		return results;
 	}
@@ -89,8 +95,11 @@ public class CategoryDaoJpaImpl extends JpaDaoSupport implements CategoryDao {
 	@Override
 	public List<Category> getCategories() throws DaoException {
 		
-		List<Category> results = this.getJpaTemplate().find(
-				"SELECT c FROM Category c ORDER BY c.categoryName");
+		EntityManager em = DaoResources.getInstance().getEntityManager();
+		
+		List<Category> results = em.createQuery(
+				"SELECT c FROM Category c ORDER BY c.categoryName")
+				.getResultList();
 		
 		return results;
 	}
@@ -99,128 +108,44 @@ public class CategoryDaoJpaImpl extends JpaDaoSupport implements CategoryDao {
 	@Override
 	public void deleteCategory(Category category) throws DaoException {
 
-		try {
-			this.getJpaTemplate().execute(new DeleteCategoryCallback(category),true);
-			
-		} catch (Exception e) {
-			
-			log.error("Could not delete category " + category);
-			throw new DaoException(e);
+		EntityManager em = DaoResources.getInstance().getEntityManager();
+		
+		if (!em.getTransaction().isActive()) {
+			em.getTransaction().begin();
 		}
 		
+		try {
+			Category deletedCategory = em.find(Category.class, category.getCategoryId());
+			em.remove(deletedCategory);
+			em.flush();
+			em.getTransaction().commit();
+			
+		} catch (Exception e) {
+			log.error("Could not delete Category. " + e.getMessage());
+			em.getTransaction().rollback();
+			throw new DaoException(e);
+		}
 	}
 	
 	@Override
 	public void updateCategory(Category category) throws DaoException {
 		
+		EntityManager em = DaoResources.getInstance().getEntityManager();
+		
+		if (!em.getTransaction().isActive()) {
+			em.getTransaction().begin();
+		}
+		
 		try {
-			this.getJpaTemplate().execute(new UpdateCategoryCallback(category),true);
+			category = em.merge(category);
+			em.flush();
+			em.getTransaction().commit();
 			
 		} catch (Exception e) {
-			
-			log.error("Could not update category " + category);
+			log.error("Could not update Category. " + e.getClass().getName());
+			em.getTransaction().rollback();
 			throw new DaoException(e);
 		}
-		
 	}
-	
-	
-	public class DeleteCategoryCallback implements JpaCallback {
-		
-		private Category category;		
-
-		public DeleteCategoryCallback(Category category) {
-			this.category = category;
-		}
-
-		@Override
-		public Object doInJpa(EntityManager em) throws PersistenceException {
-			
-			if (!em.getTransaction().isActive()) {
-				em.getTransaction().begin();
-			}
-			
-			try {
-				this.category = em.merge(category);
-				em.remove(category);
-				em.flush();
-				em.getTransaction().commit();
-				
-			} catch (Exception e) {
-				log.error("Could not delete Category. " + e.getMessage());
-				em.getTransaction().rollback();
-				throw new PersistenceException(e);
-			}
-			
-			return null;
-		}		
-	}
-	
-	public class CreateCategoryCallback implements JpaCallback {
-		
-		private Category category;		
-
-		public CreateCategoryCallback(Category category) {
-			this.category = category;
-		}
-
-		@Override
-		public Object doInJpa(EntityManager em) throws PersistenceException {
-			
-			if (!em.getTransaction().isActive()) {
-				em.getTransaction().begin();
-			}
-			
-			try {
-				em.persist(category);
-				em.flush();
-				em.getTransaction().commit();
-				
-			} catch (EntityExistsException e) {
-				log.error("Category already exists. Could not create category. " + e.getMessage());
-				em.getTransaction().rollback();
-				throw new DuplicateNameException("Category already exists.", e);
-				
-			} catch (Exception e) {
-				log.error("Could not create Category. " + e.getMessage());
-				em.getTransaction().rollback();
-				throw new PersistenceException(e);
-			}
-			
-			return category;
-		}		
-	}
-	
-	
-	public class UpdateCategoryCallback implements JpaCallback {
-		
-		private Category category;		
-
-		public UpdateCategoryCallback(Category category) {
-			this.category = category;
-		}
-
-		@Override
-		public Object doInJpa(EntityManager em) throws PersistenceException {
-			
-			if (!em.getTransaction().isActive()) {
-				em.getTransaction().begin();
-			}
-			
-			try {
-				this.category = em.merge(category);
-				em.flush();
-				em.getTransaction().commit();
-				
-			} catch (Exception e) {
-				log.error("Could not update Category. " + e.getClass().getName());
-				em.getTransaction().rollback();
-				throw new PersistenceException(e);
-			}
-			
-			return this.category;
-		}		
-	}
-
 
 }
