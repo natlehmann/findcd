@@ -25,5 +25,7 @@ public interface CdCatalogueViewObserver {
 	
 	void fireDeleteVolume(String volumeName);
 	void fireDeleteCategory(String categoryName);
+	
+	void fireShutDownApp();
 
 }
