@@ -40,6 +40,7 @@ import ar.com.natlehmann.cdcatalogue.view.action.SearchCommand;
 import ar.com.natlehmann.cdcatalogue.view.dataModel.ResourceResultsTableModel;
 import ar.com.natlehmann.cdcatalogue.view.dataModel.VolumeTree;
 import ar.com.natlehmann.cdcatalogue.view.dataModel.VolumeTreeBuilder;
+import ar.com.natlehmann.cdcatalogue.view.listener.ShutDownAppListener;
 import ar.com.natlehmann.cdcatalogue.view.lookandfeel.FontFactory;
 
 public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFacade {
@@ -109,7 +110,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 	
 	public CdCatalogueMainWindow() {
 		super("Cd Catalogue");
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);		
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);	
 	}
 	
 	public void setModelFacade(CdCatalogueModelFacade modelFacade) {
@@ -163,6 +164,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 		this.getResultsTopPanel().add(this.getLblNumberOfResults());
 		
 		
+		this.addWindowListener(new ShutDownAppListener(this));
 		this.setSize(1100,700);
 		this.setVisible(true);
 	}
