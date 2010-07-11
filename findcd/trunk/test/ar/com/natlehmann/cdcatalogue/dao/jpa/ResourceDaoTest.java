@@ -1,5 +1,10 @@
 package ar.com.natlehmann.cdcatalogue.dao.jpa;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
@@ -17,7 +22,6 @@ import ar.com.natlehmann.cdcatalogue.dao.OrderBy;
 import ar.com.natlehmann.cdcatalogue.dao.OrderField;
 import ar.com.natlehmann.cdcatalogue.dao.Page;
 import ar.com.natlehmann.cdcatalogue.dao.Parameter;
-import ar.com.natlehmann.cdcatalogue.dao.ResourceDao;
 import ar.com.natlehmann.cdcatalogue.dao.SearchField;
 import ar.com.natlehmann.cdcatalogue.dao.OrderBy.Direction;
 
@@ -28,16 +32,8 @@ import ar.com.natlehmann.cdcatalogue.dao.OrderBy.Direction;
  */
 public class ResourceDaoTest extends DaoBaseTest {
 	
-	private ResourceDao resourceDao;
-
 	@SuppressWarnings("unused")
 	private static Log log = LogFactory.getLog(ResourceDaoTest.class);
-	
-	
-	
-	public void setResourceDao(ResourceDao resourceDao) {
-		this.resourceDao = resourceDao;
-	}
 
 	
 	@Test
@@ -51,7 +47,7 @@ public class ResourceDaoTest extends DaoBaseTest {
 		parameters.add(new Parameter(SearchField.RESOURCE_PATH, this.resource.getPath()));
 		parameters.add(new Parameter(SearchField.RESOURCE_TYPE, this.resource.getResourceType()));
 		
-		List<Resource> results = this.resourceDao.getResources(parameters);
+		List<Resource> results = this.getResourceDao().getResources(parameters);
 		
 		assertNotNull("Resultados nulos", results);
 		assertFalse("No hay resultados", results.isEmpty());
@@ -74,7 +70,7 @@ public class ResourceDaoTest extends DaoBaseTest {
 		parameters.add(new Parameter(SearchField.RESOURCE_PATH, "es/el/path"));
 		parameters.add(new Parameter(SearchField.RESOURCE_TYPE, "type"));
 		
-		List<Resource> results = this.resourceDao.getResources(parameters);
+		List<Resource> results = this.getResourceDao().getResources(parameters);
 		
 		assertNotNull("Resultados nulos", results);
 		assertFalse("No hay ningun resultado", results.isEmpty());
@@ -103,14 +99,14 @@ public class ResourceDaoTest extends DaoBaseTest {
 		List<Parameter> parameters = new LinkedList<Parameter>();
 		parameters.add(new Parameter(SearchField.CATEGORY_NAME, "otroNombre"));
 		
-		List<Resource> results = this.resourceDao.getResources(parameters);
+		List<Resource> results = this.getResourceDao().getResources(parameters);
 		
 		assertNotNull("Resultados nulos", results);
 		assertTrue("Hay resultados invalidos", results.isEmpty());
 		
 		parameters = new LinkedList<Parameter>();
 		parameters.add(new Parameter(SearchField.CATEGORY_NAME, "CategoriaPrueba"));
-		results = this.resourceDao.getResources(parameters);
+		results = this.getResourceDao().getResources(parameters);
 		
 		assertNotNull("Resultados nulos", results);
 		assertFalse("No hay ningun resultado", results.isEmpty());
@@ -124,14 +120,14 @@ public class ResourceDaoTest extends DaoBaseTest {
 		List<Parameter> parameters = new LinkedList<Parameter>();
 		parameters.add(new Parameter(SearchField.RESOURCE_NAME, "otroNombre"));
 		
-		List<Resource> results = this.resourceDao.getResources(parameters);
+		List<Resource> results = this.getResourceDao().getResources(parameters);
 		
 		assertNotNull("Resultados nulos", results);
 		assertTrue("Hay resultados invalidos", results.isEmpty());
 		
 		parameters = new LinkedList<Parameter>();
 		parameters.add(new Parameter(SearchField.RESOURCE_NAME, "ResourcePrueba"));
-		results = this.resourceDao.getResources(parameters);
+		results = this.getResourceDao().getResources(parameters);
 		
 		assertNotNull("Resultados nulos", results);
 		assertFalse("No hay ningun resultado", results.isEmpty());
@@ -152,14 +148,14 @@ public class ResourceDaoTest extends DaoBaseTest {
 		List<Parameter> parameters = new LinkedList<Parameter>();
 		parameters.add(new Parameter(SearchField.RESOURCE_MODIFIED_DATE_FROM, futuro));
 		
-		List<Resource> results = this.resourceDao.getResources(parameters);
+		List<Resource> results = this.getResourceDao().getResources(parameters);
 		
 		assertNotNull("Resultados nulos", results);
 		assertTrue("Hay resultados invalidos", results.isEmpty());
 		
 		parameters = new LinkedList<Parameter>();
 		parameters.add(new Parameter(SearchField.RESOURCE_MODIFIED_DATE_FROM, date));
-		results = this.resourceDao.getResources(parameters);
+		results = this.getResourceDao().getResources(parameters);
 		
 		assertNotNull("Resultados nulos", results);
 		assertFalse("No hay ningun resultado", results.isEmpty());
@@ -182,7 +178,7 @@ public class ResourceDaoTest extends DaoBaseTest {
 		parameters.add(new Parameter(SearchField.RESOURCE_MODIFIED_DATE_TO, past));
 		parameters.add(new Parameter(SearchField.RESOURCE_MODIFIED_DATE_FROM, date));
 		
-		List<Resource> results = this.resourceDao.getResources(parameters);
+		List<Resource> results = this.getResourceDao().getResources(parameters);
 		
 		assertNotNull("Resultados nulos", results);
 		assertTrue("Hay resultados invalidos", results.isEmpty());
@@ -191,7 +187,7 @@ public class ResourceDaoTest extends DaoBaseTest {
 		parameters.add(new Parameter(SearchField.RESOURCE_MODIFIED_DATE_TO, date));
 		parameters.add(new Parameter(SearchField.RESOURCE_MODIFIED_DATE_FROM, new Date(0)));
 		
-		results = this.resourceDao.getResources(parameters);
+		results = this.getResourceDao().getResources(parameters);
 		
 		assertNotNull("Resultados nulos", results);
 		assertFalse("No hay ningun resultado", results.isEmpty());
@@ -206,7 +202,7 @@ public class ResourceDaoTest extends DaoBaseTest {
 		List<Parameter> parameters = new LinkedList<Parameter>();
 		parameters.add(new Parameter(SearchField.CATEGORY_NAME, "prueba"));
 		
-		List<Resource> results = this.resourceDao.getResources(parameters, new OrderBy(
+		List<Resource> results = this.getResourceDao().getResources(parameters, new OrderBy(
 				OrderField.CATEGORY_NAME, Direction.ASC), new Page(1));
 		
 		assertNotNull("Resultados nulos", results);
@@ -216,7 +212,7 @@ public class ResourceDaoTest extends DaoBaseTest {
 				this.getIndexFromName(results, this.resource) < 
 				this.getIndexFromName(results, this.otherResource));
 		
-		results = this.resourceDao.getResources(parameters, new OrderBy(
+		results = this.getResourceDao().getResources(parameters, new OrderBy(
 				OrderField.CATEGORY_NAME, Direction.DESC), new Page(1));
 		
 		assertTrue("El ordenamiento no es valido", 
@@ -248,14 +244,14 @@ public class ResourceDaoTest extends DaoBaseTest {
 		List<Parameter> parameters = new LinkedList<Parameter>();
 		parameters.add(new Parameter(SearchField.CATEGORY_NAME, "prueba"));
 		
-		List<Resource> results = this.resourceDao.getResources(parameters, new OrderBy(
+		List<Resource> results = this.getResourceDao().getResources(parameters, new OrderBy(
 				OrderField.VOLUME_NAME, Direction.ASC), new Page(1));
 		
 		assertTrue("El ordenamiento no es valido", 
 				this.getIndexFromName(results, this.resource) 
 				< this.getIndexFromName(results, this.otherResource));
 		
-		results = this.resourceDao.getResources(parameters, new OrderBy(
+		results = this.getResourceDao().getResources(parameters, new OrderBy(
 				OrderField.VOLUME_NAME, Direction.DESC), new Page(1));
 		
 		assertTrue("El ordenamiento no es valido", 
@@ -271,14 +267,14 @@ public class ResourceDaoTest extends DaoBaseTest {
 		List<Parameter> parameters = new LinkedList<Parameter>();
 		parameters.add(new Parameter(SearchField.CATEGORY_NAME, "prueba"));
 		
-		List<Resource> results = this.resourceDao.getResources(parameters, new OrderBy(
+		List<Resource> results = this.getResourceDao().getResources(parameters, new OrderBy(
 				OrderField.RESOURCE_NAME, Direction.ASC), new Page(1));
 		
 		assertTrue("El ordenamiento no es valido", 
 				this.getIndexFromName(results, this.resource) 
 				< this.getIndexFromName(results, this.otherResource));
 		
-		results = this.resourceDao.getResources(parameters, new OrderBy(
+		results = this.getResourceDao().getResources(parameters, new OrderBy(
 				OrderField.RESOURCE_NAME, Direction.DESC), new Page(1));
 		
 		assertTrue("El ordenamiento no es valido", 
@@ -294,14 +290,14 @@ public class ResourceDaoTest extends DaoBaseTest {
 		List<Parameter> parameters = new LinkedList<Parameter>();
 		parameters.add(new Parameter(SearchField.CATEGORY_NAME, "prueba"));
 		
-		List<Resource> results = this.resourceDao.getResources(parameters, new OrderBy(
+		List<Resource> results = this.getResourceDao().getResources(parameters, new OrderBy(
 				OrderField.RESOURCE_PATH, Direction.ASC), new Page(1));
 		
 		assertTrue("El ordenamiento no es valido", 
 				this.getIndexFromName(results, this.resource) 
 				< this.getIndexFromName(results, this.otherResource));
 		
-		results = this.resourceDao.getResources(parameters, new OrderBy(
+		results = this.getResourceDao().getResources(parameters, new OrderBy(
 				OrderField.RESOURCE_PATH, Direction.DESC), new Page(1));
 		
 		assertTrue("El ordenamiento no es valido", 
@@ -317,14 +313,14 @@ public class ResourceDaoTest extends DaoBaseTest {
 		List<Parameter> parameters = new LinkedList<Parameter>();
 		parameters.add(new Parameter(SearchField.CATEGORY_NAME, "prueba"));
 		
-		List<Resource> results = this.resourceDao.getResources(parameters, new OrderBy(
+		List<Resource> results = this.getResourceDao().getResources(parameters, new OrderBy(
 				OrderField.RESOURCE_TYPE, Direction.ASC), new Page(1));
 		
 		assertTrue("El ordenamiento no es valido", 
 				this.getIndexFromName(results, this.resource) 
 				< this.getIndexFromName(results, this.otherResource));
 		
-		results = this.resourceDao.getResources(parameters, new OrderBy(
+		results = this.getResourceDao().getResources(parameters, new OrderBy(
 				OrderField.RESOURCE_TYPE, Direction.DESC), new Page(1));
 		
 		assertTrue("El ordenamiento no es valido", 
@@ -340,7 +336,7 @@ public class ResourceDaoTest extends DaoBaseTest {
 		List<Parameter> parameters = new LinkedList<Parameter>();
 		parameters.add(new Parameter(SearchField.CATEGORY_NAME, "prueba"));
 		
-		List<Resource> results = this.resourceDao.getResources(parameters, new OrderBy(
+		List<Resource> results = this.getResourceDao().getResources(parameters, new OrderBy(
 				OrderField.RESOURCE_MODIFIED_DATE, Direction.ASC), new Page(1));
 		
 		assertNotNull("Resultados nulos", results);
@@ -350,7 +346,7 @@ public class ResourceDaoTest extends DaoBaseTest {
 				this.getIndexFromName(results, this.resource) 
 				< this.getIndexFromName(results, this.otherResource));
 		
-		results = this.resourceDao.getResources(parameters, new OrderBy(
+		results = this.getResourceDao().getResources(parameters, new OrderBy(
 				OrderField.RESOURCE_MODIFIED_DATE, Direction.DESC), new Page(1));
 		
 		assertTrue("El ordenamiento no es valido", 
