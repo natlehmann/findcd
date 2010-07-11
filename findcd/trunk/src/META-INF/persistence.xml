@@ -1,8 +1,25 @@
-<persistence xmlns="http://java.sun.com/xml/ns/persistence"
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
-        version="1.0">
-        
+<persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://java.sun.com/xml/ns/persistence
+    http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
+    
+    
 	<persistence-unit name="CdCatalogueJpa" transaction-type="RESOURCE_LOCAL">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+		
+		<class>ar.com.natlehmann.cdcatalogue.business.model.Category</class>
+	    <class>ar.com.natlehmann.cdcatalogue.business.model.Resource</class>
+	    <class>ar.com.natlehmann.cdcatalogue.business.model.Volume</class>
+	    
+		<exclude-unlisted-classes>false</exclude-unlisted-classes>
+		
+		<properties>
+			<property name="hibernate.connection.username" value="cdcatalogue"/>
+			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+			<property name="hibernate.connection.password" value="cdcatalogue"/>
+			<property name="hibernate.connection.url" value="jdbc:mysql://localhost/cdcatalogue"/>
+			<property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+		</properties>
+		
 	</persistence-unit>
 </persistence>
