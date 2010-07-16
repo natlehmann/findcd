@@ -21,5 +21,7 @@ public interface CdCatalogueModelFacade {
 	List<Category> getCategories();
 	
 	List<Volume> getVolumesByCategory(Category category);
+	
+	void addObserver(CdCatalogueModelObserver observer);
 
 }
