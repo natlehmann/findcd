@@ -10,6 +10,8 @@ public class Configuration {
 	
 	public static final String DATE_FORMAT = "dd/MM/yyyy";
 	
+	public static final String DEFAULT_CATEGORY_NAME = "-- unset --";
+	
 	
 	public static Date getStringAsDate(String date) throws ParseException {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT);
