@@ -8,22 +8,18 @@ public class DuplicateNameException extends PersistenceException {
 
 	public DuplicateNameException() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	public DuplicateNameException(String message, Throwable cause) {
 		super(message, cause);
-		// TODO Auto-generated constructor stub
 	}
 
 	public DuplicateNameException(String message) {
 		super(message);
-		// TODO Auto-generated constructor stub
 	}
 
 	public DuplicateNameException(Throwable cause) {
 		super(cause);
-		// TODO Auto-generated constructor stub
 	}
 
 	
