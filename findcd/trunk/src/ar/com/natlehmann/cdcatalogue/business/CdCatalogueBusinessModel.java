@@ -10,18 +10,20 @@ import ar.com.natlehmann.cdcatalogue.business.model.Volume;
 public interface CdCatalogueBusinessModel extends CdCatalogueModelFacade {
 	
 	Category findCategory(String categoryName);
-
-	void saveCategory(Category category) throws CdCatalogueException;
-	
+	Category saveCategory(Category category) throws CdCatalogueException;	
 	void deleteCategory(Category category) throws CdCatalogueException;
+	void updateCategory(Category category) throws CdCatalogueException;
+	Category getDefaultCategory();
 	
 	void catalogue(File path, Category category, String volumeName) throws CdCatalogueException;
-
-	void updateCategory(Category category) throws CdCatalogueException;
+	
+	Volume findVolume(String volumeName);
 	void updateVolume(Volume volume) throws CdCatalogueException;
 	void updateVolumes(List<Volume> volumes) throws CdCatalogueException;
+	void deleteVolume(Volume volume) throws CdCatalogueException;
 
 	void shutDownApp();
+
 	
 
 }
