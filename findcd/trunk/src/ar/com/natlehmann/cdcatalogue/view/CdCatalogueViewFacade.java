@@ -11,10 +11,8 @@ public interface CdCatalogueViewFacade {
 	
 	void init();
 	
-	List<Parameter> getSearchValues();
-	
-	OrderBy getOrderByField();
-	
+	List<Parameter> getSearchValues();	
+	OrderBy getOrderByField();	
 	Page getCurrentPage();
 	
 	void refreshResults();
@@ -38,21 +36,13 @@ public interface CdCatalogueViewFacade {
 	
 	void setViewObserver(CdCatalogueViewObserver viewObserver);
 	CdCatalogueViewObserver getViewObserver();
-
-	void addCategoryItem(Category newCategory);
-	void addVolumeTreeNode(Category category, String volumeName);
-	void mergeCategories(Category oldCategory, Category existentCategory);
-	void refreshCategory(String oldCategoryName, String newCategoryName);
 	
 	void closeDialogues();
 
 	boolean isConfirmed(String message);
 
 	void showEditCategoryDialog(String categoryName);
-
-
-
-
+	void showEditVolumeDialog(String volumeName, Category category);
 
 
 }
