@@ -22,6 +22,7 @@ public interface CdCatalogueViewObserver {
 	void fireLaunchEditVolume(String volumeName);	
 	void fireLaunchEditCategory(String categoryName);
 	void fireEditCategory(String categoryName, CdCatalogueViewFacade view);
+	void fireEditVolume(String volumeName, Category category);
 	
 	void fireDeleteVolume(String volumeName);
 	void fireDeleteCategory(String categoryName);
