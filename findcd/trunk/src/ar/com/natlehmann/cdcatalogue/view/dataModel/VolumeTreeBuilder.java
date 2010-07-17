@@ -103,13 +103,13 @@ public class VolumeTreeBuilder {
 		DefaultMutableTreeNode categoryNode = findCategoryNode(volumeTree, categoryName);		
 		addNode(volumeTree, categoryNode, newVolumeName);
 		
-		DefaultMutableTreeNode newNode = findNode(volumeTree, categoryNode, newVolumeName);
+		DefaultMutableTreeNode newNode = findVolumeNode(volumeTree, categoryNode, newVolumeName);
 		scrollToNode(volumeTree, newNode);
 		
 	}
 	
 	
-	private static DefaultMutableTreeNode findNode(JTree volumeTree, 
+	private static DefaultMutableTreeNode findVolumeNode(JTree volumeTree, 
 			DefaultMutableTreeNode parentNode, String nodeName) {
 		
 		DefaultTreeModel treeModel = (DefaultTreeModel)volumeTree.getModel();
@@ -139,7 +139,7 @@ public class VolumeTreeBuilder {
 			String categoryName) {
 		
 		DefaultMutableTreeNode root = (DefaultMutableTreeNode)volumeTree.getModel().getRoot();
-		return findNode(volumeTree, root, categoryName);
+		return findVolumeNode(volumeTree, root, categoryName);
 	}
 
 	
@@ -215,6 +215,50 @@ public class VolumeTreeBuilder {
 		treeModel.removeNodeFromParent(oldCategoryNode);
 		
 		scrollToNode(volumeTree, newCategoryNode);
+		
+	}
+
+	public static void removeNode(VolumeTree volumeTree, String nodeName) {
+		
+		DefaultMutableTreeNode node = findCategoryNode(volumeTree, nodeName);
+		
+		DefaultTreeModel treeModel = (DefaultTreeModel)volumeTree.getModel();
+		treeModel.removeNodeFromParent(node);
+		
+		scrollToNode(volumeTree, (DefaultMutableTreeNode)treeModel.getRoot());
+		
+	}
+
+	public static void removeNode(VolumeTree volumeTree, String nodeName,
+			String parentNodeName) {
+		
+		DefaultMutableTreeNode categoryNode = findCategoryNode(volumeTree, parentNodeName);
+		DefaultMutableTreeNode node = findVolumeNode(volumeTree, categoryNode, nodeName);
+		
+		DefaultTreeModel treeModel = (DefaultTreeModel)volumeTree.getModel();
+		treeModel.removeNodeFromParent(node);
+		
+		scrollToNode(volumeTree, categoryNode);
+		
+	}
+
+	public static void selectVolume(JTree volumeTree, Volume volume) {
+		
+		DefaultMutableTreeNode categoryNode = findCategoryNode(
+				volumeTree, volume.getCategory().getCategoryName());
+		
+		DefaultMutableTreeNode node = findVolumeNode(
+				volumeTree, categoryNode, volume.getVolumeName());
+		
+		scrollToNode(volumeTree, node);
+	}
+
+	public static void selectCategory(VolumeTree volumeTree, Category category) {
+		
+		DefaultMutableTreeNode categoryNode = findCategoryNode(
+				volumeTree, category.getCategoryName());
+		
+		scrollToNode(volumeTree, categoryNode);
 		
 	}
 
