@@ -15,6 +15,7 @@ import javax.swing.JTextField;
 
 import ar.com.natlehmann.cdcatalogue.view.action.CloseWindowCommand;
 import ar.com.natlehmann.cdcatalogue.view.lookandfeel.FontFactory;
+import ar.com.natlehmann.cdcatalogue.view.lookandfeel.GraphicElementFactory;
 import ar.com.natlehmann.cdcatalogue.view.lookandfeel.LabelFactory;
 
 public class EditCategoryDialog extends JDialog {
@@ -71,7 +72,7 @@ public class EditCategoryDialog extends JDialog {
 	
 	public JPanel getCategoryPanel() {
 		if (this.categoryPanel == null){
-			this.categoryPanel = new JPanel();
+			this.categoryPanel = GraphicElementFactory.getJPanel();
 			this.categoryPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 			
 			this.categoryPanel.add(LabelFactory.getCreateCatalogueLabel("Category:"));
@@ -83,7 +84,7 @@ public class EditCategoryDialog extends JDialog {
 	
 	public JPanel getTopPanel() {
 		if (this.topPanel == null) {
-			this.topPanel = new JPanel();
+			this.topPanel = GraphicElementFactory.getJPanel();
 			this.topPanel.setLayout(new GridLayout(1,1));
 		}
 		return topPanel;
@@ -95,7 +96,7 @@ public class EditCategoryDialog extends JDialog {
 	
 	public JPanel getCentralPanel() {
 		if (this.centralPanel == null) {
-			this.centralPanel = new JPanel();
+			this.centralPanel = GraphicElementFactory.getJPanel();
 			this.centralPanel.setLayout(new GridLayout(4,1));
 		}
 		return centralPanel;
@@ -107,7 +108,7 @@ public class EditCategoryDialog extends JDialog {
 	
 	public JPanel getButtonPanel() {
 		if (this.buttonPanel == null) {
-			this.buttonPanel = new JPanel();
+			this.buttonPanel = GraphicElementFactory.getJPanel();
 			this.buttonPanel.setLayout(new FlowLayout());
 		}
 		return buttonPanel;
