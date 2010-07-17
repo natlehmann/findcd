@@ -232,6 +232,9 @@ public class VolumeDaoJpaImpl implements VolumeDao {
 			em.flush();
 			em.getTransaction().commit();
 			
+		} catch (EntityExistsException e) {
+			throw new DuplicateNameException("Volume name already exists");
+			
 		} catch (Exception e) {
 			log.error("Could not update Volume. " + e.getMessage());
 			em.getTransaction().rollback();
