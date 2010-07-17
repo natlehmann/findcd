@@ -26,13 +26,16 @@ public class VolumeTreeSelectionListener implements TreeSelectionListener {
 			
 			viewFacade.clearMessages();
 			
-			if (node.getParent() != null && node.getParent().equals(tree.getModel().getRoot())) {
-				viewFacade.filterResultsByCategoryName(node.getUserObject().toString());
+			if (node.getParent() != null) {
 				
-			} else {
-				viewFacade.filterResultsByVolumeCategory(
-						((DefaultMutableTreeNode)node.getParent()).getUserObject().toString(), 
-						node.getUserObject().toString());
+				if (node.getParent().equals(tree.getModel().getRoot())) {
+					viewFacade.filterResultsByCategoryName(node.getUserObject().toString());
+					
+				} else {
+					viewFacade.filterResultsByVolumeCategory(
+							((DefaultMutableTreeNode)node.getParent()).getUserObject().toString(), 
+							node.getUserObject().toString());
+				}
 			}
 		}
 	}
