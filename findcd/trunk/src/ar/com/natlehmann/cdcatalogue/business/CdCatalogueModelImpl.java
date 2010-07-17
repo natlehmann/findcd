@@ -10,12 +10,21 @@ import java.util.Queue;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import ar.com.natlehmann.cdcatalogue.Configuration;
 import ar.com.natlehmann.cdcatalogue.business.exception.CdCatalogueException;
 import ar.com.natlehmann.cdcatalogue.business.exception.DuplicateNameException;
 import ar.com.natlehmann.cdcatalogue.business.exception.InvalidNameException;
 import ar.com.natlehmann.cdcatalogue.business.model.Category;
 import ar.com.natlehmann.cdcatalogue.business.model.Resource;
 import ar.com.natlehmann.cdcatalogue.business.model.Volume;
+import ar.com.natlehmann.cdcatalogue.business.notification.CategoryDeletedNotification;
+import ar.com.natlehmann.cdcatalogue.business.notification.CategoryUpdatedNotification;
+import ar.com.natlehmann.cdcatalogue.business.notification.NewCategoryNotification;
+import ar.com.natlehmann.cdcatalogue.business.notification.NewVolumeNotification;
+import ar.com.natlehmann.cdcatalogue.business.notification.NotificationCommand;
+import ar.com.natlehmann.cdcatalogue.business.notification.VolumeDeletedNotification;
+import ar.com.natlehmann.cdcatalogue.business.notification.VolumeUpdatedNotification;
+import ar.com.natlehmann.cdcatalogue.business.notification.VolumesUpdatedNotification;
 import ar.com.natlehmann.cdcatalogue.dao.CategoryDao;
 import ar.com.natlehmann.cdcatalogue.dao.DaoException;
 import ar.com.natlehmann.cdcatalogue.dao.OrderBy;
@@ -32,7 +41,12 @@ public class CdCatalogueModelImpl implements CdCatalogueBusinessModel {
 	private VolumeDao volumeDao;
 	private ResourceDao resourceDao;
 	private CategoryDao categoryDao;
+
+	private List<CdCatalogueModelObserver> observers = new LinkedList<CdCatalogueModelObserver>();
 	
+	public void addObserver(CdCatalogueModelObserver observer) {
+		this.observers.add(observer);
+	}
 
 	public VolumeDao getVolumeDao() {
 		return volumeDao;
@@ -111,9 +125,8 @@ public class CdCatalogueModelImpl implements CdCatalogueBusinessModel {
 		try {
 			categories = this.categoryDao.getCategories();
 			
-			if (categories.isEmpty()) {
-				this.saveCategory(new Category("-- unset --"));
-				categories = this.categoryDao.getCategories();
+			if (categories.isEmpty()) {				
+				categories.add(this.getDefaultCategory());
 			}
 		
 		} catch (Exception e) {
@@ -151,10 +164,11 @@ public class CdCatalogueModelImpl implements CdCatalogueBusinessModel {
 	}
 
 	@Override
-	public void saveCategory(Category category) throws CdCatalogueException {
+	public Category saveCategory(Category category) throws CdCatalogueException {
 		
 		try {
-			this.categoryDao.createCategory(category);
+			category = this.categoryDao.createCategory(category);
+			this.notifyObservers(new NewCategoryNotification(category));
 		
 		} catch (DuplicateNameException e) {
 			throw new InvalidNameException("Category name not allowed.",e);
@@ -163,8 +177,18 @@ public class CdCatalogueModelImpl implements CdCatalogueBusinessModel {
 			throw new CdCatalogueException("Could not save category " + category, e);
 		}
 		
+		return category;
+		
 	}
 	
+	private void notifyObservers(NotificationCommand<? extends Object> notificationCommand) {		
+		notificationCommand.sendNotification(this.getObservers());
+	}
+
+	private List<CdCatalogueModelObserver> getObservers() {
+		return this.observers;
+	}
+
 	public void catalogue(File path, Category category, String volumeName) 
 	throws CdCatalogueException {
 		
@@ -181,6 +205,8 @@ public class CdCatalogueModelImpl implements CdCatalogueBusinessModel {
 			
 			this.volumeDao.createVolume(volume);
 			
+			this.notifyObservers(new NewVolumeNotification(volume));
+			
 			
 		} catch (DaoException e) {
 			throw new CdCatalogueException("Could not catalogue path.", e);
@@ -188,7 +214,7 @@ public class CdCatalogueModelImpl implements CdCatalogueBusinessModel {
 	}
 	
 
-	public void catalogue(File path, Volume volume) {
+	private void catalogue(File path, Volume volume) {
 		
 		Queue<File> cola = new LinkedList<File>();
 		cola.add(path);
@@ -275,6 +301,8 @@ public class CdCatalogueModelImpl implements CdCatalogueBusinessModel {
 		
 		try {
 			categoryDao.deleteCategory(category);
+			this.notifyObservers(
+					new CategoryDeletedNotification(category));
 			
 		} catch (DaoException e) {
 			throw new CdCatalogueException("Could not delete category.", e);
@@ -287,6 +315,7 @@ public class CdCatalogueModelImpl implements CdCatalogueBusinessModel {
 		
 		try {
 			categoryDao.updateCategory(category);
+			this.notifyObservers(new CategoryUpdatedNotification(category));
 						
 		} catch (DaoException e) {
 			throw new CdCatalogueException("Could not update category.", e);
@@ -299,6 +328,10 @@ public class CdCatalogueModelImpl implements CdCatalogueBusinessModel {
 		
 		try {
 			volumeDao.updateVolume(volume);
+			this.notifyObservers(new VolumeUpdatedNotification(volume));
+			
+		} catch (DuplicateNameException e) {
+			throw new InvalidNameException("Category name not allowed.",e);
 			
 		} catch (DaoException e) {
 			throw new CdCatalogueException("Could not update volume.", e);
@@ -311,6 +344,7 @@ public class CdCatalogueModelImpl implements CdCatalogueBusinessModel {
 		
 		try {
 			volumeDao.updateVolumes(volumes);
+			this.notifyObservers(new VolumesUpdatedNotification(volumes));
 			
 		} catch (DaoException e) {
 			throw new CdCatalogueException("Could not update volumes.", e);
@@ -320,6 +354,54 @@ public class CdCatalogueModelImpl implements CdCatalogueBusinessModel {
 	@Override
 	public void shutDownApp() {
 		DaoResources.getInstance().shutDown();		
+	}
+
+	@Override
+	public Volume findVolume(String volumeName) {
+		
+		Volume volume = null;
+		
+		try {
+			volume = volumeDao.findVolume(volumeName);
+			
+		} catch (DaoException e) {
+			log.error("Could not find volume " + volumeName, e);
+		}
+		
+		return volume;
+	}
+
+	@Override
+	public void deleteVolume(Volume volume) throws CdCatalogueException {
+		
+		try {
+			volumeDao.deleteVolume(volume);
+			this.notifyObservers(new VolumeDeletedNotification(volume));
+			
+		} catch (DaoException e) {
+			throw new CdCatalogueException("Could not delete volume.", e);
+		}
+		
+	}
+
+	@Override
+	public Category getDefaultCategory() {
+		
+		Category defaultCategory = null;		
+			
+		try {		
+			defaultCategory = this.categoryDao.findCategory(Configuration.DEFAULT_CATEGORY_NAME);
+			
+			if (defaultCategory == null) {
+				defaultCategory = this.saveCategory(
+						new Category(Configuration.DEFAULT_CATEGORY_NAME));				
+			}
+			
+		} catch (Exception e) {
+			log.error("Could not create default category.", e);
+		}
+		
+		return defaultCategory;
 	}
 
 }
