@@ -11,8 +11,6 @@
 	    <class>ar.com.natlehmann.cdcatalogue.business.model.Resource</class>
 	    <class>ar.com.natlehmann.cdcatalogue.business.model.Volume</class>
 	    
-		<exclude-unlisted-classes>false</exclude-unlisted-classes>
-		
 		<properties>
 			<property name="hibernate.connection.username" value="cdcatalogue"/>
 			<property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
