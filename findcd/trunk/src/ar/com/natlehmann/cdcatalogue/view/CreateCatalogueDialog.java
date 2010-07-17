@@ -17,9 +17,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import ar.com.natlehmann.cdcatalogue.business.model.Category;
+import ar.com.natlehmann.cdcatalogue.util.Validator;
 import ar.com.natlehmann.cdcatalogue.view.action.CloseWindowCommand;
 import ar.com.natlehmann.cdcatalogue.view.action.CreateCatalogueCommand;
 import ar.com.natlehmann.cdcatalogue.view.lookandfeel.FontFactory;
+import ar.com.natlehmann.cdcatalogue.view.lookandfeel.GraphicElementFactory;
 import ar.com.natlehmann.cdcatalogue.view.lookandfeel.LabelFactory;
 
 public class CreateCatalogueDialog extends JDialog {
@@ -50,16 +52,22 @@ public class CreateCatalogueDialog extends JDialog {
 	private JTextArea messagesArea;
 	
 	private CdCatalogueMainWindow owner;
+	
+	private Mode currentMode;
+	
+	public enum Mode {
+		CREATE, EDIT;
+	}
 
 	
-	public CreateCatalogueDialog(CdCatalogueMainWindow owner) {
+	public CreateCatalogueDialog(CdCatalogueMainWindow owner, Mode mode) {
 		super(owner, false);
 		this.owner = owner;
 		this.setTitle("Confirmation");
-		this.init();
+		this.init(mode);
 	}
 
-	private void init() {
+	private void init(Mode mode) {
 		
 		this.setLayout(new BorderLayout());
 		this.add(this.getTopPanel(), BorderLayout.NORTH);
@@ -68,9 +76,7 @@ public class CreateCatalogueDialog extends JDialog {
 		
 		this.getTopPanel().add(this.getMessagesArea());
 		
-		this.getCentralPanel().add(this.getPathPanel());
-		this.getCentralPanel().add(this.getVolumePanel());
-		this.getCentralPanel().add(this.getCategoryPanel());
+		this.buildCentralPanel(mode, null, null);
 		
 		this.getButtonPanel().add(this.getBtAccept());
 		this.getButtonPanel().add(this.getBtCancel());
@@ -79,6 +85,35 @@ public class CreateCatalogueDialog extends JDialog {
 	}
 	
 	
+	private void buildCentralPanel(Mode mode, String volumeName, Category category) {
+		
+		if (mode.equals(Mode.CREATE)) {
+			this.getCentralPanel().add(this.getPathPanel());
+		}
+		
+		this.getCentralPanel().add(this.getVolumePanel());
+		this.getCentralPanel().add(this.getCategoryPanel());
+		
+		if (Validator.isNotNull(volumeName)) {
+			this.getFdVolumeName().setText(volumeName);
+		}
+		
+		if (category != null) {
+			this.selectCategory(category);
+		}
+		
+		this.currentMode = mode;
+	}
+	
+	public void reload(Mode mode, String volumeName, Category category) {
+		this.getCentralPanel().removeAll();
+		this.buildCentralPanel(mode, volumeName, category);
+		this.getContentPane().invalidate();
+		this.getContentPane().repaint();
+		
+		this.setVisible(true);
+	}
+
 	public void show(File file) {
 		this.getFdVolumeName().setText(file.getName());
 		this.getFdSelectedPath().setText(file.getAbsolutePath());
@@ -89,7 +124,7 @@ public class CreateCatalogueDialog extends JDialog {
 	
 	public JPanel getPathPanel() {
 		if (this.pathPanel == null) {
-			this.pathPanel = new JPanel();
+			this.pathPanel = GraphicElementFactory.getJPanel();
 			this.pathPanel.setLayout(new FlowLayout(FlowLayout.LEFT));			
 			
 			this.pathPanel.add(LabelFactory.getCreateCatalogueLabel("Selected Path:"));
@@ -101,7 +136,7 @@ public class CreateCatalogueDialog extends JDialog {
 	
 	public JPanel getVolumePanel() {
 		if (this.volumePanel == null) {
-			this.volumePanel = new JPanel();
+			this.volumePanel = GraphicElementFactory.getJPanel();
 			this.volumePanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 			
 			this.volumePanel.add(LabelFactory.getCreateCatalogueLabel("Volume name:"));
@@ -112,7 +147,7 @@ public class CreateCatalogueDialog extends JDialog {
 	
 	public JPanel getCategoryPanel() {
 		if (this.categoryPanel == null){
-			this.categoryPanel = new JPanel();
+			this.categoryPanel = GraphicElementFactory.getJPanel();
 			this.categoryPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 			
 			this.categoryPanel.add(LabelFactory.getCreateCatalogueLabel("Category:"));
@@ -124,7 +159,7 @@ public class CreateCatalogueDialog extends JDialog {
 	
 	public JPanel getNewCategoryPanel() {
 		if (this.newCategoryPanel == null){
-			this.newCategoryPanel = new JPanel();
+			this.newCategoryPanel = GraphicElementFactory.getJPanel();
 			this.newCategoryPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 			
 			this.newCategoryPanel.add(LabelFactory.getCreateCatalogueLabel("Create a Category:"));
@@ -137,7 +172,7 @@ public class CreateCatalogueDialog extends JDialog {
 	
 	public JPanel getTopPanel() {
 		if (this.topPanel == null) {
-			this.topPanel = new JPanel();
+			this.topPanel = GraphicElementFactory.getJPanel();
 			this.topPanel.setLayout(new GridLayout(1,1));
 		}
 		return topPanel;
@@ -149,7 +184,7 @@ public class CreateCatalogueDialog extends JDialog {
 	
 	public JPanel getCentralPanel() {
 		if (this.centralPanel == null) {
-			this.centralPanel = new JPanel();
+			this.centralPanel = GraphicElementFactory.getJPanel();
 			this.centralPanel.setLayout(new GridLayout(4,1));
 		}
 		return centralPanel;
@@ -161,7 +196,7 @@ public class CreateCatalogueDialog extends JDialog {
 	
 	public JPanel getButtonPanel() {
 		if (this.buttonPanel == null) {
-			this.buttonPanel = new JPanel();
+			this.buttonPanel = GraphicElementFactory.getJPanel();
 			this.buttonPanel.setLayout(new FlowLayout());
 		}
 		return buttonPanel;
@@ -234,30 +269,23 @@ public class CreateCatalogueDialog extends JDialog {
 		this.selectedCategory = selectedCategory;
 	}
 	
-	public void reloadCategories(Category newCategory) {
+	public void reloadCategories() {
+	
+		this.getCategoryPanel().removeAll();
+		this.selectedCategory = null;
 		
-		boolean found = false;
-		int i = 0;
-		while (i < this.getSelectedCategory().getItemCount() && !found) {
-			
-			Category categoryFound = (Category)this.getSelectedCategory().getItemAt(i);
-			if (categoryFound.getCategoryName().compareToIgnoreCase(newCategory.getCategoryName()) > 0) {
-				
-				this.getSelectedCategory().insertItemAt(newCategory, i);
-				found = true;
-			}
-			i++;
-		}
+		this.getCategoryPanel().add(LabelFactory.getCreateCatalogueLabel("Category:"));
+		this.getCategoryPanel().add(this.getSelectedCategory());
+		this.getCategoryPanel().add(this.getBtAddCategory());
 		
-		if (!found) {
-			this.getSelectedCategory().addItem(newCategory);
-		}
-		
-		this.getSelectedCategory().setSelectedItem(newCategory);
-		
-		this.getSelectedCategory().invalidate();		
-		this.getSelectedCategory().repaint();
+		this.getContentPane().invalidate();
+		this.getContentPane().repaint();
 	}
+	
+	public void selectCategory(Category category) {
+		this.getSelectedCategory().setSelectedItem(category);
+	}
+	
 	
 	public JButton getBtAccept() {
 		if (this.btAccept == null) {
@@ -398,10 +426,17 @@ public class CreateCatalogueDialog extends JDialog {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			
-			owner.getViewObserver().fireCatalogue(
-					new File(fdSelectedPath.getText()), 
-					(Category)selectedCategory.getSelectedItem(), 
-					fdVolumeName.getText());
+			if (currentMode == Mode.CREATE) {
+				owner.getViewObserver().fireCatalogue(
+						new File(fdSelectedPath.getText()), 
+						(Category)selectedCategory.getSelectedItem(), 
+						fdVolumeName.getText());
+				
+			} else {
+				owner.getViewObserver().fireEditVolume(
+						fdVolumeName.getText(), 
+						(Category)selectedCategory.getSelectedItem());
+			}
 			
 		}
 		
