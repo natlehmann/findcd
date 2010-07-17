@@ -23,6 +23,8 @@ public class CdCatalogueControllerImpl implements CdCatalogueControllerFacade, C
 	private CdCatalogueBusinessModel modelFacade;
 
 	private String oldCategoryName;
+	private String oldVolumeName;
+
 	
 	public CdCatalogueControllerImpl() {
 	}
@@ -124,9 +126,7 @@ public class CdCatalogueControllerImpl implements CdCatalogueControllerFacade, C
 				
 				try {
 					category = new Category(categoryName);
-					modelFacade.saveCategory(category);
-					
-					view.addCategoryItem(category);
+					modelFacade.saveCategory(category);					
 					view.showSuccessMessage("The category was successfully created.");
 				
 				} catch (CdCatalogueException e) {
@@ -147,7 +147,6 @@ public class CdCatalogueControllerImpl implements CdCatalogueControllerFacade, C
 			viewFacade.closeDialogues();
 			viewFacade.cleanSearchFields();
 			viewFacade.filterResultsByVolumeCategory(category.getCategoryName(), volumeName);
-			viewFacade.addVolumeTreeNode(category, volumeName);
 			viewFacade.showSuccessMessage("The path was processed successfully.");
 
 			
@@ -166,16 +165,58 @@ public class CdCatalogueControllerImpl implements CdCatalogueControllerFacade, C
 
 	@Override
 	public void fireDeleteCategory(String categoryName) {
-		// TODO IMPLEMENTAR!!!
-		System.out.println("CdCatalogueControllerImpl.fireDeleteCategory()");
+		
+		Category category = this.modelFacade.findCategory(categoryName);
+		Category defaultCategory = this.modelFacade.getDefaultCategory();
+		
+		if (category.equals(defaultCategory)) {
+			viewFacade.showErrorMessage("You cannot delete the default category.");
+		
+		} else {
+		
+			List<Volume> volumes = this.modelFacade.getVolumesByCategory(category);		
+			
+			try {
+				
+				if (!volumes.isEmpty()) {				
+					
+					for (Volume volume : volumes) {
+						volume.setCategory(defaultCategory);
+					}
+					
+					this.modelFacade.updateVolumes(volumes);
+				}
+				
+				this.modelFacade.deleteCategory(category);			
+				viewFacade.showSuccessMessage("The category " + categoryName + " was successfully deleted.");
+				
+			} catch (CdCatalogueException e) {
+				log.error("There was an error deleting the category.", e);
+				viewFacade.showErrorMessage(
+						"There was an error deleting the category. Please try again.");
+			}
+		}
 		
 	}
 
 	@Override
 	public void fireDeleteVolume(String volumeName) {
-		// TODO IMPLEMENTAR!!!
-		System.out.println("CdCatalogueControllerImpl.fireDeleteVolume()");
 		
+		if (Validator.isNull(volumeName)) {
+			viewFacade.showErrorMessage("Volume name cannot be empty");
+		}
+		
+		try {
+			Volume volume = this.modelFacade.findVolume(volumeName);			
+			this.modelFacade.deleteVolume(volume);
+			
+			viewFacade.showSuccessMessage("The volume " + volumeName + " was successfully deleted.");
+		
+		} catch (CdCatalogueException e) {
+			log.error("There was an error deleting the volume.", e);
+			viewFacade.showErrorMessage(
+					"There was an error deleting the volume. Please try again.");
+		}
 	}
 
 	@Override
@@ -187,9 +228,10 @@ public class CdCatalogueControllerImpl implements CdCatalogueControllerFacade, C
 
 	@Override
 	public void fireLaunchEditVolume(String volumeName) {
-		// TODO IMPLEMENTAR!!!
-		System.out.println("CdCatalogueControllerImpl.fireEditVolume()");
+		this.oldVolumeName = volumeName;
 		
+		Volume volume = this.modelFacade.findVolume(volumeName);
+		this.viewFacade.showEditVolumeDialog(volumeName, volume.getCategory());
 	}
 
 	@Override
@@ -224,9 +266,7 @@ public class CdCatalogueControllerImpl implements CdCatalogueControllerFacade, C
 							this.modelFacade.updateVolumes(volumes);
 							this.modelFacade.deleteCategory(oldCategory);
 							
-							this.viewFacade.closeDialogues();
-							this.viewFacade.mergeCategories(oldCategory, existentCategory);
-							
+							this.viewFacade.closeDialogues();							
 							this.viewFacade.showSuccessMessage("Volumes were merged successfully and category " 
 									+ oldCategoryName + " was deleted.");
 						}
@@ -237,7 +277,6 @@ public class CdCatalogueControllerImpl implements CdCatalogueControllerFacade, C
 						this.modelFacade.updateCategory(oldCategory);
 
 						this.viewFacade.closeDialogues();
-						this.viewFacade.refreshCategory(oldCategoryName, categoryName);
 						this.viewFacade.showSuccessMessage("The category was successfully updated.");
 						
 					}
@@ -253,8 +292,41 @@ public class CdCatalogueControllerImpl implements CdCatalogueControllerFacade, C
 	}
 
 	@Override
+	public void fireEditVolume(String volumeName, Category category) {
+		
+		Volume volume = modelFacade.findVolume(this.oldVolumeName);
+		volume.setVolumeName(volumeName);
+		volume.setCategory(category);
+		
+		try {
+			Volume existent =  null;
+			
+			if (!volumeName.equalsIgnoreCase(this.oldVolumeName)) {
+				existent = modelFacade.findVolume(volumeName);
+			}
+			
+			if (existent == null) {
+				modelFacade.updateVolume(volume);
+				viewFacade.closeDialogues();
+				viewFacade.showSuccessMessage("The volume was updated successfully");
+				
+			} else {
+				viewFacade.showErrorMessage("Volume name is already taken. Please select another.");
+			}
+			
+		} catch (CdCatalogueException e) {
+			log.error("There was an error updating the volume.", e);
+			viewFacade.showErrorMessage(
+					"There was an error updating the volume. Please try again.");
+		}
+		
+	}
+	
+	
+	@Override
 	public void fireShutDownApp() {
 		this.modelFacade.shutDownApp();		
 	}
+
 
 }
