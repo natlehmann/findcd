@@ -1,24 +1,26 @@
 TODO
-- despues de hacer update de una categoria, la lista de resources viene con datos viejos. lo mismo pasa al hacer merge de 2 categorias
-- ver que pasa cuando se hace merge de 2 categorias y existen volumeenes con igual nombre --> no deberia permitirse el merge o hay que renombrar
+- Estilos !
+- configurar el root path de un CD (ej:  E:/ o /media/cdrom) para que lo ignore en la columna "path"
+- ver si se puede tomar automaticamente el nombre del CD como "Volume name"
+- Agregar opción para que no se cataloguen archivos que empiezan con punto
 - Editar filas
 - Borrar filas
 - environment properties
-- configurar el root path de un CD (ej:  E:/ o /media/cdrom) para que lo ignore en la columna "path"
-- ver si se puede tomar automaticamente el nombre del CD como "Volume name"
 - Agregar listener a dialogo de "catalogar" para que al apretar enter en el campo funcione como Aceptar
 - módulo instalador --> que configure env props
 - Internacionalizar mensajes
 - Mensajes de error
 - Calendario para seleccionar fechas
 - Combo selección de idioma?
-- Estilos !
-- Agregar opción para que no se cataloguen archivos que empiezan con punto
+- back up periodico de la base de datos
 - Ordenar con click sobre columna TODO el listado (y no solamente lo que estoy viendo en esa página)
+- Revisar todos los TODO
+- drag and drop de los volumenes hacia las categorias
 
 
 
 LISTO
+- Cuando se borra una categoria, no se estan borrando del combo del dialogo de "catalogar"
 - Títulos sobre columnas
 - Fijar ancho columnas. 
 - Que se vean mejor los textos
