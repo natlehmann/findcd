@@ -25,12 +25,22 @@ public class VolumeTreeDeleteCommand extends CommandActionListener {
 		if ( !node.equals(this.volumeTree.getModel().getRoot()) ) {
 			
 			if (node.getParent().equals(this.volumeTree.getModel().getRoot())) {
-				getViewObserver().fireDeleteCategory(node.getUserObject().toString());
+				
+				String categoryName = node.getUserObject().toString();
+				if (getViewFacade().isConfirmed("Are you sure you want to delete the category " 
+						+ categoryName + "? This cannot be undone.")) {
+				
+					getViewObserver().fireDeleteCategory(categoryName);
+				}
 			
 			} else {
-				getViewObserver().fireDeleteVolume(node.getUserObject().toString());
 				
-				//TODO: PRIMERO MANDAR LA PANTALLITA DE CONFIRMACION. DESPUES LANZAR EL EVENTO
+				String volumeName = node.getUserObject().toString();
+				if (getViewFacade().isConfirmed("Are you sure you want to delete the volume " 
+						+ volumeName + "? This cannot be undone.")) {
+					
+					getViewObserver().fireDeleteVolume(volumeName);
+				}
 			}			
 		}
 
