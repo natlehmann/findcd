@@ -13,7 +13,6 @@ public interface CdCatalogueBusinessModel extends CdCatalogueModelFacade {
 	Category saveCategory(Category category) throws CdCatalogueException;	
 	void deleteCategory(Category category) throws CdCatalogueException;
 	void updateCategory(Category category) throws CdCatalogueException;
-	Category getDefaultCategory();
 	
 	void catalogue(File path, Category category, String volumeName) throws CdCatalogueException;
 	
