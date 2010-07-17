@@ -24,12 +24,15 @@ import javax.swing.JTextField;
 
 import ar.com.natlehmann.cdcatalogue.Configuration;
 import ar.com.natlehmann.cdcatalogue.business.CdCatalogueModelFacade;
+import ar.com.natlehmann.cdcatalogue.business.CdCatalogueModelObserver;
 import ar.com.natlehmann.cdcatalogue.business.model.Category;
+import ar.com.natlehmann.cdcatalogue.business.model.Volume;
 import ar.com.natlehmann.cdcatalogue.dao.OrderBy;
 import ar.com.natlehmann.cdcatalogue.dao.Page;
 import ar.com.natlehmann.cdcatalogue.dao.Parameter;
 import ar.com.natlehmann.cdcatalogue.dao.SearchField;
 import ar.com.natlehmann.cdcatalogue.util.Validator;
+import ar.com.natlehmann.cdcatalogue.view.CreateCatalogueDialog.Mode;
 import ar.com.natlehmann.cdcatalogue.view.action.CleanSearchCommand;
 import ar.com.natlehmann.cdcatalogue.view.action.CreateCatalogueCommand;
 import ar.com.natlehmann.cdcatalogue.view.action.FirstPageCommand;
@@ -42,8 +45,9 @@ import ar.com.natlehmann.cdcatalogue.view.dataModel.VolumeTree;
 import ar.com.natlehmann.cdcatalogue.view.dataModel.VolumeTreeBuilder;
 import ar.com.natlehmann.cdcatalogue.view.listener.ShutDownAppListener;
 import ar.com.natlehmann.cdcatalogue.view.lookandfeel.FontFactory;
+import ar.com.natlehmann.cdcatalogue.view.lookandfeel.GraphicElementFactory;
 
-public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFacade {
+public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFacade, CdCatalogueModelObserver {
 
 	private static final long serialVersionUID = 8893958615180463540L;
 	
@@ -115,6 +119,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 	
 	public void setModelFacade(CdCatalogueModelFacade modelFacade) {
 		this.modelFacade = modelFacade;
+		this.modelFacade.addObserver(this);
 	}
 	
 	public CdCatalogueModelFacade getModelFacade() {
@@ -172,7 +177,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 	
 	public JPanel getTopPanel() {
 		if (this.topPanel == null){
-			this.topPanel = new JPanel();
+			this.topPanel = GraphicElementFactory.getJPanel();
 			this.topPanel.setBackground(Color.RED);
 		}
 		return topPanel;
@@ -184,7 +189,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 	
 	public JPanel getCentralPanel() {
 		if (this.centralPanel == null) {
-			this.centralPanel = new JPanel();
+			this.centralPanel = GraphicElementFactory.getJPanel();
 			this.centralPanel.setLayout(new BorderLayout());
 		}
 		return centralPanel;
@@ -196,7 +201,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 	
 	public JPanel getLeftPanel() {
 		if (this.leftPanel == null) {
-			this.leftPanel = new JPanel();
+			this.leftPanel = GraphicElementFactory.getJPanel();
 			this.leftPanel.setLayout(new BorderLayout());
 		}
 		return leftPanel;
@@ -208,7 +213,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 	
 	public JPanel getRightPanel() {
 		if (this.rightPanel == null) {
-			this.rightPanel = new JPanel();
+			this.rightPanel = GraphicElementFactory.getJPanel();
 			this.rightPanel.setLayout(new BorderLayout());
 		}
 		return rightPanel;
@@ -220,7 +225,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 	
 	public JPanel getSearchPanel() {
 		if (this.searchPanel == null) {
-			this.searchPanel = new JPanel();
+			this.searchPanel = GraphicElementFactory.getJPanel();
 			this.searchPanel.setLayout(new BorderLayout());
 		}
 		return searchPanel;
@@ -232,7 +237,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 	
 	public JPanel getResultsPanel() {
 		if (this.resultsPanel == null) {
-			this.resultsPanel = new JPanel();
+			this.resultsPanel = GraphicElementFactory.getJPanel();
 			this.resultsPanel.setLayout(new BorderLayout());
 		}
 		return resultsPanel;
@@ -244,7 +249,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 	
 	public JPanel getSearchTopPanel() {
 		if (this.searchTopPanel == null) {
-			this.searchTopPanel = new JPanel();
+			this.searchTopPanel = GraphicElementFactory.getJPanel();
 			this.searchTopPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		}
 		return searchTopPanel;
@@ -256,7 +261,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 	
 	public JPanel getSearchCentralPanel() {
 		if (this.searchCentralPanel == null) {
-			this.searchCentralPanel = new JPanel();
+			this.searchCentralPanel = GraphicElementFactory.getJPanel();
 			this.searchCentralPanel.setLayout(new GridLayout(3,3));
 			
 			this.searchCentralPanel.add(this.getSearchPanel1());
@@ -280,7 +285,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 	
 	public JPanel getSearchBottomPanel() {
 		if (this.searchBottomPanel == null) {
-			this.searchBottomPanel = new JPanel();
+			this.searchBottomPanel = GraphicElementFactory.getJPanel();
 			this.searchBottomPanel.setLayout(new FlowLayout());
 			
 			this.searchBottomPanel.add(this.getBtClean());
@@ -295,7 +300,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 	
 	public JPanel getResultsBottomPanel() {
 		if (this.resultsBottomPanel == null) {
-			this.resultsBottomPanel = new JPanel();
+			this.resultsBottomPanel = GraphicElementFactory.getJPanel();
 			this.resultsBottomPanel.setLayout(new FlowLayout());
 		}
 		return resultsBottomPanel;
@@ -307,7 +312,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 	
 	public JPanel getResultsTopPanel() {
 		if (this.resultsTopPanel == null) {
-			this.resultsTopPanel = new JPanel();
+			this.resultsTopPanel = GraphicElementFactory.getJPanel();
 			this.resultsTopPanel.setLayout(new FlowLayout(FlowLayout.LEFT));
 		}
 		return resultsTopPanel;
@@ -498,7 +503,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 
 	public JPanel getSearchPanel1() {
 		if (this.searchPanel1 == null) {
-			this.searchPanel1 = new JPanel();
+			this.searchPanel1 = GraphicElementFactory.getJPanel();
 			this.searchPanel1.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			
 			this.searchPanel1.add(new JLabel("Category name:"));
@@ -513,7 +518,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 
 	public JPanel getSearchPanel2() {
 		if (this.searchPanel2 == null) {
-			this.searchPanel2 = new JPanel();
+			this.searchPanel2 = GraphicElementFactory.getJPanel();
 			this.searchPanel2.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			
 			this.searchPanel2.add(new JLabel("Volume name:"));
@@ -528,7 +533,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 
 	public JPanel getSearchPanel3() {
 		if (this.searchPanel3 == null) {
-			this.searchPanel3 = new JPanel();
+			this.searchPanel3 = GraphicElementFactory.getJPanel();
 			this.searchPanel3.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			
 			this.searchPanel3.add(new JLabel("Resource name:"));
@@ -543,7 +548,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 
 	public JPanel getSearchPanel4() {
 		if (this.searchPanel4 == null) {
-			this.searchPanel4 = new JPanel();
+			this.searchPanel4 = GraphicElementFactory.getJPanel();
 			this.searchPanel4.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			
 			this.searchPanel4.add(new JLabel("Resource path:"));
@@ -558,7 +563,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 
 	public JPanel getSearchPanel5() {
 		if (this.searchPanel5 == null) {
-			this.searchPanel5 = new JPanel();
+			this.searchPanel5 = GraphicElementFactory.getJPanel();
 			this.searchPanel5.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			
 			this.searchPanel5.add(new JLabel("Resource type:"));
@@ -573,7 +578,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 
 	public JPanel getSearchPanel6() {
 		if (this.searchPanel6 == null) {
-			this.searchPanel6 = new JPanel();
+			this.searchPanel6 = GraphicElementFactory.getJPanel();
 			this.searchPanel6.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			
 			this.searchPanel6.add(new JLabel("Modified date from:"));
@@ -588,7 +593,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 
 	public JPanel getSearchPanel7() {
 		if (this.searchPanel7 == null) {
-			this.searchPanel7 = new JPanel();
+			this.searchPanel7 = GraphicElementFactory.getJPanel();
 			this.searchPanel7.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			
 			this.searchPanel7.add(new JLabel("Modified date to:"));
@@ -603,7 +608,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 
 	public JPanel getSearchPanel8() {
 		if (this.searchPanel8 == null) {
-			this.searchPanel8 = new JPanel();
+			this.searchPanel8 = GraphicElementFactory.getJPanel();
 			this.searchPanel8.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			
 			this.searchPanel8.add(new JLabel("Comments:"));
@@ -723,7 +728,7 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 	
 	public CreateCatalogueDialog getCreateCatalogueDialog() {
 		if (this.createCatalogueDialog == null) {
-			this.createCatalogueDialog = new CreateCatalogueDialog(this);
+			this.createCatalogueDialog = new CreateCatalogueDialog(this, Mode.CREATE);
 		}
 		return this.createCatalogueDialog;
 	}
@@ -822,9 +827,10 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 		this.getSearchFdResourceName().setText("");
 		this.getSearchFdResourcePath().setText("");
 		this.getSearchFdResourceType().setText("");
-		this.getSearchFdVolumeName().setText("");		
+		this.getSearchFdVolumeName().setText("");
 	}
 	
+	@Override
 	public void cleanTreeSelection() {
 		this.getVolumeTree().setSelectionPath(null);
 	}
@@ -940,27 +946,6 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 		getEditCategoryDialog().getMessagesArea().setText("");
 		this.getMessagesArea().setText("");
 	}
-
-	@Override
-	public void addCategoryItem(Category newCategory) {
-		this.getCreateCatalogueDialog().reloadCategories(newCategory);
-		VolumeTreeBuilder.addCategory(this.getVolumeTree(), newCategory.getCategoryName());		
-	}
-	
-	public void addVolumeTreeNode(Category category, String volumeName) {
-		VolumeTreeBuilder.addVolume(this.getVolumeTree(), category.getCategoryName(), volumeName);
-	}
-	
-	public void mergeCategories(Category oldCategory, Category existentCategory) {
-		VolumeTreeBuilder.mergeCategories(this.getVolumeTree(), oldCategory.getCategoryName(), 
-				existentCategory.getCategoryName());
-	}
-	
-	public void refreshCategory(String oldCategoryName, String newCategoryName) {
-		VolumeTreeBuilder.refreshCategory(this.getVolumeTree(), 
-				oldCategoryName, newCategoryName);
-		this.refreshResults();
-	}
 	
 	public void closeDialogues() {
 		if (getCreateCatalogueDialog().isVisible()) {
@@ -983,6 +968,11 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 		this.getEditCategoryDialog().show(categoryName);		
 	}
 	
+	@Override
+	public void showEditVolumeDialog(String volumeName, Category category) {
+		this.getCreateCatalogueDialog().reload(Mode.EDIT, volumeName, category);
+	}
+	
 	private JDialog getVisibleDialog() {
 		
 		if (getCreateCatalogueDialog().isVisible()) {
@@ -1000,5 +990,60 @@ public class CdCatalogueMainWindow extends JFrame implements CdCatalogueViewFaca
 		
 		return (this.getVisibleDialog() != null) ? this.getVisibleDialog() : this;
 	}
+
+	@Override
+	public void categoryCreated(Category newCategory) {
+		this.getCreateCatalogueDialog().reloadCategories();
+		this.getCreateCatalogueDialog().selectCategory(newCategory);
+		VolumeTreeBuilder.addCategory(this.getVolumeTree(), newCategory.getCategoryName());	
+	}
+
+	@Override
+	public void volumeCreated(Volume newVolume) {
+		VolumeTreeBuilder.addVolume(this.getVolumeTree(), 
+				newVolume.getCategory().getCategoryName(), newVolume.getVolumeName());		
+	}
+
+	@Override
+	public void volumesUpdated(List<Volume> volumes) {		
+	}
+	
+	@Override
+	public void volumeUpdated(Volume volume) {
+		this.rebuildVolumeTree();
+		VolumeTreeBuilder.selectVolume(this.volumeTree, volume);
+	}
+
+	@Override
+	public void categoryUpdated(Category category) {
+		this.rebuildVolumeTree();
+		this.getCreateCatalogueDialog().reloadCategories();
+		VolumeTreeBuilder.selectCategory(this.volumeTree, category);
+	}
+	
+	@Override
+	public void categoryDeleted(Category category) {
+		this.rebuildVolumeTree();
+		this.getCreateCatalogueDialog().reloadCategories();
+		VolumeTreeBuilder.selectCategory(this.volumeTree, this.modelFacade.getDefaultCategory());
+	}
+	
+	private void rebuildVolumeTree() {
+		this.getLeftPanel().removeAll();
+		this.volumeTree = null;
+		this.volumeTreeScrollPane = null;
+		this.getLeftPanel().add(this.getVolumeTreeScrollPane());
+		
+		this.getContentPane().invalidate();
+		this.getContentPane().repaint();
+	}
+
+	@Override
+	public void volumeDeleted(Volume volume) {
+		VolumeTreeBuilder.removeNode(this.getVolumeTree(), 
+				volume.getVolumeName(), volume.getCategory().getCategoryName());
+		
+	}
+
 
 }
