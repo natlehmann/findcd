@@ -9,6 +9,7 @@ public interface CdCatalogueModelObserver {
 
 	void categoryCreated(Category newCategory);
 	void categoryUpdated(Category category);
+	void categoryDeleted(Category category);
 
 	void volumeCreated(Volume newVolume);
 	void volumesUpdated(List<Volume> volumes);
