@@ -81,10 +81,8 @@ public class ResourceDaoImpl implements ResourceDao {
 //		try {
 //			r.createResource(resource);
 //		} catch (DaoException e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
 //	}
